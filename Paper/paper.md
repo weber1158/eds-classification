@@ -33,7 +33,7 @@ To satisfy the needs of earth and atmospheric scientists seeking to rapidly clas
 # Methods
 ## Mineral Classification
 
-The function library introduces a novel machine learning-based mineral classification model (the "Weber algorithm") that has been trained with EDS data collected on 18 mineral standards and exhibits an overall accuracy exceeding 99% (see `supplement.bib` for details). The library also includes functions for three sorting algorithms that have been painstakingly transcribed from the literature into MATLAB code. This includes the aforementioned Donarummo algorithm [@Donarummo2003] which can be used to classify 16 unique aluminosilicate minerals based on EDS net intensity data, the Panta algorithm [@Panta2023] which can be used to classify 17 unique minerals and 6 mineral groups based on EDS atom percent data, and the Kanlder algorithm [@Kandler2011] which can be used to categorized EDS atom percent data into broad mineral groups, classes, and refractive indexes. 
+The function library introduces a novel machine learning-based mineral classification model (the "Weber algorithm") that has been trained with EDS data collected on 18 mineral standards and exhibits an overall accuracy exceeding 99% (see `supplement.md` for details). The library also includes functions for three sorting algorithms that have been painstakingly transcribed from the literature into MATLAB code. This includes the aforementioned Donarummo algorithm [@Donarummo2003] which can be used to classify 16 unique aluminosilicate minerals based on EDS net intensity data, the Panta algorithm [@Panta2023] which can be used to classify 17 unique minerals and 6 mineral groups based on EDS atom percent data, and the Kandler algorithm [@Kandler2011] which can be used to categorized EDS atom percent data into broad mineral groups, classes, and refractive indexes. 
 
 The four mineral classification algorithms are available as individual functions (`weber_classification`, `donarummo_classifiation`,  `panta_classifiation`, and `kandler_classification`) as well as packaged together in a single function (`eds_classification`). Each function has clearly written documentation that can be viewed using the MATLAB `help` or `doc` commands. The general syntax, however, is very basic:
 
@@ -54,7 +54,7 @@ plt = xray_plot('energy_spectrum.msa');
 xray_peak_label(plt)
 ```
 
-Users may also import x-ray energy directly into the MATLAB workspace along with file metadata using `read_msa`.
+Users may also import x-ray energy data directly into the MATLAB workspace along with the corresponding metadata using `read_msa`.
 
 ```matlab
 [data,metadata] = read_msa('filename.msa');
@@ -74,7 +74,7 @@ I thank Paul Pohwat and the Smithsonian Institution for contributing the mineral
 
 # Copyrights
 
-The software repository is made available under a MIT license, meaning that users are free to modify and distribute the software without restriction. However, the *intellectual copyrights* for the Donarummo, Kandler, and Panta algorithms belong to their original creators. If you use any of these algorithms in your research, please also cite the original references as appropriate.
+The software repository is made available under a MIT license, meaning that users are free to modify and distribute the software without restriction. However, the *intellectual copyrights* for the Donarummo, Kandler, and Panta algorithms belong to their original creators. If you use any of these algorithms in your research, **please** also cite the original references as appropriate.
 
 # References
 
