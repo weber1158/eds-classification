@@ -1,42 +1,75 @@
 function minerals = donarummo_classification(peak_intensity_table)
-% minerals = donarummo_classification(peak_intensity_table) 
-% Performs a simple mineral classification on a table of elemental intensity data.
+%Mineral classification scheme from Donarummo et al. (2003)
 %
-% The sorting scheme from Figure 2 in Donarummo et al. (2003) is used to identify the
-% mineralogy of a sample given an input table of peak intensities as measured by
-% energy-dispersive xray spectrometry (EDS) on an electron microscope.
-% 
-% The table must contain a column for each of the following elements: Al, Si, Fe, Ca,
-% Na, K, and Mg. The name for each of these columns must match the shorthand notation 
-% for the element (e.g. "Al" not "Aluminium"). 
-% 
-% The function returns the evaluated mineral name as a 1-by-1 categorical.
-% Mineral names are given as abbreviations using the taxonmy proposed by
-% Whitney and Evans (2010) unless otherwise stated. Unknown mineral
-% classifications are given names beginning with "U-" as proposed by
-% Donarummo et al. (2003).
-% 
-% Example:
-% 	% Generate a table of elemental intensities using random integers
-% 		sz = [1000,1];
-% 		Al = randi(12000,sz);
-% 		Si = randi(30000,sz);
-% 		Fe = randi(6000,sz);
-% 		Ca = randi(4000,sz);
-% 		Na = randi(4000,sz);
-% 		K  = randi(2000,sz);
-% 		Mg = randi(1000,sz);
-% 		elements = [Al,Si,Fe,Ca,Na,K,Mg];
-% 		myTable = array2table(elements,'VariableNames',{'Al','Si','Fe','Ca','Na','K','Mg'});
-% 	% Classify the mineralogy of each row
-% 		minerals = donarummo_classification(myTable);
+%DESCRIPTION
+% This function automates the mineral classification workflow published
+% by Donarummo et al. (2003). Takes a table of energy dispersive spectro-
+% metry (EDS) net intensity data and assigns a mineralogy to each row.
 %
+%SYNTAX
+% minerals = DONARUMMO_CLASSIFICATION(peak_intensity_table)
+%
+%INPUT
+% peak_intensity_table - Table containing a column for each of the
+%  following elements: Na, Mg, Al, Si, K, Ca, and Fe. The name of each
+%  column may be the full element name or its abbreviation. For instance,
+%  "Silicon" and "Si" are valid table variable names. Both the American and
+%  British spelling of "Aluminum" ("Aluminium") are also valid.
+%  Capitalization is not required, but spelling is paramount. The values in
+%  the table should represent the measured net intensity for each element.
+%
+%OUTPUT
+% minerals - Categorical vector of mineral names corresponding to each row
+%  in the input table. Mineral names are given as abbreviations using the
+%  taxonomy proposed by Whitney and Evans (2010)*. Unknown mineral
+%  classifications are given names beginning with "U-" as described by
+%  Donarummo et al. (2003).
+% 
+%*The sixteen possible mineral classifications are:
+%  ABBREVIATION     NAME
+%  Ab               Albite
+%  Afs              Alkali feldspar (orthoclase)
+%  An               Anorthite
+%  Aug              Augite
+%  Bt               Biotite
+%  Chl              Chlorite
+%  Hbl              Hornblende
+%  Htr**            Hectorite
+%  Ilt              Illite
+%  Ilt/Sme          Illite/Smectite 70/30 mix.
+%  Kln              Kaolinite
+%  Lab/Byt**        Labradorite/Bytownite
+%  Mnt              Ca-Montmorillonite
+%  Ms               Muscovite
+%  Olig/Ans**       Oligoclase/Andesine
+%  Vrm              Vermiculite
+%
+%**Abbreviation defined for this function.
+%
+%LIMITATIONS
+% This function will misclassify any mineral not present in the list above.
+% For instance, net intensity data for the mineral quartz will never be
+% classified as quartz. To maximize the usefulness of this algorithm the
+% user should also consult the results of additional classification
+% methods.
+%
+%REFERENCES
+% Donarummo, J., Ram, M., & Stoermer, E. F. (2003). Possible deposit of
+%  soil dust from the 1930 s U.S. dust bowl identified in Greenland ice.
+%  Geophysical Research Letters, 30(6). https://doi.org/10.1029/2002GL016641
+% Whitney, D. L., & Evans, B. W. (2010). Abbreviations for names of
+%  rock-forming minerals. American Mineralogist, 95(1), 185–187.
+%  https://doi.org/10.2138/am.2010.3371
+%
+%See also
+% eds_classification, kandler_classification, panta_classification, weber_classification
 
-% References:
-% Donarummo, J., Ram, M., & Stoermer, E. F. (2003). Possible deposit of soil dust from the 1930 s U.S. dust bowl identified in Greenland ice. Geophysical Research Letters, 30(6). https://doi.org/10.1029/2002GL016641
-% Whitney, D. L., & Evans, B. W. (2010). Abbreviations for names of rock-forming minerals. American Mineralogist, 95(1), 185–187. https://doi.org/10.2138/am.2010.3371
+%Updates
+% 20/Jul/2024 - Changed mineral IDs from full names to abbreviations and
+% added a local function to check that the variable names in the input
+% table match the required elements. Additional documentation updates.
 
-% Function code ©2023 Austin M. Weber
+% Function code ©2024 Austin M. Weber
 
 %
 % BEGIN FUNCTION BODY
@@ -45,15 +78,15 @@ function minerals = donarummo_classification(peak_intensity_table)
 if ~istable(peak_intensity_table)
 	error('Input must be a table.')
 end
-vars = peak_intensity_table.Properties.VariableNames;
-if sum(ismember(vars,{'Al','Si','Fe','Ca','Na','K','Mg'})) ~= 7
-	error('Input must be a table containing columns for Al, Si, Fe, Ca, Na, K, and Mg.')
-end
+
+% Does the table contain the correct variable names?
+peak_intensity_table = parseTableVariableNames(peak_intensity_table); % Local function, defined at bottom of file
+
 % Classify the mineral for each row of the input table
 num_classifications = size(peak_intensity_table,1); 
 minerals = categorical([]);
 for n = 1:num_classifications
-	mineral = node1(peak_intensity_table(n,:)); 
+	mineral = node1(peak_intensity_table(n,:)); % Begin classification at first node of the sorting scheme tree
 	minerals(n) = mineral;
 end
 minerals = minerals'; % Convert to column vector
@@ -78,16 +111,16 @@ function val = node2A(T)
 	if ratio2A >= 0.02
 		val = node3A(T);
 	else
-		val = categorical("Hectorite"); % Htr
+		val = categorical("Htr"); % Hectorite, does not have an abbreviation in Whitney & Evans 2010
 	end
 end
 
 function val = node3A(T)
 	ratio3A = T.K ./ T.Al;
 	if ratio3A < 0.3
-		val = categorical("Augite"); % Aug
+		val = categorical("Aug"); % Augite
 	elseif ratio3A > 0.49
-		val = categorical("Hornblende"); % Hbl
+		val = categorical("Hbl"); % Horblende
 	else
 		val = categorical("U-A");
 	end
@@ -96,7 +129,7 @@ end
 function val = node2C(T)
 	ratio2C = (T.Mg + T.Fe) ./ T.Si;
 	if ratio2C >= 0.9
-		val = categorical("Chlorite"); % Chl
+		val = categorical("Chl"); % Chlorite
 	elseif ratio2C < 0.3
 		val = node3C(T);
 	else
@@ -107,7 +140,7 @@ end
 function val = node3C(T)
 	ratio3C = T.K ./ T.Si;
 	if ratio3C >= 0.1
-		val = categorical("Muscovite"); % Ms
+		val = categorical("Ms"); % Muscovite
 	else
 		val = node4C(T);
 	end
@@ -116,9 +149,9 @@ end
 function val = node4C(T)
 	ratio4C = T.Ca ./ T.Si;
 	if ratio4C < 0.05
-		val = categorical("Kaolinite"); % Kln
+		val = categorical("Kln"); % Kaolinite
 	elseif ratio4C >= 0.25
-		val = categorical("Anorthite"); % An
+		val = categorical("An"); % Anorthite
 	else
 		val = categorical("U-F");
 	end
@@ -142,7 +175,7 @@ function val = node3B1(T)
 	elseif (ratio3B1 > 0.5) && (ratio3B1 < 1.0)
 		val = categorical("U-B1");
 	else
-		val = categorical("Ca-Montmorillonite"); % Ca-Montmorillonite (Mnt)
+		val = categorical("Mnt"); % Ca-Montmorillonite
 	end
 end
 
@@ -158,13 +191,13 @@ end
 function val = node5B1a1(T)
 	ratio5B1a1 = T.Ca ./ T.Na;
 	if ratio5B1a1 < 0.2
-		val = categorical("Albite"); % Ab
+		val = categorical("Ab"); % Albite
 	elseif ratio5B1a1 >= 10
 		val = categorical("U-B3");
 	elseif (ratio5B1a1 >= 0.2) && (ratio5B1a1 < 1)
-		val = categorical("Olig/Andesine"); % Olg/Ans; my own abbreviations
+		val = categorical("Olig/Ans"); % Oligoclase/Andesine; my own abbreviations
 	else
-		val = categorical("Lab/Bytownite"); % Lab/Byt; my own abbreviations
+		val = categorical("Lab/Byt"); % Labradorite/Bytownite; my own abbreviations
 	end
 end
 
@@ -182,11 +215,11 @@ function val = node4B2b(T)
 	if ratio4B2b <= 0.1
 		val = categorical("U-C2");
 	elseif ratio4B2b > 2
-		val = categorical("Vermiculite"); % K-vermiculite (Vrm)
+		val = categorical("Vrm"); % K-vermiculite
 	elseif (ratio4B2b > 0.1) && (ratio4B2b < 1)
 		val = categorical("U-D5");
 	else
-		val = categorical("Biotite"); % Bt
+		val = categorical("Bt"); % Biotite
 	end
 end
 
@@ -204,7 +237,7 @@ function val = node5B2a1(T)
 	if ratio5B2a1 < 0.25
 		val = categorical("U-D2");
 	elseif (ratio5B2a1 >= 0.25) && (ratio5B2a1 <= 0.35)
-		val = categorical("Orthoclase"); % Or
+		val = categorical("Afs"); % Orthoclase == alkali feldspar
 	elseif (ratio5B2a1 > 0.35) && (ratio5B2a1 < 0.7)
 		val = categorical("U-D1");
 	else
@@ -219,10 +252,35 @@ function val = node5B2a2(T)
 	elseif ratio5B2a2 > 0.25
 		val = categorical("U-D3");
 	elseif (ratio5B2a2 > 0.05) && (ratio5B2a2 <= 0.1)
-		val = categorical("I/S mixed"); % Ilt/Sme mixed
+		val = categorical("Ilt/Sme"); % Illite/Smectite 70/30 mixed
 	else
-		val = categorical("Illite"); % Ilt
+		val = categorical("Ilt"); % Illite
 	end
+end
+
+function newTable = parseTableVariableNames(originalTable)
+% Checks whether the table contains the correct variables and re-names
+% variables accordingly.
+% Convert full-name table variables to abbreviations
+element_names = lower({'Aluminum','Aluminium','Silicon',...
+    'Iron','Sodium','Magnesium','Potassium','Calcium'});
+varnames = originalTable.Properties.VariableNames;
+varnames_lower = lower(varnames);
+element_abbreviations = {'Al','Al','Si','Fe','Na','Mg','K','Ca'};
+    for i = 1:numel(element_abbreviations)
+	    if any(contains(varnames_lower,element_names{i}))
+		    inx = contains(varnames_lower,element_names{i});
+		    varnames(inx) = element_abbreviations(i);
+	    end
+    end
+originalTable.Properties.VariableNames = varnames;
+% Make sure all necessary elements are present
+element_list = {'Al','Si','Fe','Na','Mg','K','Ca'};
+varis = originalTable.Properties.VariableNames;
+    if sum(ismember(varis,element_list)) ~= 7
+	    error('Input must be a table containing columns for the elements Na, Mg, Al, Si, K, Ca, and Fe');
+    end
+newTable = originalTable;
 end
 
 %

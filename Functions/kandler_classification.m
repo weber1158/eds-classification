@@ -1,30 +1,39 @@
-function particles = kandler_classification(data_table)
-% particles = kandler_classification(data_table)
-% Particle classification of EDS data using the Kandler algorithm.
+function minerals = kandler_classification(data_table)
+%EDS classification scheme from Kandler et al. (2011)
 %
-%Description:
-% This function is a programmatically-transcribed version of the sorting
-% scheme algorithm from Table S1 in Kandler et al. (2011). The function
-% performs particle classification on a table of ATOM PERCENTAGE
-% data collected with an EDS detector using a scanning electron
-% microscope. It gives general mineralogical information (class, group, and
-% refractive index) but does not explicitly classify the particles by mineral 
-% species.
+%DESCRIPTION
+% This function automates the mineral classification workflow published
+% by Kandler et al. (2011). Takes a table of energy dispersive spectro-
+% metry (EDS) atom percent data and categorizes each row into a broad
+% mineral group, mineral class, and refractive index.
 %
-%Input:
-% This function requires an input of class 'table' with columns for each of
-% the following elements: Na, Mg, Al, Si, P, S, Cl, K, Ca, Ti, Cr, Mn, and Fe.
-% The column names in the table may be full element names or their corresponding
-% elemental abbreviations (e.g., "Silicon" and "Si" are both valid).
-% Capitalization does not matter. For example, "iron" and "fe" are both
-% valid. [Note: the function considers both 'Aluminum' and 'Aluminium' as valid 
-% spellings for the element 'Al'].
+%SYNTAX
+% minerals = KANDLER_CLASSIFICATION(data_table)
 %
-%Output:
-% The function output will be a table with 3 categorical variables: class,
-% group, and refractive index.
+%INPUT
+% data_table - Table containing a column for each of the following
+%  elements: Na, Mg, Al, Si, P, S, Cl, K, Ca, Ti, Cr, Mn, and Fe. The
+%  name of each column may be the full element name or its abbreviation
+%  For instance, "Silicon" and "Si" are valid table variable names. Both
+%  the American and British spelling of "Aluminum" ("Aluminium") are also 
+%  valid. Capitalization is not required, but spelling is paramount. The 
+%  values in the table should represent the measured atomic percent for 
+%  each element. 
 %
-%Reference:
+%OUTPUT
+% minerals - Table containing three categorical variables: 'class', 
+%  'group', and 'refractive_index' where each row corresponds to the same
+%  row in the input table. The 'group' variable describes the general
+%  mineral class (e.g., "sulfates"); the 'class' variable describes the
+%  general mineral composition (e.g., "SiAlNaK"); and the 'refractive_
+%  index' variable describes the related refractive index calculate defined
+%  by Kandler et al. (2011).
+%
+%LIMITATIONS
+% This algorithm does not distinctly classify any mineral species and is
+% most useful for identifying generalized mineral classes.
+%
+%REFERENCE
 % Kandler, K., Lieke, K., Benker, N., Emmel, C., Küpper, M., Müller-Ebert,
 %  D., Ebert, M., Scheuvens, D., Schladitz, A., Schütz, L., & Weinbruch, S.
 %  (2011). Electron microscopy of particles collected at Praia, Cape Verde,
@@ -33,7 +42,9 @@ function particles = kandler_classification(data_table)
 %  https://doi.org/10.1111/j.1600-0889.2011.00550.x
 %
 %See also:
-% donarummo_classification, panta_classification
+% eds_classification, donarummo_classification, panta_classification, weber_classification
+
+% Function code ©2024 Austin M. Weber
 
 %
 % BEGIN MAIN FUNCTION
@@ -63,14 +74,14 @@ if sum(ismember(vars,element_list)) ~= numel(element_list)
 	error('Input must be a table containing columns for the elements Na, Mg, Al, Si, P, S, Cl, K, Ca, Ti, Cr, Mn, and Fe');
 end
 % Evaluate mineralogies with local functions
-particles = particle_classification(data_table);
+minerals = particle_classification(data_table);
 	% particle_classification() is a local function, which calls numerous
 	% other local functions that find the index positions for each row that
 	% correspond to particular mineral classifications.
-particles = array2table(particles,'VariableNames',{'class','group','refractive_index'});
-particles.class = categorical(particles.class);
-particles.group = categorical(particles.group);
-particles.refractive_index = categorical(particles.refractive_index);
+minerals = array2table(minerals,'VariableNames',{'group','class','refractive_index'});
+minerals.group = categorical(minerals.group);
+minerals.class = categorical(minerals.class);
+minerals.refractive_index = categorical(minerals.refractive_index);
 
 %
 % LOCAL FUNCTIONS
@@ -184,8 +195,8 @@ function classifications = particle_classification(T)
 			classifications(idx,3) = {'N/A'};
 		% 20 of 44
 			idx = classify20(T,sums,classifications);
-			classifications(idx,1) = {'quartz'};
-			classifications(idx,2) = {'quartz'};
+			classifications(idx,1) = {'Qz'}; %quartz
+			classifications(idx,2) = {'Qz'}; %quartz
 			classifications(idx,3) = {'hem+qtz'};
 		% 21 of 44
 			idx = classify21(T,sums,classifications);

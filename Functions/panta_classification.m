@@ -1,34 +1,80 @@
 function minerals = panta_classification(data_table)
-%minerals = panta_classification(data_table) 
-% Performs mineral classification using the sorting scheme from Panta et
-% al. (2023).
+%Mineral classification scheme from Panta et al. (2023)
 %
-%Description
-% The sorting scheme is derived from corrected atomic concentration (%)
-% measurements acquired on mineral particles using a FEI ESEM Quanta 400
-% FEG scanning electron microscope with an X-Max 150 Energy-Dispersive
-% X-ray spectroscopy silicon drift X-ray detector. Data were collected
-% using an acceleration voltage of 12.5 keV, a beam current of 18 nA, a
-% spot size of 5.0, and a working distance of 10 mm.
+%DESCRIPTION
+% This function automates the mineral classification workflow published
+% by Panta et al. (2023). Takes a table of energy dispersive spectro-
+% metry (EDS) atom percent data and assigns a mineralogy to each row.
 %
-%Using the function
-% This function requires an input of class 'table' with columns for each of
-% the following elements: Al, Si, Na, Mg, P, S, Cl, Fe, K, Ca, Ti, Cr, Mn,
-% and F.
+%SYNTAX
+% minerals = PANTA_CLASSIFICATION(data_table) 
 %
-% The function output will be a categorical list of the most likely mineral
-% classification for each row in the input table.
+%INPUT
+% data_table - Table containing a column for each of the following
+%  elements: F, Na, Mg, Al, Si, P, S, Cl, K, Ca, Ti, Cr, Mn, and Fe. The
+%  name of each column may be the full element name or its abbreviation
+%  For instance, "Silicon" and "Si" are valid table variable names. Both
+%  the American and British spelling of "Aluminum" ("Aluminium") are also 
+%  valid. Capitalization is not required, but spelling is paramount. The 
+%  values in the table should represent the measured atomic percent for 
+%  each element.
 %
-%Reference:
+%OUTPUT
+% minerals - Categorical vector of mineral names corresponding to each row
+%  in the input table. Specific mineral names are given as abbreviations
+%  using the taxonomy proposed by Whitney and Evans (2010)*.
+%
+%*The 18 possible specific** mineral classifications are:
+%  ABBREVIATION     NAME
+%  Ab               Albite
+%  Alu              Alunite
+%  Ap               Apatite
+%  Cal              Calcite
+%  Chl              Chlorite
+%  Dol              Dolomite
+%  Fsp              Feldspar
+%  Gp               Gypsum
+%  Hl               Halite
+%  Hem              Hematite
+%  Ilm              Ilmenite
+%  Ilt              Illite
+%  Kln              Kaolinite
+%  Mica             Mica
+%  Mc               Microcline
+%  Qz               Quartz
+%  Rt               Rutile
+%  Sme              Smectite
+%
+%**The algorithm also has classifications for:
+% - Ca-rich silicate/Ca-Si-mix
+% - Complex Clay
+% - Complex Fsp
+% - Complex Fsp/Clay mix
+% - Complex Qz
+% - Complex Sulfate
+%
+%LIMITATIONS
+% This function will misclassify any mineral not present in the list above.
+% For instance, atom percent data for pyroxene will never be classified as
+% pyroxene. To maximize the usefulness of this algorithm the user should
+% also consult the results of additional classification methods.
+%
+%REFERENCES
 % A. Panta, et al. (2023). "Insights into the single-particle composition,
-% size, mixing state, and aspect ratio of freshly emitted mineral dust from
-% field measurements in the Moroccan Sahara using electron microscopy."
-% Atmos. Chem. Phys. 23, 3861–3885. doi.org/10.5194/acp-23-3861-2023
+%  size, mixing state, and aspect ratio of freshly emitted mineral dust from
+%  field measurements in the Moroccan Sahara using electron microscopy."
+%  Atmos. Chem. Phys. 23, 3861–3885. doi.org/10.5194/acp-23-3861-2023
+% Whitney, D. L., & Evans, B. W. (2010). Abbreviations for names of
+%  rock-forming minerals. American Mineralogist, 95(1), 185–187.
+%  https://doi.org/10.2138/am.2010.3371
+%
+%See also
+% eds_classification, donarummo_classification, kandler_classification, weber_classification
 
-%
-% The transcription of the Panta et al. (2023) sorting scheme into MATLAB code
-% was performed and is copyrighted by Austin M. Weber.
-%
+%Updates
+% 20/Jul/2024 - Changed mineral IDs from full names to abbreviations
+
+% Function code ©2024 Austin M. Weber
 
 %
 % BEGIN FUNCTION BODY
@@ -82,76 +128,75 @@ the 23 mineralogy-checking local functions (which all require the
 calculation of those sums in order to evaluate the element index) in
 order to save computational time (i.e., so that the sums do not have to
 be calculated 23 times; rather, only the one time).
-© Austin M. Weber 2023
 %}
 sums = element_sums(T); % Local function
 minerals = repmat({'Unknown'},[size(T,1),1]); % Preallocate memory
 % HEMATITE
 	idx = check_hematite(T,sums);
-	minerals(idx) = {'Hematite-like'};
+	minerals(idx) = {'Hem'};
 % RUTILE 
 	idx = check_rutile(T,sums);
-	minerals(idx) = {'Rutile-like'};
+	minerals(idx) = {'Rt'};
 % ILLMENITE
 	idx = check_illmenite(T,sums);
-	minerals(idx) = {'Illmenite-like'};
+	minerals(idx) = {'Ilm'};
 % QUARTZ
 	idx = check_quartz(T,sums);
-	minerals(idx) = {'Quartz-like'};
+	minerals(idx) = {'Qz'};
 % COMPLEX QUARTZ
 	idx = check_complex_quartz(T,sums);
-	minerals(idx) = {'Complex quartz-like'};
+	minerals(idx) = {'Complex Qz'};
 % MICROCLINE
 	idx = check_microcline(T,sums);
-	minerals(idx) = {'Microcline-like'};
+	minerals(idx) = {'Mc'};
 % ALBITE
 	idx = check_albite(T,sums);
-	minerals(idx) = {'Albite-like'};
+	minerals(idx) = {'Ab'};
 % COMPLEX FELDSPAR
 	idx = check_complex_feldspar(T,sums);
-	minerals(idx) = {'Feldspar-like'};
+	minerals(idx) = {'Complex Fsp'};
 % COMPLEX CLAY/FELDSAR MIXTURE
 	idx = check_complex_clay_feldspar_mix(T,sums);
-	minerals(idx) = {'Complex clay/feldspar mixture'};
+	minerals(idx) = {'Complex Fsp/clay mix'};
 % MICA
 	idx = check_mica(T,sums);
-	minerals(idx) = {'Mica-like'};
+	minerals(idx) = {'Mica'};
 % COMPLEX CLAY
 	idx = check_complex_clay(T,sums);
-	minerals(idx) = {'Complex clay-mineral-like'};
+	minerals(idx) = {'Complex clay'};
 % ILLITE
 	idx = check_illite(T,sums);
-	minerals(idx) = {'Illite-like'};
+	minerals(idx) = {'Ilt'};
 % CHLORITE
 	idx = check_chlorite(T,sums);
-	minerals(idx) = {'Chlorite-like'};
+	minerals(idx) = {'Chl'};
 % SMECTITE
 	idx = check_smectite(T,sums);
-	minerals(idx) = {'Smectite-like'};
+	minerals(idx) = {'Sme'};
 % KAOLINITE
 	idx = check_kaolinite(T,sums);
-	minerals(idx) = {'Kaolinite-like'};
+	minerals(idx) = {'Kln'};
 % CALCIUM SILICATE MIX
 	idx = check_calcium_silicate_mix(T,sums);
-	minerals(idx) = {'Ca-rich silicate/Ca-Si-mixture'};
+	minerals(idx) = {'Ca-rich silicate/Ca-Si-mix'};
 % CALCITE
 	idx = check_calcite(T,sums);
-	minerals(idx) = {'Calcite-like'};
+	minerals(idx) = {'Cal'};
 % DOLOMITE
 	idx = check_dolomite(T,sums);
-	minerals(idx) = {'Dolomite-like'};
+	minerals(idx) = {'Dol'};
 % APATITE
 	idx = check_apatite(T,sums);
-	minerals(idx) = {'Apatite-like'};
+	minerals(idx) = {'Ap'};
 % GYPSUM
 	idx = check_gypsum(T,sums);
-	minerals(idx) = {'Gypsum-like'};
+	minerals(idx) = {'Gp'};
 % ALUNITE
 	idx = check_alunite(T,sums);
-	minerals(idx) = {'Alunite-like'};
+	minerals(idx) = {'Alu'};
 % HALITE
 	idx = check_halite(T,sums);
-	minerals(idx) = {'Halite-like'};
+	minerals(idx) = {'Hl'};
 % COMPLEX SULFATE 
 	idx = check_complex_sulfate(T,sums);
 	minerals(idx) = {'Complex sulfate'};
