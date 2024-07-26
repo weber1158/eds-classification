@@ -2,7 +2,7 @@ function ratioTable = netIntensityRatios(dataTable,label)
 %Convert a table of EDS net intensity data to a table of net intensity
 %ratios.
 %
-%This purpose of this function is to create a table of 23 predictor variables
+%The purpose of this function is to create a table of 23 predictor variables
 %used inside of the weber_classification algorithm. 
 %
 %Syntax
