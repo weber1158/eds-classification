@@ -10,15 +10,15 @@ function xray_peak_label(axHandle,prominence)
 % prominence : (Optional, default=90) percentile between 0 and 100 that
 %  specifies the minimum prominence of he x-rary peaks to be labeled.
 %
-% xray_peak_label(axHandle) adds labels to characteristic x-ray peaks in
-%   the chart with the axes handle 'figHandle'
+% xray_peak_label(axHandle) adds labels the to characteristic x-ray peaks
+%  in an xray_plot saved as `axHandle`
 %
 %Examples
 % data = read_msa('file1.msa');
 % plt = xray_plot(data);
 % xray_peak_label(plt)
 %
-% % Label the peaks above the 95th percentile in size
+% % Label the peaks above the 95th percentile in height
 % xray_peak_label(plt,95)
 %
 % See also

@@ -20,11 +20,10 @@ function pixWidth = sem_pixel_size(image_file_name)
 %    pw = 
 %     0.0674
 %
-%
-% COPYRIGHT
-%  ©Austin M. Weber 2023
 % See also
 %  get_sem_metadata
+
+%  ©Austin M. Weber 2024
 
 
 % Store input as a new variable name

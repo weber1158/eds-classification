@@ -26,7 +26,7 @@ function minerals = donarummo_classification(peak_intensity_table)
 %  Donarummo et al. (2003).
 % 
 %*The sixteen possible mineral classifications are:
-%  ABBREVIATION     NAME
+%  ABBREVIATION     MINERAL_NAME
 %  Ab               Albite
 %  Afs              Alkali feldspar (orthoclase)
 %  An               Anorthite

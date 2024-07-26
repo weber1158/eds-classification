@@ -42,7 +42,7 @@ function classes = eds_classification(data,varargin)
 %EXAMPLES
 % % Use the machine learning algorithm by Weber [1] to classify the mineral
 % % composition of each row in an EDS net intenstiy data table.
-% load eds_mineral_standards.mat
+% load eds_mineral_net_intensities.mat
 % weber = EDS_CLASSIFICATION(data);
 %
 % % Use the sorting scheme algorithm from Donarummo et al. [2] to classify
@@ -70,9 +70,9 @@ function classes = eds_classification(data,varargin)
 %
 %
 %REFERENCES
-% [1] Weber, Austin M. (2024). "EDS Classification for MATLAB" V1.0.0 .
+% [1] Weber, Austin M. (2024). "EDS Classification for MATLAB" V1.0.1 .
 %     [Software]. Github. <a href="matlab:
-%     web('https://github.com/weber-1158/eds-classification-for-MATLAB')">https://github.com/weber-1158/eds-classification-for-MATLAB</a>.
+%     web('https://github.com/weber1158/eds-classification-for-MATLAB')">https://github.com/weber1158/eds-classification-for-MATLAB</a>.
 %
 % [2] Donarummo, J., Ram, M., & Stoermer, E. F. (2003). Possible deposit of
 %     soil dust from the 1930 s U.S. dust bowl identified in Greenland ice.

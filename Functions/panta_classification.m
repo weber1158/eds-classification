@@ -25,7 +25,7 @@ function minerals = panta_classification(data_table)
 %  using the taxonomy proposed by Whitney and Evans (2010)*.
 %
 %*The 18 possible specific** mineral classifications are:
-%  ABBREVIATION     NAME
+%  ABBREVIATION     MINERAL_NAME
 %  Ab               Albite
 %  Alu              Alunite
 %  Ap               Apatite
