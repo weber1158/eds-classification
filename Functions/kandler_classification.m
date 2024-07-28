@@ -95,229 +95,229 @@ function classifications = particle_classification(T)
 		
 		sums = element_sums(T);
 		% 01 of 44
-			idx = classify01(T,sums,classifications);
+			idx = check_biological(T,sums,classifications);
 			classifications(idx,1) = {'other'};
 			classifications(idx,2) = {'biological'};
 			classifications(idx,3) = {'N/A'};
 		% 02 of 44
-			idx = classify02(T,sums,classifications);
+			idx = check_NaRich(T,sums,classifications);
 			classifications(idx,1) = {'secondary'};
 			classifications(idx,2) = {'Na-rich'};
 			classifications(idx,3) = {'sulf'};
 		% 03 of 44
-			idx = classify03(T,sums,classifications);
+			idx = check_NH4SO4(T,sums,classifications);
 			classifications(idx,1) = {'secondary'};
 			classifications(idx,2) = {'ammonium sulfate'};
 			classifications(idx,3) = {'sulf'};
-%NOTE: The following blocks of code for classify04 and classify05 are
+%NOTE: The following blocks of code for check_sootMix and check_sootNH4SO4 are
 %commented-out because they require mineral particle data collected on
 %particles between 0.03 and 0.20 microns in size. The user may uncomment
 %these lines if they are applicable.
 %		% 04 of 44
-% 			idx = classify04(T,sums,classifications);
+% 			idx = check_sootMix(T,sums,classifications);
 % 			classifications(idx,1) = {'soot mixtures'};
 % 			classifications(idx,2) = {'soot'};
 % 			classifications(idx,3) = {'soot'};
 %		% 05 of 44
-% 			idx = classify05(T,sums,classifications);
+% 			idx = check_sootNH4SO4(T,sums,classifications);
 % 			classifications(idx,1) = {'soot mixtures'};
 % 			classifications(idx,2) = {'soot+ammonium sulfate'};
 % 			classifications(idx,3) = {'sulf+soot'};
 		% 06 of 44
-			idx = classify06(T,sums,classifications);
+			idx = check_NaSO4(T,sums,classifications);
 			classifications(idx,1) = {'sulfates'};
 			classifications(idx,2) = {'Na sulfate'};
 			classifications(idx,3) = {'sulf'};
 		% 07 of 44
-			idx = classify07(T,sums,classifications);
+			idx = check_CaNaSO4(T,sums,classifications);
 			classifications(idx,1) = {'sulfates'};
 			classifications(idx,2) = {'Ca Na sulfate'};
 			classifications(idx,3) = {'sulf'};
 		% 08 of 44
-			idx = classify08(T,sums,classifications);
+			idx = check_CaSO4(T,sums,classifications);
 			classifications(idx,1) = {'sulfates'};
 			classifications(idx,2) = {'Ca sulfate'};
 			classifications(idx,3) = {'calc'};
 		% 09 of 44
-			idx = classify09(T,sums,classifications);
+			idx = check_otherSO4(T,sums,classifications);
 			classifications(idx,1) = {'sulfates'};
 			classifications(idx,2) = {'other sulfate'};
 			classifications(idx,3) = {'sulf'};
 		% 10 of 44
-			idx = classify10(T,sums,classifications);
+			idx = check_CaCO3(T,sums,classifications);
 			classifications(idx,1) = {'carbonates'};
 			classifications(idx,2) = {'Ca carbonate'};
 			classifications(idx,3) = {'hem+sil+calc'};
 		% 11 of 44
-			idx = classify11(T,sums,classifications);
+			idx = check_CaMgCO3(T,sums,classifications);
 			classifications(idx,1) = {'carbonates'};
 			classifications(idx,2) = {'Ca Mg carbonate'};
 			classifications(idx,3) = {'hem+sil+calc'};
 		% 12 of 44
-			idx = classify12(T,sums,classifications);
+			idx = check_PO4(T,sums,classifications);
 			classifications(idx,1) = {'phosphates'};
 			classifications(idx,2) = {'phosphate'};
 			classifications(idx,3) = {'N/A'};
 		% 13 of 44
-			idx = classify13(T,sums,classifications);
+			idx = check_NaCl(T,sums,classifications);
 			classifications(idx,1) = {'chlorides'};
 			classifications(idx,2) = {'Na chloride'};
 			classifications(idx,3) = {'nchl+sulf'};
 		% 14 of 44
-			idx = classify14(T,sums,classifications);
+			idx = check_KCl(T,sums,classifications);
 			classifications(idx,1) = {'chlorides'};
 			classifications(idx,2) = {'K chloride'};
 			classifications(idx,3) = {'kchl'};
 		% 15 of 44
-			idx = classify15(T,sums,classifications);
+			idx = check_otherCl(T,sums,classifications);
 			classifications(idx,1) = {'chlorides'};
 			classifications(idx,2) = {'other chloride'};
 			classifications(idx,3) = {'N/A'};
 		% 16 of 44
-			idx = classify16(T,sums,classifications);
+			idx = check_FeO(T,sums,classifications);
 			classifications(idx,1) = {'oxides'};
 			classifications(idx,2) = {'Fe oxide'};
 			classifications(idx,3) = {'hem+sil'};
 		% 17 of 44
-			idx = classify17(T,sums,classifications);
+			idx = check_TiO(T,sums,classifications);
 			classifications(idx,1) = {'oxides'};
 			classifications(idx,2) = {'Ti oxide'};
 			classifications(idx,3) = {'rut+sil'};
 		% 18 of 44
-			idx = classify18(T,sums,classifications);
+			idx = check_FeTiO(T,sums,classifications);
 			classifications(idx,1) = {'oxides'};
 			classifications(idx,2) = {'Fe Ti oxide'};
 			classifications(idx,3) = {'rut+sil'};
 		% 19 of 44
-			idx = classify19(T,sums,classifications);
+			idx = check_AlO(T,sums,classifications);
 			classifications(idx,1) = {'oxides'};
 			classifications(idx,2) = {'Al oxide'};
 			classifications(idx,3) = {'N/A'};
 		% 20 of 44
-			idx = classify20(T,sums,classifications);
+			idx = check_quartz(T,sums,classifications);
 			classifications(idx,1) = {'Qz'}; %quartz
 			classifications(idx,2) = {'Qz'}; %quartz
 			classifications(idx,3) = {'hem+qtz'};
 		% 21 of 44
-			idx = classify21(T,sums,classifications);
+			idx = check_SiAl(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiAl'};
 			classifications(idx,3) = {'hem+sil'};
 		% 22 of 44
-			idx = classify22(T,sums,classifications);
+			idx = check_SiAlK(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiAlK'};
 			classifications(idx,3) = {'hem+sil'};
 		% 23 of 44
-			idx = classify23(T,sums,classifications);
+			idx = check_SiAlNa(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiAlNa'};
 			classifications(idx,3) = {'hem+sil'};
 		% 24 of 44
-			idx = classify24(T,sums,classifications);
+			idx = check_SiAlNaCa(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiAlNaCa'};
 			classifications(idx,3) = {'hem+sil+calc'};
 		% 25 of 44
-			idx = classify25(T,sums,classifications);
+			idx = check_SiAlNaK(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiAlNaK'};
 			classifications(idx,3) = {'hem+sil'};
 		% 26 of 44
-			idx = classify26(T,sums,classifications);
+			idx = check_SiAlCaFeMg(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiAlCaFeMg'};
 			classifications(idx,3) = {'hem+sil+calc'};
 		% 27 of 44
-			idx = classify27(T,sums,classifications);
+			idx = check_SiAlKFeMg(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiAlKFeMg'};
 			classifications(idx,3) = {'hem+sil'};
 		% 28 of 44
-			idx = classify28(T,sums,classifications);
+			idx = check_SiAlFeMg(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiAlFeMg'};
 			classifications(idx,3) = {'hem+sil'};
 		% 29 of 44
-			idx = classify29(T,sums,classifications);
+			idx = check_SiMgFe(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiMgFe'};
 			classifications(idx,3) = {'hem+sil'};
 		% 30 of 44
-			idx = classify30(T,sums,classifications);
+			idx = check_SiMg(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiMg'};
 			classifications(idx,3) = {'hem+sil'};
 		% 31 of 44
-			idx = classify31(T,sums,classifications);
+			idx = check_SiCaTi(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'SiCaTi'};
 			classifications(idx,3) = {'rut+sil'};
 		% 32 of 44
-			idx = classify32(T,sums,classifications);
+			idx = check_mixSiS(T,sums,classifications);
 			classifications(idx,1) = {'mixtures'};
 			classifications(idx,2) = {'mixtures Si+S'};
 			classifications(idx,3) = {'hem+sil+sulf'};
 		% 33 of 44
-			idx = classify33(T,sums,classifications);
+			idx = check_mixAlSiS(T,sums,classifications);
 			classifications(idx,1) = {'mixtures'};
 			classifications(idx,2) = {'mixtures AlSi+S'};
 			classifications(idx,3) = {'hem+sil+sulf'};
 		% 34 of 44
-			idx = classify34(T,sums,classifications);
+			idx = check_mixClS(T,sums,classifications);
 			classifications(idx,1) = {'mixtures'};
 			classifications(idx,2) = {'mixtures Cl+S'};
 			classifications(idx,3) = {'nchl+sulf'};
 		% 35 of 44
-			idx = classify35(T,sums,classifications);
+			idx = check_mixNaClSi(T,sums,classifications);
 			classifications(idx,1) = {'mixtures'};
 			classifications(idx,2) = {'mixtures NaCl+Si'};
 			classifications(idx,3) = {'hem+sil+nchl+sulf'};
 		% 36 of 44
-			idx = classify36(T,sums,classifications);
+			idx = check_mixNaClAlSi(T,sums,classifications);
 			classifications(idx,1) = {'mixtures'};
 			classifications(idx,2) = {'mixtures NaCl+AlSi'};
 			classifications(idx,3) = {'hem+sil+nchl+sulf'};
 		% 37 of 44
-			idx = classify37(T,sums,classifications);
+			idx = check_mixCaSi(T,sums,classifications);
 			classifications(idx,1) = {'mixtures'};
 			classifications(idx,2) = {'mixtures Ca+Si'};
 			classifications(idx,3) = {'hem+sil+calc'};
 		% 38 of 44
-			idx = classify38(T,sums,classifications);
+			idx = check_mixCaAlSi(T,sums,classifications);
 			classifications(idx,1) = {'mixtures'};
 			classifications(idx,2) = {'mixtures Ca+AlSi'};
 			classifications(idx,3) = {'hem+sil+calc'};
 		% 39 of 44
-			idx = classify39(T,sums,classifications);
+			idx = check_otherSi(T,sums,classifications);
 			classifications(idx,1) = {'silicates'};
 			classifications(idx,2) = {'other Si-dominated'};
 			classifications(idx,3) = {'hem+sil+sulf'};
 		% 40 of 44
-			idx = classify40(T,sums,classifications);
+			idx = check_steel(T,sums,classifications);
 			classifications(idx,1) = {'other'};
 			classifications(idx,2) = {'steel'};
 			classifications(idx,3) = {'hem+sil+sulf'};
 		% 41 of 44
-			idx = classify41(T,sums,classifications);
+			idx = check_otherMg(T,sums,classifications);
 			classifications(idx,1) = {'other'};
 			classifications(idx,2) = {'other Mg-dominated'};
 			classifications(idx,3) = {'N/A'};
 		% 42 of 44
-			idx = classify42(T,sums,classifications);
+			idx = check_otherK(T,sums,classifications);
 			classifications(idx,1) = {'other'};
 			classifications(idx,2) = {'other K-dominated'};
 			classifications(idx,3) = {'N/A'};
 		% 43 of 44
-			idx = classify43(T,sums,classifications);
+			idx = check_otherCa(T,sums,classifications);
 			classifications(idx,1) = {'other'};
 			classifications(idx,2) = {'other Ca-dominated'};
 			classifications(idx,3) = {'N/A'};
 		% 44 of 44
-			idx = classify44(classifications);
+			idx = check_na(classifications);
 			classifications(idx,3) = {'N/A'};
 end % End of particle_classification() local function
-function index = classify01(T,sums,classification_array)
+function index = check_biological(T,sums,classification_array)
 	minisums = T.Na+T.S+T.P+T.Ca;
 	criteria1 = (T.K+T.Na+T.S+T.P+T.Ca)./sums;
 	criteria2 = T.P ./ sums;
@@ -341,7 +341,7 @@ function index = classify01(T,sums,classification_array)
 		   & ((T.Fe ./ minisums) < 0.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify02(T,sums,classification_array)
+function index = check_NaRich(T,sums,classification_array)
 	% NOTE: In the original algorithm from the literature, Kandler et al.
 	% (2011) appear to have mistakenly wrote the expression: C/Na<0.05 when
 	% they most likely meant Cl/Na<0.05. I have corrected for this error,
@@ -367,7 +367,7 @@ function index = classify02(T,sums,classification_array)
 		   & ((T.Fe ./ T.Na) < 0.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify03(T,sums,classification_array)
+function index = check_NH4SO4(T,sums,classification_array)
 	criteria1 = T.S ./ sums;
 	index = ((criteria1 >= 0.3) & (criteria1 <= 1.1)...
 		   & ((T.Na ./ T.S) < 0.1)...
@@ -384,7 +384,7 @@ function index = classify03(T,sums,classification_array)
 		   & ((T.Fe ./ T.S) < 0.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify04(T,sums,classification_array)
+function index = check_sootMix(T,sums,classification_array)
 	%NOTE: This local function is not called by the main function unless
 	%the user un-comments the corresponding lines in the main function.
 	 index =(((T.Mg ./ sums) < 0.05)...
@@ -396,7 +396,7 @@ function index = classify04(T,sums,classification_array)
 		   & ((T.Cl ./ T.Si) < 0.05)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify05(T,sums,classification_array)
+function index = check_sootNH4SO4(T,sums,classification_array)
 	%NOTE: This local function is not called by the main function unless
 	%the user un-comments the corresponding lines in the main function.
 	criteria4 = T.S ./ sums;
@@ -410,7 +410,7 @@ function index = classify05(T,sums,classification_array)
 		   & ((T.Cl ./ T.Si) < 0.05)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify06(T,sums,classification_array)
+function index = check_NaSO4(T,sums,classification_array)
 	criteria1 = T.Na ./ T.S;
 	criteria2 = (T.Na+T.S) ./ sums;
 	criteria3 = T.Na ./ sums;
@@ -433,7 +433,7 @@ function index = classify06(T,sums,classification_array)
 		   & ((T.Fe ./ minisums) < 0.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify07(T,sums,classification_array)
+function index = check_CaNaSO4(T,sums,classification_array)
 	criteria1 = (T.Na+T.S+T.Ca) ./ sums;
 	criteria2 = T.Na ./ sums;
 	criteria3 = T.S  ./ sums;
@@ -459,7 +459,7 @@ function index = classify07(T,sums,classification_array)
 		   & (criteria16 >= 0.1001) & (criteria16 <= 10)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify08(T,sums,classification_array)
+function index = check_CaSO4(T,sums,classification_array)
 	criteria1 = T.Ca ./ T.S;
 	criteria2 = (T.Ca+T.S) ./ sums;
 	minisums = T.S+T.Ca;
@@ -478,7 +478,7 @@ function index = classify08(T,sums,classification_array)
 		   & ((T.Fe ./ minisums) < 0.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify09(T,sums,classification_array)
+function index = check_otherSO4(T,sums,classification_array)
 	criteria1 = T.S ./ sums;
 	index =((criteria1 >= 0.2) & (criteria1 >= 1.1)...
 		  & ((T.Na ./ T.S) < 2)...
@@ -495,7 +495,7 @@ function index = classify09(T,sums,classification_array)
 		  & ((T.Fe ./ T.S) < 2)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify10(T,sums,classification_array)
+function index = check_CaCO3(T,sums,classification_array)
 	criteria1 = T.Ca ./ sums;
 	index = ((criteria1 >= 0.2) & (criteria1 <= 1.1)...
 		   & ((T.Na ./ T.Ca) < 0.110)...
@@ -512,7 +512,7 @@ function index = classify10(T,sums,classification_array)
 		   & ((T.Fe ./ T.Ca) < 0.100)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify11(T,sums,classification_array)
+function index = check_CaMgCO3(T,sums,classification_array)
 	criteria1 = (T.Ca+T.Mg) ./ sums;
 	criteria2 = T.Mg ./ T.Ca;
 	minisums = T.Ca+T.Mg;
@@ -529,7 +529,7 @@ function index = classify11(T,sums,classification_array)
 		   & ((T.Fe ./ minisums) < 0.100)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify12(T,sums,classification_array)
+function index = check_PO4(T,sums,classification_array)
 	criteria1 = T.P ./ sums;
 	minisums = T.Ca ./ T.P;
 	index = ((criteria1 >= 0.050) & (criteria1 <= 1.100)...
@@ -537,7 +537,7 @@ function index = classify12(T,sums,classification_array)
 			& ((T.Si ./ minisums) < 0.100)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify13(T,sums,classification_array)
+function index = check_NaCl(T,sums,classification_array)
 	minisums = T.Na+T.Cl;
 	criteria1 = minisums ./ sums;
 	criteria2 = T.Na ./ sums;
@@ -557,7 +557,7 @@ function index = classify13(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.25)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify14(T,sums,classification_array)
+function index = check_KCl(T,sums,classification_array)
 	minisums = T.K+T.Cl;
 	criteria1 = minisums ./ sums;
 	criteria2 = T.Na ./ sums;
@@ -578,7 +578,7 @@ function index = classify14(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.250)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify15(T,sums,classification_array)
+function index = check_otherCl(T,sums,classification_array)
 	criteria1 = T.Cl ./ sums;
 	index = ((criteria1 >= 0.25) & (criteria1 <= 1.10)...
 		  & ((T.Si ./ sums) < 0.0699)...
@@ -595,7 +595,7 @@ function index = classify15(T,sums,classification_array)
 		  & ((T.Fe ./ T.Cl) <10.000)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify16(T,sums,classification_array)
+function index = check_FeO(T,sums,classification_array)
 	criteria1 = T.Fe ./ sums;
 	index = ((criteria1 >= 0.25) & (criteria1 <= 1.10)...
 		  & ((T.Na ./ T.Fe) < 0.10)...
@@ -612,7 +612,7 @@ function index = classify16(T,sums,classification_array)
 		  & ((T.Mn ./ T.Fe) < 1.00)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify17(T,sums,classification_array)
+function index = check_TiO(T,sums,classification_array)
 	criteria1 = T.Ti ./ sums;
 	index = ((criteria1 >= 0.25) & (criteria1 <= 1.10)...
 		  & ((T.Na ./ T.Ti) < 0.18)...
@@ -629,7 +629,7 @@ function index = classify17(T,sums,classification_array)
 		  & ((T.Fe ./ T.Ti) < 0.25)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify18(T,sums,classification_array)
+function index = check_FeTiO(T,sums,classification_array)
 	minisums = T.Ti+T.Fe;
 	criteria1 = T.Ti ./ T.Fe;
 	criteria2 = minisums ./ sums;
@@ -648,7 +648,7 @@ function index = classify18(T,sums,classification_array)
 		  & ((T.Mn ./ minisums) < 0.05)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify19(T,sums,classification_array)
+function index = check_AlO(T,sums,classification_array)
 	criteria1 = T.Al ./ sums;
 	index = ((criteria1 >= 0.2) & (criteria1 <= 1.1)...
 		  & ((T.Na ./ T.Al) < 0.2)...
@@ -663,7 +663,7 @@ function index = classify19(T,sums,classification_array)
 		  & ((T.Fe ./ T.Al) < 1.0)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify20(T,sums,classification_array)
+function index = check_quartz(T,sums,classification_array)
 	criteria1 = T.Si ./ sums;
 	index = ((criteria1 >= 0.4) & (criteria1 <= 1.1)...
 		  & ((T.Al ./ T.Si) < 0.2)...
@@ -680,7 +680,7 @@ function index = classify20(T,sums,classification_array)
 		  & ((T.Fe ./ T.Si) < 0.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify21(T,sums,classification_array)
+function index = check_SiAl(T,sums,classification_array)
 	minisums = T.Si+T.Al;
 	criteria1 = T.Al ./ T.Si;
 	criteria2 = minisums ./ sums;
@@ -701,7 +701,7 @@ function index = classify21(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.10)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify22(T,sums,classification_array)
+function index = check_SiAlK(T,sums,classification_array)
 	minisums = T.Si+T.Al+T.K;
 	criteria1 = T.K ./ (T.Si+T.Al);
 	criteria2 = T.Al ./ T.Si;
@@ -723,7 +723,7 @@ function index = classify22(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.05)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify23(T,sums,classification_array)
+function index = check_SiAlNa(T,sums,classification_array)
 	minisums = T.Si+T.Al+T.Na;
 	criteria1 = T.Na ./ (T.Si+T.Al);
 	criteria2 = T.Al ./ T.Si;
@@ -744,7 +744,7 @@ function index = classify23(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.15)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify24(T,sums,classification_array)
+function index = check_SiAlNaCa(T,sums,classification_array)
 	minisum = T.Si+T.Al;
 	minisums= T.Si+T.Al+T.Na+T.Ca;
 	criteria1 = (T.Ca+T.Na) ./ minisum;
@@ -768,7 +768,7 @@ function index = classify24(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.10)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify25(T,sums,classification_array)
+function index = check_SiAlNaK(T,sums,classification_array)
 	minisums = T.Si+T.Al+T.Na+T.K;
 	criteria1 = (T.K+T.Na) ./ (T.Si+T.Al);
 	criteria2 = T.Al ./ T.Si;
@@ -793,7 +793,7 @@ function index = classify25(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.05)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify26(T,sums,classification_array)
+function index = check_SiAlCaFeMg(T,sums,classification_array)
 	minisums = T.Si+T.Al+T.Ca+T.Fe+T.Mg;
 	criteria1 = (T.Ca+T.Fe+T.Mg)./(T.Si+T.Al);
 	criteria2 = T.Al ./ T.Si;
@@ -820,7 +820,7 @@ function index = classify26(T,sums,classification_array)
 		  & ((T.Mn ./ minisums) < 0.05)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))) );
 end
-function index = classify27(T,sums,classification_array)
+function index = check_SiAlKFeMg(T,sums,classification_array)
 	minisum1 = T.Si+T.Al;
 	minisum2 = T.Fe+T.Mg;
 	minisums = T.Si+T.Al+T.K+T.Fe+T.Mg;
@@ -845,7 +845,7 @@ function index = classify27(T,sums,classification_array)
 		  & ((T.Mn ./ minisums) < 0.05)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify28(T,sums,classification_array)
+function index = check_SiAlFeMg(T,sums,classification_array)
 	minisum = T.Si+T.Al;
 	minisums = T.Si+T.Al+T.Fe+T.Mg;
 	criteria1 = T.Al ./ sums;
@@ -873,7 +873,7 @@ function index = classify28(T,sums,classification_array)
 		  & ((T.Mn ./ minisums) < 0.05)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify29(T,sums,classification_array)
+function index = check_SiMgFe(T,sums,classification_array)
 	minisums = T.Si+T.Fe+T.Mg;
 	criteria1 = T.Fe ./ (T.Si+T.Mg);
 	criteria2 = (T.Mg+T.Fe) ./ T.Si;
@@ -894,7 +894,7 @@ function index = classify29(T,sums,classification_array)
 		  & ((T.Mn ./ minisums) < 0.05)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify30(T,sums,classification_array)
+function index = check_SiMg(T,sums,classification_array)
 	minisums = T.Si+T.Mg;
 	criteria1 = T.Mg ./ T.Si;
 	criteria3 = minisums ./ sums;
@@ -914,7 +914,7 @@ function index = classify30(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.20)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify31(T,sums,classification_array)
+function index = check_SiCaTi(T,sums,classification_array)
 	minisums = T.Si+T.Ca+T.Ti;
 	criteria1 = T.Ca ./ T.Ti;
 	criteria3 = minisums ./ sums;
@@ -936,7 +936,7 @@ function index = classify31(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.20)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify32(T,sums,classification_array)
+function index = check_mixSiS(T,sums,classification_array)
 	minisums = T.Si+T.S;
 	criteria2 = T.S ./ sums;
 	criteria3 = T.S ./ T.Si;
@@ -959,7 +959,7 @@ function index = classify32(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 0.20)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify33(T,sums,classification_array)
+function index = check_mixAlSiS(T,sums,classification_array)
 	minisums = T.Al+T.Si+T.S;
 	criteria1 = T.Al ./ sums;
 	criteria2 = T.Si ./ sums;
@@ -985,7 +985,7 @@ function index = classify33(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 5.00)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify34(T,sums,classification_array)
+function index = check_mixClS(T,sums,classification_array)
 	minisums = T.S+T.Cl;
 	criteria1 = T.Cl ./ T.S;
 	criteria2 = minisums ./ sums;
@@ -1006,7 +1006,7 @@ function index = classify34(T,sums,classification_array)
 		  & ((T.Fe ./ minisums) < 2.00)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify35(T,sums,classification_array)
+function index = check_mixNaClSi(T,sums,classification_array)
 	criteria1 = T.Si ./ (T.Na +T.Cl);
 	criteria2 = T.Al ./ T.Si;
 	criteria3 = (T.Si+T.Na+T.Cl) ./ sums;
@@ -1021,7 +1021,7 @@ function index = classify35(T,sums,classification_array)
 		  &  (criteria6 >= 0.01)& (criteria6 <= 1.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify36(T,sums,classification_array)
+function index = check_mixNaClAlSi(T,sums,classification_array)
 	criteria1 = (T.Si+T.Al)./(T.Na+T.Cl);
 	criteria2 = T.Al ./ T.Si;
 	criteria3 = (T.Si+T.Na+T.Cl) ./ sums;
@@ -1038,7 +1038,7 @@ function index = classify36(T,sums,classification_array)
 		  &  (criteria7 >= 0.010) & (criteria4 <=   1.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify37(T,sums,classification_array)
+function index = check_mixCaSi(T,sums,classification_array)
 	% NOTE: There is an inconsistency in the original Kandler algorithm as
 	% written in the literature: for this particular function, Kandler et
 	% al. (2011) use the ratio Si/Ca twice, but with different domains. That
@@ -1063,7 +1063,7 @@ function index = classify37(T,sums,classification_array)
 		  & ((T.S  ./ minisums) < 0.2)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify38(T,sums,classification_array)
+function index = check_mixCaAlSi(T,sums,classification_array)
 	minisums = T.Si+T.Ca;
 	criteria1 = T.Al ./ T.Si;
 	criteria2 = (T.Ca+T.Si+T.Al)./sums;
@@ -1085,34 +1085,34 @@ function index = classify38(T,sums,classification_array)
 		  & ((T.K  ./ minisums) < 1.00)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify39(T,sums,classification_array)
+function index = check_otherSi(T,sums,classification_array)
 	criteria1 = T.Si ./ sums;
 	index = ((criteria1 >= 0.1) & (criteria1 <= 1.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify40(T,sums,classification_array)
+function index = check_steel(T,sums,classification_array)
 	criteria1 = T.Fe+T.Ti+T.Mn+T.Cr;
 	criteria2 = T.Fe ./ sums;
 	index = ((criteria1 >= 0.2) & (criteria1 <= 1.1)...
 		   & (criteria2 >= 0.2) & (criteria2 <= 1.1))...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1)));
 end
-function index = classify41(T,sums,classification_array)
+function index = check_otherMg(T,sums,classification_array)
 	criteria1 = T.Mg ./ sums;
 	index = ((criteria1 >= 0.35) & (criteria1 <= 1.1))...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1)));
 end
-function index = classify42(T,sums,classification_array)
+function index = check_otherK(T,sums,classification_array)
 	criteria1 = T.K ./ sums;
 	index = ((criteria1 >= 0.25) & (criteria1 <= 1.1))...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1)));
 end
-function index = classify43(T,sums,classification_array)
+function index = check_otherCa(T,sums,classification_array)
 	criteria1 = T.Ca ./ sums;
 	index = ((criteria1 >= 0.15) & (criteria1 <= 1.1)...
 		  & (cellfun(@(x) strcmp(x, 'other'), classification_array(:,1))));
 end
-function index = classify44(classifications_array)
+function index = check_na(classifications_array)
 	index = cellfun(@(x) strcmp(x, 'other'), classifications_array(:,1));
 end
 function sums = element_sums(T)
