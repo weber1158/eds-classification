@@ -131,7 +131,7 @@ The purpose of this function is to assist in the mineral classification of compl
 
 `minerals` - categorical vector of mineral classifications for each row in the input table. All classifications are given using standardized abbreviations (see the table below for details).
 
-`groups` - (Optional) categorical vector of generalized mineral groups for each row in the input table. For example, if the mieral is classified as one of the five feldspars it will be given a group classification of "Feldspar".
+`groups` - (Optional) categorical vector of generalized mineral groups for each row in the input table. For example, if the mineral is classified as one of the five feldspars it will be given a group classification of "Feldspar".
 
 `scores` - (Optional) Probability scores for each classification. That is, a table showing the likelihood of each classification. The scores are given as fractions between 0 (0%) and 1 (100%).
 
