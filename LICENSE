@@ -16,8 +16,8 @@ copies or substantial portions of the Software.
 in the software, properly cite the original source materials for the algorithms that 
 were utilized. Recommended citations are as follows:
 
-[2a] For general use of the software, please cite: Weber, Austin M. (2024). Mineral
-Classification Version 1.0.0 [Software]. Github. https://github.com/weber1158/mineral-classification
+[2a] For general use of the software, please cite: Weber, Austin M. (2024). EDS Classification for
+MATLAB V1.2.0 [Software]. Github. https://github.com/weber1158/eds-classification-for-matlab
 
 [2b] For use of the Donarummo algorithm, please cite: Donarummo, J., Ram, M., & Stoermer, E. F. (2003). 
 Possible deposit of soil dust from the 1930’s U.S. dust bowl identified in Greenland ice. Geophysical 

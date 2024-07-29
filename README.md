@@ -1,12 +1,12 @@
 # EDS Classification for MATLAB
 **Functions for working with SEM-EDS data in MATLAB, including different algorithms for performing mineral classification.**
 
-This repository includes several functions designed to quickly classify minerals from data collected using a scanning electron microscope (SEM) with an energy dispersive spectrometry (EDS) detector. The `weber_classification()` algorithm is a novel machine learning classifier trained on 18 mineral standards with an validation accuracy exceeding 99%. In addition, three alternative classification algorithms have been trasncribed into viable MATLAB code from the literature to compare and help finalize the results. See the `donarummo_classification()` **[1]**, `kandler_classification()` **[2]**, and `panta_classification()` **[3]** functions for details.
+This repository includes several functions designed to quickly classify minerals from data collected using a scanning electron microscope (SEM) with an energy dispersive spectrometry (EDS) detector. The `weber_classification()` algorithm is a novel machine learning classifier trained on 18 mineral standards with an validation accuracy exceeding 99%. In addition, three alternative classification algorithms have been trasncribed into viable MATLAB code from the literature to compare and help finalize the results. See the `donarummo_classification()` **[1]**, `kandler_classification()` **[2]**, and `panta_classification()` **[3]** functions for details. The Donarummo, Kandler, and Panta algorithms have also been transcribed into Julia code for those without a MATLAB license.
 
-Moreover, this repository includes functions for importing EDS x-ray spectral data (see `read_msa()`) and visualizing the data (see `xray_plot()`). Users may also import the metadata from SEM micrographs with the `get_sem_metadata()` function, and much more.
+Moreover, this repository includes MATLAB functions for importing EDS x-ray spectral data (see `read_msa()`) and visualizing the data (see `xray_plot()`). Users may also import the metadata from SEM micrographs with the `get_sem_metadata()` function, and much more.
 
 ## Citation
-Weber, Austin M. (2024) EDS Classification for MATLAB. V1.0.1 [Software]. Github. https://github.com/weber1158/eds-classification-for-matlab
+Weber, Austin M. (2024) EDS Classification for MATLAB. V1.2.0 [Software]. Github. https://github.com/weber1158/eds-classification-for-matlab
 
 For BibTeX:
 ```tex
@@ -15,7 +15,7 @@ For BibTeX:
    title = {EDS Classification for MATLAB}, 
    year = 2024, 
    publisher = {GitHub}, 
-   version = {1.0.1}, 
+   version = {1.2.0}, 
    url = {https://github.com/weber1158/eds-classification-for-matlab} 
 }
 ```
