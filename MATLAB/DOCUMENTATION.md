@@ -121,7 +121,7 @@ Machine learning mineral classification model for EDS data
 
 This **bagged tree ensemble** model was trained using EDS net intensity data collected on 18 mineral standards at the Center for Electron Microscopy and Analysis (CEMAS) at The Ohio State University. The instrument that was used was a Quattro Environmental SEM with an EDAX Octane Elect Super EDS detector. Operating conditions included a 15 kV acceleration voltage, 11 nA beam current, and 12 mm working distance.
 
-The purpose of this function is to assist in the mineral classification of complex EDS spectra, with emphasis on minerals that are often foundin ice core dust studies. Minerals with simple chemistry, such as quartz, can be easily identified from their spectra alone and were therefore excluded from the model training. 
+The purpose of this function is to assist in the mineral classification of complex EDS spectra, with emphasis on minerals that are often found in ice core dust studies. Minerals with simple chemistry, such as quartz, can be easily identified from their spectra alone and were therefore excluded from the model training. 
 
 <big>**Input**</big>
 
