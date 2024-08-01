@@ -83,22 +83,22 @@ NAME
 
 `"Algorithm"` or `Algorithm=`
 
-| VALUE | DATA_TYPE | REQUIRED_ELEMENTS | [REFERENCE](#copyrights) |
+| VALUE | DATA_TYPE | REQUIRED_ELEMENTS | REFERENCE |
 | --- | --- | --- | :---: | 
-|`"Weber"`|Net intensity|Na,Mg,Al,Si,P,K,Ca,Ti,Fe|[1]|
-|`"Donarummo"`|Net intensity|Na,Mg,Al,Si,K,Ca,Fe|[2]|
-|`"Kandler"`|Atom percent|Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[3]|
-|`"Panta"`|Atom percent|F,,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[4]|
+|`"Weber"`|Net intensity|Na,Mg,Al,Si,P,K,Ca,Ti,Fe|[[1]](#copyrights)|
+|`"Donarummo"`|Net intensity|Na,Mg,Al,Si,K,Ca,Fe|[[2]](#copyrights)|
+|`"Kandler"`|Atom percent|Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[[3]](#copyrights)|
+|`"Panta"`|Atom percent|F,Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[[4]](#copyrights)|
 
 
 <big>**Examples**</big>
 
 ```matlab
-% Use the machine learning algorithm by Weber [1] to classify the mineral composition of each row in an EDS net intensity data table.
+% Use the machine learning algorithm by Weber to classify the mineral composition of each row in an EDS net intensity data table.
 load eds_mineral_standards.mat
 weber = eds_classifiation(data);
 
-% Use the sorting scheme algorithm from Donarummo et al. [2] to classify the same data.
+% Use the sorting algorithm from Donarummo et al. (2003) to classify the same data.
 donarummo = eds_classifiation(data,Algorithm="Donarummo");
 ```
 
