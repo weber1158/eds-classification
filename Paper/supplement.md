@@ -92,7 +92,11 @@ The Weber algorithm is only capable of identifying the 18 minerals used to train
 
 Furthermore, restricting the algorithm training to 18 mineral classes was necessary due to time and monetary limits. The process of performing microscopy analyses is both labor intensive and economically restrictive. The collection of EDS data for the original 20 mineral samples was carried out over a three month period and cost approximately $2000 USD to complete. 
 
-For individuals seeking mineral classification for economic mineral reasearch and need an algorithm for identifying minerals from electron microprobe data, see @daSilva2021.   
+For individuals seeking mineral classification for economic mineral reasearch and need an algorithm for identifying minerals from electron microprobe data, see @daSilva2021. 
+
+### Data Availability Statement
+
+The EDS net intensity data and relevant functions used for training the Weber algorithm are available in the software repository on GitHub [(click here)](https://github.com/weber1158/eds-classification-for-matlab/tree/main/MATLAB/MachineLearningModel).
 
 # References
 
