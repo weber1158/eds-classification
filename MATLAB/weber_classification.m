@@ -92,6 +92,7 @@ function [minerals,groups,scores] = weber_classification(data)
 % (C) Austin M. Weber 2024
 
 % Import model
+warning off
 load weber_trained_model.mat
 weber_classifier = trainedModel.predictFcn;
 
@@ -151,7 +152,7 @@ if nargout >= 2
     groups = categorical(groups);
 
 end
-
+warning on % Turns warning notifications back on
 end
 
 function groups = renamegroups(groups,index,group_name)
