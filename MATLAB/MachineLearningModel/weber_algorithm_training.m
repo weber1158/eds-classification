@@ -54,6 +54,11 @@ data_smote_table = movevars(data_smote_table,'Mineral','Before','(Mg+Fe)/Al');
 % completed and can be viewed by running the following:
 classificationLearner("CLSession.mat")
 
+% NOTE: The "CLSession.mat" session file will only load successfully if the user
+% is using R2024a or later because the original algorithm was programmed using
+% MATLAB Online with version R2024a. See below for details on the model hyper-
+% parameters etc.
+
 % The bagged tree ensemble model is the one that has been saved and
 % incorporated into the weber_classification() function. Note that the
 % model uses a customized cost matrix and is fitted with the following
