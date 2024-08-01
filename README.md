@@ -12,7 +12,7 @@ For BibTeX:
 ```tex
 @software{weber2024eds
    author = {Weber, Austin M.}, 
-   title = {EDS {Classification} for {MATLAB}}, 
+   title = {{EDS} {Classification} for {MATLAB}}, 
    year = 2024, 
    publisher = {GitHub}, 
    version = {1.2.0}, 
