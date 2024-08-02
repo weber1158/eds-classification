@@ -1,4 +1,8 @@
 # EDS Classification for MATLAB
+
+[![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771)
+
+
 **Functions for working with SEM-EDS data in MATLAB, including different algorithms for performing mineral classification.**
 
 This repository includes several functions designed to quickly identify common mineral species from data collected using a scanning electron microscope (SEM) with an energy dispersive spectrometry (EDS) detector. The <small>`eds_classification()`</small> function is encoded with four EDS mineral classification algorithms, including a novel machine learning classifier trained on 18 mineral standards with an accuracy ≅ 99%. Three additional sorting algorithms (that have been transcribed from the peer-reviewed literature) are also available for discriminating mineral classes from SEM-EDS data. See the online **[Documentation](https://github.com/weber1158/eds-classification-for-matlab/blob/main/MATLAB/docs/DOCUMENTATION.md)** for details on each of the algorithms.
