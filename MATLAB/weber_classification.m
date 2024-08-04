@@ -35,7 +35,7 @@ function [minerals,groups,scores] = weber_classification(data)
 %
 % groups   : (Optional) Categorical vector of generalized mineral groups
 %            for each row in the input table. For example, if the mineral 
-%            is classified as one of the five feldspars it will be given a 
+%            is classified as one of the four feldspars it will be given a 
 %            group classification of 'Feldspar'.
 %
 % scores   : (Optional) Probability scores for each classification. That

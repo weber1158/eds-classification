@@ -42,9 +42,9 @@ doc function
   - [`eds_classification()`](#eds_classification) - EDS mineral classification
   - [`weber_classification()`](#weber_classification) -  Machine learning mineral classification model for EDS data
   - [`donarummo_classification()`](#donarummo_classification) - Mineral classification scheme from Donarummo et al. (2003)
-  - [`kandler_classification()`](#kandler_classification) - Mineral classification scheme from Kandler et al. (2011)
+  - [`kandler_classification()`](#kandler_classification) - EDS classification scheme from Kandler et al. (2011)
   - [`panta_classifiction()`](#panta_classification) - Mineral classification scheme from Panta et al. (2023)
-  - [`read_msa()`](#read_msa) - Import EDS spectral data from EMSA (.msa) files
+  - [`read_msa()`](#read_msa) - Read EMSA spectral data files (.msa)
   - [`xray_plot()`](#xray_plot) - Plot EDS spectra
   - [`xray_peak_label()`](#xray_peak_label) - Identify characteristic x-ray peaks in spectra
   - [`get_sem_metadata()`](#get_tif_metadata) - Extract metadata from SEM images (.tif or .tiff)
@@ -95,11 +95,11 @@ NAME
 
 ```matlab
 % Use the machine learning algorithm by Weber to classify the mineral composition of each row in an EDS net intensity data table.
-load eds_mineral_standards.mat
-weber = eds_classifiation(data);
+load eds_mineral_net_intensities.mat
+weber = eds_classification(data);
 
 % Use the sorting algorithm from Donarummo et al. (2003) to classify the same data.
-donarummo = eds_classifiation(data,Algorithm="Donarummo");
+donarummo = eds_classification(data,Algorithm="Donarummo");
 ```
 
 **SEE ALSO** [`weber_classification()`](#weber_classification), [`donarummo_classification()`](#donarummo_classification), [`kandler_classification()`](#kandler_classification),  [`panta_classification()`](#panta_classification).

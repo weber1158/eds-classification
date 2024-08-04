@@ -23,8 +23,8 @@ function classes = eds_classification(data,varargin)
 %               The default is Algorithm="Weber".
 % 
 %OUTPUT
-% classes - Categorical vector of mineral classes corresponding to each row
-%           in the input table.
+% classes - Categorical vector/table of mineral classes corresponding to each
+%           row in the input table.
 %
 %
 %NAME-VALUE PAIRS
@@ -70,9 +70,9 @@ function classes = eds_classification(data,varargin)
 %
 %
 %REFERENCES
-% [1] Weber, Austin M. (2024). "EDS Classification for MATLAB" V1.0.1 .
+% [1] Weber, Austin M. (2024). "EDS Classification for MATLAB"
 %     [Software]. Github. <a href="matlab:
-%     web('https://github.com/weber1158/eds-classification-for-MATLAB')">https://github.com/weber1158/eds-classification-for-MATLAB</a>.
+%     web('https://github.com/weber1158/eds-classification-for-matlab')">https://github.com/weber1158/eds-classification-for-MATLAB</a>.
 %
 % [2] Donarummo, J., Ram, M., & Stoermer, E. F. (2003). Possible deposit of
 %     soil dust from the 1930 s U.S. dust bowl identified in Greenland ice.
