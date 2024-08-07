@@ -10,7 +10,7 @@ This repository includes several functions designed to quickly identify common m
 Moreover, this repository includes MATLAB functions for importing EDS x-ray spectral data (<small>`read_msa()`</small>) and visualizing the data (<small>`xray_plot()`</small>). Users may also import the metadata from SEM micrographs with the <small>`get_sem_metadata()`</small> function, and more.
 
 ## How to cite
-Weber, Austin M. (2024) EDS Classification for MATLAB Version 1.2.0 [Software]. GitHub. https://github.com/weber1158/eds-classification-for-matlab
+Weber, Austin M. (2024) EDS Classification for MATLAB Version 1.3.0 [Software]. GitHub. https://github.com/weber1158/eds-classification-for-matlab
 
 For BibTeX:
 ```tex
@@ -19,7 +19,7 @@ For BibTeX:
    title = {{EDS} {Classification} for {MATLAB}}, 
    year = 2024, 
    publisher = {GitHub}, 
-   version = {1.2.0}, 
+   version = {1.3.0}, 
    url = {https://github.com/weber1158/eds-classification-for-matlab} 
 }
 ```
