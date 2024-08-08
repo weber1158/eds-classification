@@ -1,2 +1,4 @@
-# Hide Jupyter Notebooks from language statistics
-*.ipynb linguist-detectable=false
+# Treat .mlx files as MATLAB code for the language statistics
+*.mlx linguist-language=MATLAB
+# Treat Jupyter Notebooks as Julia code for the language statistics
+*.ipynb linguist-language=Julia
