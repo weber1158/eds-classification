@@ -1,0 +1,2 @@
+# Hide Jupyter Notebooks from language statistics
+*.ipynb linguist-detectable=false
