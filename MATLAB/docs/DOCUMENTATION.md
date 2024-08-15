@@ -1,3 +1,4 @@
+# DOCUMENTATION
 ## Table of Contents ##
 
 - [Features](#features)
@@ -83,12 +84,12 @@ NAME
 
 `"Algorithm"` or `Algorithm=`
 
-| VALUE | DATA_TYPE | REQUIRED_ELEMENTS | REFERENCE |
-| --- | --- | --- | :---: | 
-|`"Weber"`|Net intensity|Na,Mg,Al,Si,P,K,Ca,Ti,Fe|[[1]](#copyrights)|
-|`"Donarummo"`|Net intensity|Na,Mg,Al,Si,K,Ca,Fe|[[2]](#copyrights)|
-|`"Kandler"`|Atom percent|Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[[3]](#copyrights)|
-|`"Panta"`|Atom percent|F,Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[[4]](#copyrights)|
+| VALUE | DATA_TYPE | REQUIRED_ELEMENTS | PARENT_FUNCTION | REFERENCE |
+| --- | --- | --- | --- | :---: | 
+|`"Weber"`|Net intensity|Na,Mg,Al,Si,P,K,Ca,Ti,Fe|[`weber_classification()`](#weber_classification)|[[1]](#copyrights)|
+|`"Donarummo"`|Net intensity|Na,Mg,Al,Si,K,Ca,Fe|[`donarummo_classification()`](#donarummo_classification)|[[2]](#copyrights)|
+|`"Kandler"`|Atom percent|Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[`kandler_classification()`](#kandler_classification)|[[3]](#copyrights)|
+|`"Panta"`|Atom percent|F,Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[`panta_classification()`](#panta_classification)|[[4]](#copyrights)|
 
 
 <big>**Examples**</big>
@@ -96,7 +97,7 @@ NAME
 ```matlab
 % Use the machine learning algorithm by Weber to classify the mineral composition of each row in an EDS net intensity data table.
 load eds_mineral_net_intensities.mat
-weber = eds_classification(data);
+weber = eds_classification(data); %Or, weber = eds_classification(data,Algorithm="Weber");
 
 % Use the sorting algorithm from Donarummo et al. (2003) to classify the same data.
 donarummo = eds_classification(data,Algorithm="Donarummo");
