@@ -98,7 +98,11 @@ NAME
 % Use the machine learning algorithm by Weber to classify the mineral composition of each row in an EDS net intensity data table.
 load eds_mineral_net_intensities.mat
 weber = eds_classification(data); %Or, weber = eds_classification(data,Algorithm="Weber");
+```
 
+<img alt="Weber mineral classification histogram" width="800" src="/MATLAB/images/classificationHistogram.jpg">
+
+```matlab
 % Use the sorting algorithm from Donarummo et al. (2003) to classify the same data.
 donarummo = eds_classification(data,Algorithm="Donarummo");
 ```
@@ -364,7 +368,11 @@ plt = xray_plot(data);
 
 % Alternative method (equivalent to the above syntax)
 plt = xray_plot('file1.msa');
+```
 
+<img alt="Simple x-ray plot" width="800" src="/MATLAB/images/xrayplot.jpg">
+
+```matlab
 % Plot multiple spectra on the same plot with normalized units
 f1 = read_msa('file1.msa');
 f2 = read_msa('file2.msa');
@@ -377,6 +385,8 @@ hold on
 hold off
 legend('F2','F1')
 ```
+
+<img alt="Stacked x-ray plot" width="800" src="/MATLAB/images/xrayplot2.jpg">
 
 **SEE ALSO**: [`xray_peak_label()`](#xray_peak_label) [`read_msa()`](#read_msa)
 
@@ -406,6 +416,8 @@ xray_peak_label(plt)
 % Label the peaks above the 95th percentile in height
 xray_peak_label(plt,95)
 ```
+
+<img alt="X-ray plot with element labels" width="800" src="/MATLAB/images/xraypeaklabel.jpg">
 
 **SEE ALSO** [`xray_plot()`](#xray_plot) [`read_msa()`](#read_msa)
 

@@ -93,6 +93,9 @@ function classes = eds_classification(data,varargin)
 % [5] Severin, K. P. (2004). Energy Dispersive Spectrometry of Common Rock 
 %     Forming Minerals. Kluwer Academic Publishers. <a href="matlab:
 % web('https://doi.org/10.1007/978-1-4020-2841-0')">DOI</a>.
+%
+%See also
+% weber_classification, donarummo_classification, kandler_classification, panta_classification
 
 % Function code ©2024 Austin M. Weber
 
