@@ -48,7 +48,7 @@ doc function
   - [`read_msa()`](#read_msa) - Read EMSA spectral data files (.msa)
   - [`xray_plot()`](#xray_plot) - Plot EDS spectra
   - [`xray_peak_label()`](#xray_peak_label) - Identify characteristic x-ray peaks in spectra
-  - [`get_sem_metadata()`](#get_tif_metadata) - Extract metadata from SEM images (.tif or .tiff)
+  - [`get_sem_metadata()`](#get_sem_metadata) - Extract metadata from SEM images (.tif or .tiff)
   - [`sem_pixel_size()`](#sem_pixel_size) - Calculate pixel size in a SEM image
   - [`convergence_angle()`](#convergence_angle) - Calculate the convergence angle for an SEM image
 
