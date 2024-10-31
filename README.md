@@ -1,4 +1,4 @@
-# EDS Classification for MATLAB
+# SEM-EDS Mineral Dust Classification
 
 [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx)
 
@@ -9,16 +9,16 @@ This repository includes several functions designed to quickly identify common m
 Moreover, this repository includes MATLAB functions for importing EDS x-ray spectral data (<small>`read_msa()`</small>) and visualizing the data (<small>`xray_plot()`</small>). Users may also import the metadata from SEM micrographs with the <small>`get_sem_metadata()`</small> function, and more.
 
 ## How to cite
-Weber, Austin M. (2024) EDS Classification for MATLAB Version 1.3.1 [Software]. GitHub. https://github.com/weber1158/eds-classification-for-matlab
+Weber, Austin M. (2024) EDS Classification Version #.#.# [Software]. GitHub. https://github.com/weber1158/eds-classification
 
 For BibTeX:
 ```tex
 @software{weber2024eds
    author = {Weber, Austin M.}, 
-   title = {{EDS} {Classification} for {MATLAB}}, 
+   title = {{EDS} {Classification}}, 
    year = 2024, 
    publisher = {GitHub}, 
-   version = {1.3.1}, 
-   url = {https://github.com/weber1158/eds-classification-for-matlab} 
+   version = {#.#.#}, 
+   url = {https://github.com/weber1158/eds-classification} 
 }
 ```
