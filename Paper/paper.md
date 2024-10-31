@@ -55,7 +55,7 @@ plt = xray_plot('spectrum.msa');
 xray_peak_label(plt)
 ```
 
-<img src="Paper/Figures/spectrum.jpg" alt="xray plot visualization" width="600"/>
+![xray plot visualization](Figures/spectrum.jpg)
 
 Users may also import x-ray energy data directly into the MATLAB workspace along with the corresponding metadata using `read_msa`.
 
