@@ -1,22 +1,11 @@
----
-title: 'Supplemental information'
-authors:
-  - name: Austin M. Weber
-    orcid: 0009-0008-0070-2869
-    equal-contrib: true
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-affiliations:
- - name: Byrd Polar and Climate Research Center, Columbus, Ohio
-   index: 1
- - name: School of Earth Sciences, The Ohio State University, Columbus, Ohio
-   index: 2
-date: 26 July 2024
-bibliography: paper.bib
----
+# Supplemental Informtion for "Algorithms for SEM-EDS Mineral Dust Classification"
+by Austin M. Weber<sup>1,2</sup>
 
-# A novel machine learning classifier for categorizing minerals from EDS net intensity data
+<small><sup>
+1 Byrd Polar and Climate Research Center, Columbus, Ohio | 2 School of Earth Sciences, The Ohio State Universtiy, Colubmus, Ohio 
+</sup></small>
 
-## The "Weber Algorithm"
+## The "Weber Algorithm": A novel machine learning classifier for categorizing minerals from EDS net intensity data
 ### Reference Minerals
 
 A total of 20 mineral standards were prepared in order to collect EDS data for training a novel mineral classification model using supervised machine learning. The mineral specimens used in this study were obtained from the Smithsonian Institution Mineralogy Collections Management Unit at the National Museum of Natural History (henceforth "NMNH"). The acquired mineral specimens are listed in **Table S1** and are grouped alphabetically by general mineral groupings. **Table S1** also lists the abbreviations used for each mineral as defined by @Whitney2010 unless otherwise specified. These minerals represent the majority of the most common silicate and aluminosilicate minerals that have been previously identified in ice core studies. Quartz and its polymorphs were not included because the simplicity of their EDS spectra makes them very easy to identify without the aid of a classification algorithm. 
@@ -100,3 +89,13 @@ The EDS net intensity data and relevant functions used for training the Weber al
 
 # References
 
+* **Chawla, N. V.**, Bowyer, K. W., Hall, L. O., & Kegelmeyer, W. P. (2002). SMOTE: Synthetic Minority Over-sampling Technique. *Journal of Artificial Intelligence Research*, 16, 321–357. https://doi.org/10.1613/jair.953
+
+* **da Silva, G. F.**, Ferreira, M. V., Costa, I. S. L., Bernardes, R. B., Mota, C. E. M., & Cuadros Jiménez, F. A. (2021). Qmin – A machine learning-based application for processing and analysis of mineral chemistry data. *Computers & Geosciences*, 157, 104949. https://doi.org/10.1016/j.cageo.2021.104949
+
+* **Donarummo Jr., J.**, Ram, M., & Stoermer, E. F. (2003). Possible deposit of soil dust from the 1930’s U.S. dust bowl identified in Greenland ice. Geophysical Research Letters, 30(6). https://doi.org/10.1029/2002GL016641
+
+
+* **Larsen, B. S.** (2024). Synthetic Minority Over-sampling Technique (SMOTE). GitHub. https://github.com/dkbsl/matlab_smote/releases/tag/1.0
+
+* **Whitney, D. L.**, & Evans, B. W. (2010). Abbreviations for names of rock-forming minerals. *American Mineralogist*, 95(1), 185–187. https://doi.org/10.2138/am.2010.3371
