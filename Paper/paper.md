@@ -16,13 +16,13 @@ affiliations:
    index: 1
  - name: School of Earth Sciences, The Ohio State University, Columbus, Ohio
    index: 2
-date: 31 October 2024 # Original commit date: 26 July 2024
+date: 09 November 2024 # Original commit date: 26 July 2024
 supplement: supplement.md
 bibliography: paper.bib
 ---
 
 # Summary
-A repository of MATLAB functions has been assembled to work with scanning electron microcope (SEM) and energy dispersive x-ray spectrometry (EDS) data, with the objective of providing researchers with tools to quickly and accurately determine the mineral compositions of dust particles. The repository includes a novel machine learning classifier and three additional sorting algorithms that have been transcribed from the peer-reviewed literature, as well as functions for importing and visualizing x-ray energy spectra, and functions for extracting and working with hidden metadata in SEM images.
+A repository of MATLAB functions has been assembled to work with scanning electron microcope (SEM) and energy dispersive x-ray spectrometry (EDS) data, with the objective of providing researchers with tools to quickly and accurately determine the mineral compositions of dust particles. The repository includes a novel machine learning classifier and three additional sorting algorithms that have been transcribed from the peer-reviewed literature, as well as functions for importing and visualizing x-ray energy spectra.
 
 # Statement of need
 The mineral classification of single particles (i.e., dust) has major implications for atmospheric and glaciological research. For instance, there is a great need for building mineral dust datasets that can be used to improve the predictive ability of climate models [@Elements2010]. Mineral dust observations are also severely limited in many glaciated mountain regions, meaning that the dust's radiative impact on glacier melt rates cannot be easily determined [@Gilardoni2022].
@@ -55,20 +55,12 @@ plt = xray_plot('spectrum.msa');
 xray_peak_label(plt)
 ```
 
-![xray plot visualization](Figures/spectrum.jpg)
+![EDS spectrum visualization.](Figures/spectrum.jpg)
 
 Users may also import x-ray energy data directly into the MATLAB workspace along with the corresponding metadata using `read_msa`.
 
 ```matlab
 [data,metadata] = read_msa('spectrum.msa');
-```
-
-## Extract metadata from SEM images
-
-Images collected with SEM software are usually saved as 16-bit TIFs and contain valuable metadata regarding the image itself as well as the operating conditions of the instrument at the time the image was taken. But while MATLAB users with access to the **[Image Processing Toolbox](https://www.mathworks.com/products/image-processing.html)** can typically view image metadata with the `imfinfo` function, the metadata stored in an SEM image are not so easily accessed. This is because the image metadata become compressed into a single character vector that is nested within several structure objects. Many string operations or regular expressions are therefore needed to access the relevant metadata. To combat this, a function called `get_sem_metadata` has been written to automatically extract the useful information from a SEM image.
-
-```matlab
-md = get_sem_metadata('filename.tif');
 ```
 
 # Acknowledgements
