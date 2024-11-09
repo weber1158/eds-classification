@@ -48,7 +48,7 @@ where `data` is a table of EDS data and `"Name"` specifies the desired algorithm
 
 For individuals who want to compare the EDS spectra of their single particle measurements to the standard spectra in @Severin2004, it will be necessary to visualize each energy spectrum along with labels for the major characteristic x-rays. Most EDS software save x-ray energy data in the EMSA (`.msa`) file format which is compiled differently depending on the software and therefore makes it difficult to simply import the data using a base MATLAB function such as `readtable`. While methods for visualizing  EDS spectra are available for the Julia programming language [@Ritchie2022] and as a desktop Java application (see **[DTSA-II](https://www.cstl.nist.gov/div837/837.02/epq/dtsa2/index.html)**), there are currently no simple alternatives to perform these tasks in MATLAB. 
 
-To address this limitation, the EDS mineral dust classification library also provides functions for importing `.msa` files into MATLAB and for visualizing the EDS spectrum contained in a file. Just use the `xray_plot` function to view the spectrum and the `xray_peak_label` function to label the characteristic x-rays with the most likely element.
+To address this limitation, the EDS mineral dust classification library also provides functions for importing `.msa` files into MATLAB and for visualizing the EDS spectrum contained in a file. Just use the `xray_plot` function to view the spectrum and the `xray_peak_label` function to label the characteristic x-rays with the most likely element (**Fig.1**).
 
 ```matlab
 plt = xray_plot('spectrum.msa');
@@ -56,12 +56,6 @@ xray_peak_label(plt)
 ```
 
 ![EDS spectrum visualization.](Figures/spectrum.jpg)
-
-Users may also import x-ray energy data directly into the MATLAB workspace along with the corresponding metadata using `read_msa`.
-
-```matlab
-[data,metadata] = read_msa('spectrum.msa');
-```
 
 # Acknowledgements
 
