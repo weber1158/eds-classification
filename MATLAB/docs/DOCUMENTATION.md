@@ -533,7 +533,7 @@ I thank Paul Pohwat and the Smithsonian Institution for contributing the mineral
 
 This software is made available under a MIT license meaning that users are free to modify and distribute the software without restriction. However, the intellectual copyrights for the Donarummo, Kandler, and Panta algorithms belong to their original creators. If you use any of these algorithms in your research, **please** also cite the appropriate reference(s) from the list below:
 
-**[1]** Weber, Austin M. (2024) EDS Classification for MATLAB. [Software]. GitHub. https://github.com/weber1158/eds-classification-for-matlab
+**[1]** Weber, Austin M. (2024). EDS Classification [Software]. GitHub. https://github.com/weber1158/eds-classification
 
 **[2]** Donarummo, J., Ram, M., & Stoermer, E. F. (2003). Possible deposit of soil dust from the 1930’s U.S. dust bowl identified in Greenland ice. Geophysical Research Letters, 30(6). https://doi.org/10.1029/2002GL016641
 
