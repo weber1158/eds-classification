@@ -94,6 +94,23 @@ minerals = minerals'; % Convert to column vector
 
 %
 % LOCAL FUNCTIONS
+%   ===================================================================
+%                          NODE VISUALIZATION
+%   ===================================================================
+%                                  [1]
+%        ___________________________|_____________________________
+%        |                          |                            |
+%       [2A]                       [2B]                         [2C]
+%        |                __________|___________                 |
+%        |               |                      |                |
+%       [3A]           [3B1]                  [3B2]             [3C]
+%                        |              ________|________        |
+%                        |              |               |        |
+%                     [4B1a]          [4B2a]          [4B2b]    [4C]
+%                        |        ______|______          
+%                        |        |           |         
+%                     [5B1a]   [5B2a1]      [5B2a2]
+%   ===================================================================                 
 %
 function val = node1(T)
 	ratio1 = T.Al ./ T.Si;
@@ -240,8 +257,6 @@ function val = node5B2a1(T)
 		val = categorical("Afs"); % Orthoclase == alkali feldspar
 	elseif (ratio5B2a1 > 0.35) && (ratio5B2a1 < 0.7)
 		val = categorical("U-D1");
-	else
-		val = categorical("U-D5"); % This is my own classification, since Donarummo's sorting scheme does not consider classifications for any values >0.7
 	end
 end
 
