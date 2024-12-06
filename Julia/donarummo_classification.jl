@@ -15,26 +15,26 @@ INPUT
 
 OUTPUT
 
-"minerals" :: Categorical vector of mineral names corresponding to each row in the input DataFrame.
+"minerals" :: DataFrame of mineral names corresponding to each row in the input DataFrame.
 
 LIST OF POSSIBLE MINERAL CLASSIFICATIONS
 
- 1. Albite
- 2. Anorthite
- 3. Augite
- 4. Biotite
- 5. Chlorite
- 6. Hornblende
- 7. Hectorite
- 8. Illite
- 9. Illite/Smectite 70/30 mix
-10. Kaolinite
-11. Labradorite/Bytownite
-12. Montmorillonite
-13. Muscovite
-14. Oligoclase/Andesine
-15. Orthoclase
-16. Vermiculite
+ 1. Ab [Albite]
+ 2. An [Anorthite]
+ 3. Aug [Augite]
+ 4. Bt [Biotite]
+ 5. Chl [Chlorite]
+ 6. Hbl [Hornblende]
+ 7. Htr [Hectorite]
+ 8. Ilt [Illite]
+ 9. Ilt/Sme [Illite/Smectite 70/30 mix]
+10. Kln [Kaolinite]
+11. Lab/Byt [Labradorite/Bytownite]
+12. Mnt [Montmorillonite]
+13. Ms [Muscovite]
+14. Olig/Ans [Oligoclase/Andesine]
+15. Afs [Orthoclase = Alkali feldspar AKA Microcline, Mc]
+16. Vrm [Vermiculite]
 
 LIMITATIONS
 
@@ -77,438 +77,222 @@ function donarummo_classification(df)
             error("Input must be a DataFrame containing a column for Na, Mg, Al, Si, K, Ca, and Fe. Check the spellings of the column names. Only full element names and abbreviations are valid.")
         end
     
-        ###
-        ### CREATE LOCAL FUNCTIONS
-        ###
-        function mineral_classification(DF)
-            num_classifications = nrow(DF)
-            minerals = fill("Unknown", num_classifications) # Preallocate memory
-    
-            # FIRST BRANCHING PATHWAY
-                # HECTORITE
-                    idx = check_hectorite(DF)
-                    minerals[idx] .= ["Hectorite"]
-                # AUGITE
-                    idx = check_augite(DF)
-                    minerals[idx] .= ["Augite"]
-                # U-A
-                    idx = check_UA(DF)
-                    minerals[idx] .= ["U-A"]
-                # HORNBLENDE
-                    idx = check_hornblende(DF)
-                    minerals[idx] .= ["Hornblende"]
-            # SECOND BRANCHING PATHWAY - B
-                # ALBITE
-                    idx = check_albite(DF)
-                    minerals[idx] .= ["Albite"]
-                # OLIG/ANDESINE
-                    idx = check_olig(DF)
-                    minerals[idx] .= ["Olig/Andesine"]
-                # LAB/BYTOWNITE
-                    idx = check_lab(DF)
-                    minerals[idx] .= ["Lab/Bytownite"]
-                # U-B3
-                    idx = check_UB3(DF)
-                    minerals[idx] .= ["U-B3"]
-                # U-B2
-                    idx = check_UB2(DF)
-                    minerals[idx] .= ["U-B2"]
-                # Ca-MONTMORILLONITE
-                    idx = check_montmorillonite(DF)
-                    minerals[idx] .= ["Ca-Montmorillonite"]
-                # U-B1
-                    idx = check_UB1(DF)
-                    minerals[idx] .= ["U-B1"]
-                # U-C1
-                    idx = check_UC1(DF)
-                    minerals[idx] .= ["U-C1"]
-            # SECOND BRANCHING PATHWAY - B
-                # U-D2
-                    idx = check_UD1(DF)
-                    minerals[idx] .= ["U-D2"]
-                # ORTHOCLASE
-                    idx = check_orthoclase(DF)
-                    minerals[idx] .= ["Orthoclase"]
-                # U-D1
-                    idx = check_UD1(DF)
-                    minerals[idx] .= ["U-D1"]
-                # U-D0 (Note: this class is NOT defined by Donarummo et al. (2003)
-                    idx = check_UD0(DF)
-                    minerals[idx] .= ["U-D0"]
-                # U-D4
-                    idx = check_UD4(DF)
-                    minerals[idx] .= ["U-D4"]
-                # I/S MIXED (70/30)
-                    idx = check_ISmix(DF)
-                    minerals[idx] .= ["I/S Mixed (70/30)"]
-                # ILLITE
-                    idx = check_illite(DF)
-                    minerals[idx] .= ["Illite"]
-                # U-D3
-                    idx = check_UD3(DF)
-                    minerals[idx] .= ["U-D3"]
-                # U-C2
-                    idx = check_UC2(DF)
-                    minerals[idx] .= ["U-C2"]
-                # U-D5
-                    idx = check_UD5(DF)
-                    minerals[idx] .= ["U-D5"]
-                # BIOTITE
-                    idx = check_biotite(DF)
-                    minerals[idx] .= ["Biotite"]
-                # K-VERMICULITE
-                    idx = check_vermiculite(DF)
-                    minerals[idx] .= ["K-Vermiculite"]
-            # THIRD BRANCHING PATHWAY
-                # CHLORITE
-                    idx = check_chlorite(DF)
-                    minerals[idx] .= ["Chlorite"]
-                # U-E
-                    idx = check_UE(DF)
-                    minerals[idx] .= ["U-E"]
-                # MUSCOVITE
-                    idx = check_muscovite(DF)
-                    minerals[idx] .= ["Muscovite"]
-                # KAOLINITE
-                    idx = check_kaolinite(DF)
-                    minerals[idx] .= ["Kaolinite"]
-                # U-F
-                    idx = check_UF(DF)
-                    minerals[idx] .= ["U-F"]
-                # ANORTHITE
-                    idx = check_anorthite(DF)
-                    minerals[idx] .= ["Anorthite"]    
-            return minerals
-        end ### END mineral_classification() FUNCTION
-    
-        # FIRST BRANCHING PATHWAY
-        function check_hectorite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:Fe] ./ T[:,:Si]
-            index = (criteria1 .< 0.1) .& (criteria2 .< 0.02)
-            return index
-        end
-        function check_augite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:Fe] ./ T[:,:Si]
-            criteria3 = T[:,:K] ./ T[:,:Al]
-            index = (criteria1 .< 0.1) .& (criteria2 .>= 0.02) .& (criteria3 .< 0.3)
-            return index
-        end
-        function check_UA(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:Fe] ./ T[:,:Si]
-            criteria3 = T[:,:K] ./ T[:,:Al]
-            index = (criteria1 .< 0.1) .& (criteria2 .>= 0.02) .& (criteria3 .>= 0.3) .& (criteria3 .<= 0.49)
-            return index
-        end
-        function check_hornblende(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:Fe] ./ T[:,:Si]
-            criteria3 = T[:,:K] ./ T[:,:Al]
-            index = (criteria1 .< 0.1) .& (criteria2 .>= 0.02) .& (criteria3 .> 0.49)
-            return index
-        end
-    
-        # SECOND BRACHING PATHWAY - A
-        function check_albite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = (T[:,:Ca] .+ T[:,:Na]) ./ T[:,:Al]
-            criteria5 = T[:,:Ca] ./ T[:,:Na]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .< 0.35)
-                .& (criteria3 .< 0.3)
-                .& (criteria4 .>= 0.23)
-                .& (criteria5 .< 0.2))
-            return index
-        end
-        function check_olig(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = (T[:,:Ca] .+ T[:,:Na]) ./ T[:,:Al]
-            criteria5 = T[:,:Ca] ./ T[:,:Na]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7)
-                .& (criteria2 .< 0.35)
-                .& (criteria3 .< 0.3)
-                .& (criteria4 .>= 0.23)
-                .& (criteria5 .>= 0.2) .& (criteria5 .< 1.0))
-            return index
-        end
-        function check_lab(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = (T[:,:Ca] .+ T[:,:Na]) ./ T[:,:Al]
-            criteria5 = T[:,:Ca] ./ T[:,:Na]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .< 0.35)
-                .& (criteria3 .< 0.3)
-                .& (criteria4 .>= 0.23)
-                .& (criteria5 .>= 1.0) .& (criteria5 .< 10.0))
-            return index
-        end
-        function check_UB3(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = (T[:,:Ca] .+ T[:,:Na]) ./ T[:,:Al]
-            criteria5 = T[:,:Ca] ./ T[:,:Na]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .< 0.35)
-                .& (criteria3 .< 0.3)
-                .& (criteria4 .>= 0.23)
-                .& (criteria5 .> 10.0))
-            return index
-        end
-        function check_UB2(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = (T[:,:Ca] .+ T[:,:Na]) ./ T[:,:Al]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .< 0.35)
-                .& (criteria3 .< 0.3)
-                .& (criteria4 .< 0.23))
-            return index
-        end
-        function check_montmorillonite(T)
-           criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .< 0.35)
-                .& (criteria3 .>= 0.3) .& (criteria3 .<= 0.5))
-            return index
-        end
-        function check_UB1(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .< 0.35)
-                .& (criteria3 .> 0.5) .& (criteria3 .< 1.0))
-            return index
-        end
-        function check_UC1(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .< 0.35)
-                .& (criteria3 .>= 1.0))
-            return index
-        end
+"""
+The Donarummo algorithm is a sorting scheme with the following structure:
+
+                                  [1]
+        ___________________________|_____________________________
+        |                          |                            |
+       [2A]                       [2B]                         [2C]
+        |                __________|___________                 |
+        |               |                      |                |
+       [3A]           [3B1]                  [3B2]             [3C]
+                        |              ________|________        |
+                        |              |               |        |
+                     [4B1a]          [4B2a]          [4B2b]    [4C]
+                        |        ______|______          
+                        |        |           |         
+                     [5B1a]   [5B2a1]      [5B2a2]
+
+The nodes in schematic above (indicated with brackets []) are criteria checks. Each node has its own local function, defined below.
+
+"""
+function node1(T)
+	ratio1 = T[:Al] ./ T[:Si];
+	if ratio1 < 0.1
+		node2A(T);
+	elseif ratio1 >= 0.7
+		node2C(T);
+	else
+		node2B(T);
+	end
+end
+
+function node2A(T)
+	ratio2A = T[:Fe] ./ T[:Si];
+	if ratio2A >= 0.02
+		node3A(T);
+	else
+		val = "Htr"; # Hectorite, does not have an abbreviation in Whitney & Evans 2010
+        return val
+	end
+end
+
+function node3A(T)
+	ratio3A = T[:K] ./ T[:Al];
+	if ratio3A < 0.3
+		val = "Aug"; # Augite
+        return val
+	elseif ratio3A > 0.49
+		val = "Hbl"; # Horblende
+        return val
+	else
+		val = "U-A";
+        return val
+	end
+end
+
+function node2C(T)
+	ratio2C = (T[:Mg] + T[:Fe]) ./ T[:Si];
+	if ratio2C >= 0.9
+		val = "Chl"; # Chlorite
+        return val
+	elseif ratio2C < 0.3
+		node3C(T);
+	else
+		val = "U-E";
+        return val
+	end
+end
+
+function node3C(T)
+	ratio3C = T[:K] ./ T[:Si];
+	if ratio3C >= 0.1
+		val = "Ms"; # Muscovite
+        return val
+	else
+		node4C(T);
+	end
+end
+
+function node4C(T)
+	ratio4C = T[:Ca] ./ T[:Si];
+	if ratio4C < 0.05
+		val = "Kln"; # Kaolinite
+        return val
+	elseif ratio4C >= 0.25
+		val = "An"; # Anorthite
+        return val
+	else
+		val = "U-F";
+        return val
+	end
+end
+
+function node2B(T)
+	ratio2B = T[:K] / (T[:K] + T[:Na] + T[:Ca]);
+	if ratio2B < 0.35
+		node3B1(T);
+	else
+		node3B2(T);
+	end
+end
+
+function node3B1(T)
+	ratio3B1 = (T[:Mg] .+ T[:Fe]) ./ T[:Al];
+	if ratio3B1 < 0.3
+		node4B1a(T);
+	elseif ratio3B1 >= 1.0
+		val = "U-C1";
+        return val
+	elseif (ratio3B1 > 0.5) && (ratio3B1 < 1.0)
+		val = "U-B1";
+        return val
+	else
+		val = "Mnt"; # Ca-Montmorillonite
+        return val
+	end
+end
+
+function node4B1a(T)
+	ratio4B1a = (T[:Ca] .+ T[:Na]) ./ T[:Al];
+	if ratio4B1a >= 0.23
+		node5B1a1(T);
+	else
+		val = "U-B2";
+        return val
+	end
+end
+
+function node5B1a1(T)
+	ratio5B1a1 = T[:Ca] ./ T[:Na];
+	if ratio5B1a1 < 0.2
+		val = "Ab"; # Albite
+        return val
+	elseif ratio5B1a1 >= 10
+		val = "U-B3";
+        return val
+	elseif (ratio5B1a1 >= 0.2) && (ratio5B1a1 < 1)
+		val = "Olig/Ans"; # Oligoclase/Andesine; my own abbreviations
+        return val
+	else
+		val = "Lab/Byt"; # Labradorite/Bytownite; my own abbreviations
+        return val
+	end
+end
+
+function node3B2(T)
+	ratio3B2 = (T[:Mg] .+ T[:Fe]) ./ T[:Al];
+	if ratio3B2 < 0.55
+		node4B2a(T);
+	else
+		node4B2b(T);
+	end
+end
+
+function node4B2b(T)
+	ratio4B2b = T[:K] ./ T[:Al];
+	if ratio4B2b <= 0.1
+		val = "U-C2";
+        return val
+	elseif ratio4B2b > 2
+		val = "Vrm"; # K-vermiculite
+        return val
+	elseif (ratio4B2b > 0.1) && (ratio4B2b < 1)
+		val = "U-D5";
+        return val
+	else
+		val = "Bt"; # Biotite
+        return val
+	end
+end
+
+function node4B2a(T)
+	ratio4B2a = T[:K] ./ T[:Al];
+	if ratio4B2a >= 0.7
+		node5B2a1(T);
+	else
+		node5B2a2(T);
+	end
+end
+
+function node5B2a1(T)
+	ratio5B2a1 = T[:Al] ./ T[:Si];
+	if ratio5B2a1 < 0.25
+		val = "U-D2";
+        return val
+	elseif (ratio5B2a1 >= 0.25) && (ratio5B2a1 <= 0.35)
+		val = "Afs"; # Orthoclase == alkali feldspar
+        return val
+	elseif (ratio5B2a1 > 0.35) && (ratio5B2a1 < 0.7)
+		val = "U-D1";
+        return val
+	end
+end
+
+function node5B2a2(T)
+	ratio5B2a2 = T[:K] ./ (T[:Al] + T[:Si]);
+	if ratio5B2a2 <= 0.05
+		val = "U-D4";
+        return val
+	elseif ratio5B2a2 > 0.25
+		val = "U-D3";
+        return val
+	elseif (ratio5B2a2 > 0.05) && (ratio5B2a2 <= 0.1)
+		val = "Ilt/Sme"; # Illite/Smectite 70/30 mixed
+        return val
+	else
+		val = "Ilt"; # Illite
+        return val
+	end
+end
         
-        # SECOND BRANCHING PATHWAY - B
-        function check_UD2(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            criteria5 = T[:,:Al] ./ T[:,:Si]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .>= 0.7)
-                .& (criteria5 .< 0.25))
-            return index
-        end
-        function check_orthoclase(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            criteria5 = T[:,:Al] ./ T[:,:Si]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .>= 0.7)
-                .& (criteria5 .>= 0.25) .& (criteria5 .< 0.35))
-            return index
-        end
-        function check_UD1(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            criteria5 = T[:,:Al] ./ T[:,:Si]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .>= 0.7)
-                .& (criteria5 .> 0.35) .& (criteria5 .< 0.7))
-            return index
-        end
-        function check_UD0(T)
-            # Note: This class is NOT defined in Donarummo et al. (2003)!
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            criteria5 = T[:,:Al] ./ T[:,:Si]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .>= 0.7)
-                .& (criteria5 .>= 0.7))
-            return index
-        end
-        function check_UD4(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            criteria5 = T[:,:K] ./ (T[:,:Al] .+ T[:,:Si])
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .< 0.7)
-                .& (criteria5 .<= 0.05))
-            return index
-        end
-        function check_ISmix(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            criteria5 = T[:,:K] ./ (T[:,:Al] .+ T[:,:Si])
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .< 0.7)
-                .& (criteria5 .> 0.05) .& (criteria5 .<= 0.1))
-            return index
-        end
-        function check_illite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            criteria5 = T[:,:K] ./ (T[:,:Al] .+ T[:,:Si])
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .< 0.7)
-                .& (criteria5 .> 0.1) .& (criteria5 .<= 0.25))
-            return index
-        end
-        function check_UD3(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            criteria5 = T[:,:K] ./ (T[:,:Al] .+ T[:,:Si])
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .< 0.7)
-                .& (criteria5 .> 0.25))
-            return index
-        end
-        function check_UC2(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .<= 0.1))
-            return index
-        end
-        function check_UD5(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .> 0.1) .& (criteria4 .< 1.0))
-            return index
-        end
-        function check_biotite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .>= 1.0) .& (criteria4 .<= 2.0))
-            return index
-        end
-        function check_vermiculite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = T[:,:K] ./ (T[:,:K] .+ T[:,:Na] .+ T[:,:Ca])
-            criteria3 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Al]
-            criteria4 = T[:,:K] ./ T[:,:Al]
-            index = ((criteria1 .>= 0.1) .& (criteria1 .< 0.7) 
-                .& (criteria2 .>= 0.35)
-                .& (criteria3 .< 0.55)
-                .& (criteria4 .> 2.0))
-            return index
-        end
-    
-        # THIRD BRANCHING PATHWAY
-        function check_chlorite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Si]
-            index = (criteria1 .>= 0.7) .& (criteria2 .>= 0.9)
-            return index
-        end
-        function check_UE(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Si]
-            index = (criteria1 .>= 0.7) .& (criteria2 .>= 0.3) .& (criteria2 .< 0.9) 
-            return index
-        end
-        function check_muscovite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Si]
-            criteria3 = T[:,:K] ./ T[:,:Si]
-            index = (criteria1 .>= 0.7) .& (criteria2 .< 0.3) .& (criteria3 .>= 0.1) 
-            return index
-        end
-        function check_kaolinite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Si]
-            criteria3 = T[:,:K] ./ T[:,:Si]
-            criteria4 = T[:,:Ca] ./ T[:,:Si]
-            index = ((criteria1 .>= 0.7) 
-                .& (criteria2 .< 0.3) 
-                .& (criteria3 .< 0.1) 
-                .& (criteria4 .< 0.05))
-            return index
-        end
-        function check_UF(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Si]
-            criteria3 = T[:,:K] ./ T[:,:Si]
-            criteria4 = T[:,:Ca] ./ T[:,:Si]
-            index = ((criteria1 .>= 0.7) 
-                .& (criteria2 .< 0.3) 
-                .& (criteria3 .< 0.1) 
-                .& (criteria4 .>= 0.05) .& (criteria4 .< 0.25))
-            return index
-        end
-        function check_anorthite(T)
-            criteria1 = T[:,:Al] ./ T[:,:Si]
-            criteria2 = (T[:,:Mg] .+ T[:,:Fe]) ./ T[:,:Si]
-            criteria3 = T[:,:K] ./ T[:,:Si]
-            criteria4 = T[:,:Ca] ./ T[:,:Si]
-            index = ((criteria1 .>= 0.7) 
-                .& (criteria2 .< 0.3) 
-                .& (criteria3 .< 0.1) 
-                .& (criteria4 .>= 0.25))
-            return index
-        end
-        
-        # Final step: Classify the mineralogy for each row of the input table
-        minerals = DataFrame(Minerals = mineral_classification(df))
-        
-        return minerals
+# Final step: Classify the mineralogy for each row of the input table
+minerals = [] #fill("Unknown", num_classifications) # Preallocate memory
+for row in eachrow(df)
+	mineral = node1(row); # Begin classification at first node of the sorting scheme
+    push!(minerals,mineral)
+end
+minerals = DataFrame(Minerals = map(string,minerals))   
+return minerals
 end
