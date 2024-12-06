@@ -15,7 +15,7 @@ INPUT
 
 OUTPUT
 
-"minerals" :: Categorical vector of general mineral classes corresponding to each row in the input DataFrame.
+"minerals" :: DataFrame of general mineral classes corresponding to each row in the input DataFrame.
 
 
 LIMITATIONS
