@@ -36,6 +36,7 @@ labels = findobj(gca,'Type','Text');
 delete(points);
 delete(labels);
 
+% Check whether prominence was specified
 if ~exist('prominence','var') % i.e., if the user does not specify a prominence
 	% Evaluate the 90th-percentile cutoff point for determining local maxima
 	prominence = prctile(Counts,90);
@@ -47,35 +48,52 @@ else % i.e., the user specifies a prominence
 	[local_maxima_energies,idx] = evaluate_local_maxima(keV,Counts,min_sep,user_prominence);
 end
 
-% Estiamte the elements for each local maximum
-energies = readtable('XrayEnergyTable.txt','Delimiter','tab',...
-	'NumHeaderLines',1,'LeadingDelimitersRule','ignore');
-energies(:,3) = [];
-vars = {'Z','Element','Ka1','Ka2','Kb','La1','La2','Lb1','Lb2','Lg1'};
-energies.Properties.VariableNames = vars;
-% Extract energies in keV and save as a matrix
-energies_vals = energies{:,3:end};
+% Import x-ray energy table
+energies = readtable('XrayEnergyTable.csv','Delimiter','comma',...
+    'ReadVariableNames',true,'VariableNamingRule','preserve');
+element_names = energies.Element; % 95x1 cell
+energy_vals = energies{:,3:end}; % 95x8 double
 
+%
 % Identify the elements that most likely correspond to the local maxima
-Z_idx = keV(idx);
-% Delete values less than 0.025 keV
-i = Z_idx <= 0.025;
-Z_idx(i) = []; 
-% Create a table of most likely elements
-Z_table = zeros(length(Z_idx),1);
-Z_table = num2cell(Z_table);
-for k = 1:length(Z_idx)
-	zmin = Z_idx(k) - 0.0175;
-	zmax = Z_idx(k) + 0.0175;
-	z_all = energies_vals >= zmin & energies_vals <=zmax;
-	z_sum = logical(sum(z_all,2));
-	e_idx = energies{z_sum,2};
-	if length(e_idx) < 1
-		e_idx = "?";
-	end
-	Z_table{k} = string(e_idx(1));
+%
+% Energy values corresponding to peaks
+peak_energies = keV(idx); % [1xN] double
+
+% Delete peak energies less than 0.025 keV
+low_energies = peak_energies <= 0.025;
+peak_energies(low_energies) = []; 
+
+% Number of peaks
+number_of_peaks = length(peak_energies);
+
+% Preallocate memory for labels
+peak_labels = cell(number_of_peaks,1); % [1xN] cell
+
+% Loop through peaks to identify elements
+for peak = 1:number_of_peaks
+ % Engergies likely won't match the expected energy exactly, so check for
+ % matches within a range:
+  lowerBound = peak_energies(peak) - 0.0250;
+  upperBound = peak_energies(peak) + 0.0250;
+ % Match index matrix
+  match_matrix = energy_vals >= lowerBound & energy_vals <= upperBound;
+ % Get list of all matching elements (i.e., rows containing true values)
+  row_idx = logical(sum(match_matrix,2));
+  element_list = element_names(row_idx);
+ % Define labels
+  if numel(element_list) == 0
+    peak_labels(peak) = {" ?"};
+  elseif numel(element_list) == 1
+    peak_labels(peak) = {join([" " element_list])};
+  else
+    label = element_list{1};
+    for L = 2:length(element_list)
+     label = join([label "," element_list{L}]);
+    end
+    peak_labels(peak) = {join([" [" label "]"])};
+  end
 end
-elements = Z_table;
 
 % Add data to plot
 hold('on')
@@ -84,11 +102,13 @@ hold('on')
         'sr','MarkerSize',3,...
         'HandleVisibility','off')
 	% Add labels for the most likely element classification
-	for n = 1:numel(elements)
-		text(local_maxima_energies.keV(n),local_maxima_energies.Counts(n),elements(n),...
-			'HorizontalAlignment','center',...
-			'VerticalAlignment','bottom',...
-			'FontName','Calibri')
+	for n = 1:number_of_peaks
+		text(local_maxima_energies.keV(n),...
+		     local_maxima_energies.Counts(n),...
+			 peak_labels(n),...
+			'HorizontalAlignment','left',...
+			'VerticalAlignment','middle',...
+			'Rotation',90)
 	end
 hold('off')
 % End main function body
@@ -107,5 +127,6 @@ function [local_maxima_energies,localMax] = evaluate_local_maxima(keV,Counts,min
 	x_max(energy_idx) = [];
 	y_max(energy_idx) = [];
 	% Create table of local maxima energies
-	local_maxima_energies = array2table([x_max',y_max'],'VariableNames',{'keV','Counts'});
+	local_maxima_energies = array2table([x_max',y_max'],...
+	                           'VariableNames',{'keV','Counts'});
 end
