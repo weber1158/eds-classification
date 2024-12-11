@@ -77,7 +77,7 @@ end
 function plotDetails(figHandle)
 	ylabel('Counts','FontWeight','bold')
 	xlabel('keV','FontWeight','bold')
-	xlim([0,10]), xticks(0:1:10)
+	xlim([0,15])
 	set(gca,'TickDir','out','YGrid','on','YMinorTick','on','YMinorGrid','on','MinorGridLineStyle','-.','MinorGridAlpha',0.1)
 	box off
 	fontname(gcf,'Default')
