@@ -47,8 +47,8 @@ if exist(filename, 'file') ~= 2
 end
 
 % Retrieve the file metadata
-metadata = get_msa_metadata(filename); % Function included with the
-% EDS Classification for MATLAB package
+metadata = get_msa_metadata(filename); % private function
+
 
 % Extract important metadata keys
 md_keys = metadata(:,1);
@@ -84,7 +84,8 @@ if strcmp(datatype,'Y')
         kev = ev ./ 1000;
     end
     % Get numeric data
-    counts = readmatrix(filename,'FileType','text');
+    idx = find(contains(lower(metadata(:,1)),'spectrum'));
+    counts = readmatrix(filename,'FileType','text','NumHeaderLines',idx);
     if size(counts,2) > 1
 	    counts = reshape(counts',[],1);
     end
