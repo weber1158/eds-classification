@@ -8,7 +8,7 @@ function xray_peak_label(axHandle,prominence)
 %Inputs
 % axHandle : axes handle to an open xray_plot object
 % prominence : (Optional, default=90) percentile between 0 and 100 that
-%  specifies the minimum prominence of he x-rary peaks to be labeled.
+%  specifies the minimum prominence of the x-rary peaks to be labeled.
 %
 % xray_peak_label(axHandle) adds labels the to characteristic x-ray peaks
 %  in an xray_plot saved as `axHandle`
