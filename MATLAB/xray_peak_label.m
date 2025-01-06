@@ -1,4 +1,4 @@
-function xray_peak_label(axHandle,prominence)
+function xray_peak_label(axHandle,prominence,x_tolerance)
 %Label most prominent peaks in an xray_plot
 %
 %Syntax
@@ -9,9 +9,10 @@ function xray_peak_label(axHandle,prominence)
 % axHandle : axes handle to an open xray_plot object
 % prominence : (Optional, default=90) percentile between 0 and 100 that
 %  specifies the minimum prominence of the x-ray peaks to be labeled.
-%
-% xray_peak_label(axHandle) adds labels the to characteristic x-ray peaks
-%  in an xray_plot saved as `axHandle`
+% x_tolerance : (Optional, default=0.025) the energy value corresponding 
+%  to a peak in an EDS spectrum is unlikely to exactly match the literature 
+%  value for the element, so a tolerance in x must be defined. Tolerance 
+%  must be in units of keV. 
 %
 %Examples
 % data = read_msa('file1.msa');
@@ -48,6 +49,20 @@ else % i.e., the user specifies a prominence
 	[local_maxima_energies,idx] = evaluate_local_maxima(keV,Counts,min_sep,user_prominence);
 end
 
+% Check whether x_tolerance was specified
+if nargin == 3
+   % If true, is x_tolerance defined correctly?
+   if ~isa(x_tolerance,'double')
+	   error('The ''x_tolerance'' input must be numeric (default=0.025).')
+   end
+   if x_tolerance < 0
+	   error('The ''x_tolerance'' input must be greater than zero (default=0.025).')
+   end
+else
+   % Set x_tolerance
+   x_tolerance = 0.0250;
+end
+
 % Import x-ray energy table
 energies = readtable('XrayEnergyTable.csv','Delimiter','comma',...
     'ReadVariableNames',true,'VariableNamingRule','preserve');
@@ -74,8 +89,8 @@ peak_labels = cell(number_of_peaks,1); % [1xN] cell
 for peak = 1:number_of_peaks
  % Engergies likely won't match the expected energy exactly, so check for
  % matches within a range:
-  lowerBound = peak_energies(peak) - 0.0250;
-  upperBound = peak_energies(peak) + 0.0250;
+  lowerBound = peak_energies(peak) - x_tolerance;
+  upperBound = peak_energies(peak) + x_tolerance;
  % Match index matrix
   match_matrix = energy_vals >= lowerBound & energy_vals <= upperBound;
  % Get list of all matching elements (i.e., rows containing true values)
