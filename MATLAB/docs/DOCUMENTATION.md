@@ -399,11 +399,15 @@ Label most prominent peaks in an `xray_plot`
 
 `xray_peak_label(axHandle,prominence)`
 
+`xray_peak_lable(axHandle,prominence,x_tolerance)`
+
 <big>**Inputs**</big>
 
 `axHandle` - Axes handle to an open <small> `xray_plot()`</small> object.
 
 `prominence` - (Optional, default=90) percentile between 0 and 100 that specifies the minimum prominence of the x-ray peaks to be labeled.
+
+`x_tolerance` - (Optional, default=0.025) the energy value corresponding to a peak in an EDS spectrum is unlikely to exactly match the literature value for the element, so a tolerance in x must be defined. Tolerance must be in units of keV.
 
 <big>**Examples**</big>
 

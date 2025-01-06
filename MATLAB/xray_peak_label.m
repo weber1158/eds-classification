@@ -4,6 +4,7 @@ function xray_peak_label(axHandle,prominence,x_tolerance)
 %Syntax
 % xray_peak_label(axHandle)
 % xray_peak_label(axHandle,prominence)
+% xray_peak_label(axHandle,prominence,x_tolerance)
 %
 %Inputs
 % axHandle : axes handle to an open xray_plot object
