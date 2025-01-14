@@ -1,148 +1,102 @@
 function xray_peak_label(axHandle,prominence,x_tolerance)
-%Label most prominent peaks in an xray_plot
+%Label peaks in an EDS spectrum
 %
 %Syntax
 % xray_peak_label(axHandle)
 % xray_peak_label(axHandle,prominence)
 % xray_peak_label(axHandle,prominence,x_tolerance)
+% xray_peak_label(axHandle,prominence,x_tolerance,algorithm)
+% xray_peak_label(axHandle,algorithm)
 %
 %Inputs
-% axHandle : axes handle to an open xray_plot object
-% prominence : (Optional, default=90) percentile between 0 and 100 that
-%  specifies the minimum prominence of the x-ray peaks to be labeled.
-% x_tolerance : (Optional, default=0.025) the energy value corresponding 
-%  to a peak in an EDS spectrum is unlikely to exactly match the literature 
-%  value for the element, so a tolerance in x must be defined. Tolerance 
-%  must be in units of keV. 
+% axHande (Required) : handle to an xray_plot axes
+% prominence (Optional) : minimum prominence of peaks to be labeled. Must
+%                         be a percentile between 1 and 99. Default=90
+% x_tolerance (Optional) : the +/- energy range used to identify elements
+%                          relative to the energy of each peak. Must be in
+%                          units of keV. Default=0.025
+% algorithm (Optional) : the labeling algorithm. Default='best'. The other
+%                        options are 'all' which labels each peak with all
+%                        of the possible elements, and 'first' which labels
+%                        each peak with the first possible element.
+%
 %
 %Examples
-% data = read_msa('file1.msa');
-% plt = xray_plot(data);
-% xray_peak_label(plt)
+% plt1 = xray_plot('file1.msa');
+% xray_peak_label(plt1)
 %
-% % Label the peaks above the 95th percentile in height
-% xray_peak_label(plt,95)
+% plt2 = xray_plot('file2.msa');
+% xray_peak_label(plt2,95,0.027,'all')
 %
 % See also
 %  xray_plot, read_msa
 
-% Copyright ©Austin M. Weber 2024
+% Copyright 2025 Austin M. Weber
 
-keV = axHandle.XData;
-Counts = axHandle.YData;
-min_sep = 0.1;
-
-% Delete any pre-existing labels
-points = findobj(gca,'Type','Line');
-labels = findobj(gca,'Type','Text');
-delete(points);
-delete(labels);
-
-% Check whether prominence was specified
-if ~exist('prominence','var') % i.e., if the user does not specify a prominence
-	% Evaluate the 90th-percentile cutoff point for determining local maxima
-	prominence = prctile(Counts,90);
-	% Find local maxima
-	[local_maxima_energies,idx] = evaluate_local_maxima(keV,Counts,min_sep,prominence);
-
-else % i.e., the user specifies a prominence
-	user_prominence = prctile(Counts,prominence);
-	[local_maxima_energies,idx] = evaluate_local_maxima(keV,Counts,min_sep,user_prominence);
+% Parse user inputs
+num_inputs = nargin;
+if num_inputs < 1
+	error('The function ''xray_peak_label'' requires at least one input.')
 end
 
-% Check whether x_tolerance was specified
-if nargin == 3
-   % If true, is x_tolerance defined correctly?
-   if ~isa(x_tolerance,'double')
-	   error('The ''x_tolerance'' input must be numeric (default=0.025).')
-   end
-   if x_tolerance < 0
-	   error('The ''x_tolerance'' input must be greater than zero (default=0.025).')
-   end
-else
-   % Set x_tolerance
-   x_tolerance = 0.0250;
+if num_inputs < 2
+	prominence = 90;
 end
 
-% Import x-ray energy table
-energies = readtable('XrayEnergyTable.csv','Delimiter','comma',...
-    'ReadVariableNames',true,'VariableNamingRule','preserve');
-element_names = energies.Element; % 95x1 cell
-energy_vals = energies{:,3:end}; % 95x8 double
-
-%
-% Identify the elements that most likely correspond to the local maxima
-%
-% Energy values corresponding to peaks
-peak_energies = keV(idx); % [1xN] double
-
-% Delete peak energies less than 0.025 keV
-low_energies = peak_energies <= 0.025;
-peak_energies(low_energies) = []; 
-
-% Number of peaks
-number_of_peaks = length(peak_energies);
-
-% Preallocate memory for labels
-peak_labels = cell(number_of_peaks,1); % [1xN] cell
-
-% Loop through peaks to identify elements
-for peak = 1:number_of_peaks
- % Engergies likely won't match the expected energy exactly, so check for
- % matches within a range:
-  lowerBound = peak_energies(peak) - x_tolerance;
-  upperBound = peak_energies(peak) + x_tolerance;
- % Match index matrix
-  match_matrix = energy_vals >= lowerBound & energy_vals <= upperBound;
- % Get list of all matching elements (i.e., rows containing true values)
-  row_idx = logical(sum(match_matrix,2));
-  element_list = element_names(row_idx);
- % Define labels
-  if numel(element_list) == 0
-    peak_labels(peak) = {" ?"};
-  elseif numel(element_list) == 1
-    peak_labels(peak) = {join([" " element_list])};
-  else
-    label = element_list{1};
-    for L = 2:length(element_list)
-     label = join([label "," element_list{L}]);
-    end
-    peak_labels(peak) = {join([" [" label "]"])};
-  end
-end
-
-% Add data to plot
-hold('on')
-	% Label prominent peaks with red markers
-	plot(local_maxima_energies.keV,local_maxima_energies.Counts,...
-        'sr','MarkerSize',3,...
-        'HandleVisibility','off')
-	% Add labels for the most likely element classification
-	for n = 1:number_of_peaks
-		text(local_maxima_energies.keV(n),...
-		     local_maxima_energies.Counts(n),...
-			 peak_labels(n),...
-			'HorizontalAlignment','left',...
-			'VerticalAlignment','middle',...
-			'Rotation',90)
+if num_inputs == 2
+	if ~isa(prominence,'double')
+		if isa(prominence,'char')
+			algorithm = prominence;
+			prominence = 90;
+		elseif isa(prominence,'string')
+			algorithm = char(prominence);
+			prominence = 90;
+		else
+			error('Second input must be a numeric value between 1 and 99 (which sets the prominence parameter). The second input may also be the name of the labeling algorithm (i.e., ''best'' or ''all'').')
+		end
 	end
-hold('off')
-% End main function body
 end
 
-%
-% LOCAL FUNCTIONS
-%
-function [local_maxima_energies,localMax] = evaluate_local_maxima(keV,Counts,min_sep,prominence)
-	% Find local maxima
-	localMax = islocalmax(Counts,'MinSeparation',min_sep,'SamplePoints',keV,'MinProminence',prominence);
-	x_max = keV(localMax);
-	y_max = Counts(localMax);
-	% Delete any values less than 0.025 keV
-	energy_idx = x_max <= 0.025;
-	x_max(energy_idx) = [];
-	y_max(energy_idx) = [];
-	% Create table of local maxima energies
-	local_maxima_energies = array2table([x_max',y_max'],...
-	                           'VariableNames',{'keV','Counts'});
+if num_inputs < 3
+	x_tolerance = 0.025;
+end
+
+if num_inputs == 4
+	if isempty(prominence)
+		prominence = 90;
+	end
+	if isempty(x_tolerance)
+		x_tolerance = 0.025;
+	end
+	if ~isa(algorithm,'char')
+		if ~isa(algorithm,'string')
+			error('Fourth input must be a string. Try ''best'' or ''all''.')
+		end
+	end
+end
+
+if ~exist('algorithm','var')
+	algorithm = 'best';
+end
+
+% Delete any previous scatter points
+objects = findall(axHandle.Parent.Parent);
+markers = findobj(objects,'Type','Line');
+if numel(markers) > 0
+ delete(markers)
+end
+
+% Apply labeling algorithm to the figure
+switch lower(algorithm)
+	case 'best'
+		xray_peak_label_best(axHandle,prominence,x_tolerance) % See the \private\ folder
+	case 'all'
+		xray_peak_label_all(axHandle,prominence,x_tolerance) % See the \private\ folder
+	case 'first'
+		xray_peak_label_first(axHandle,prominence,x_tolerance) % See the \private\ folder
+	otherwise
+		error('Algorithm parameter not recognized. Try ''best'' or ''all''.')
+end
+
+% End main function
 end

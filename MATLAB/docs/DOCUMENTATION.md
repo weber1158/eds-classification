@@ -399,15 +399,21 @@ Label most prominent peaks in an `xray_plot`
 
 `xray_peak_label(axHandle,prominence)`
 
-`xray_peak_lable(axHandle,prominence,x_tolerance)`
+`xray_peak_label(axHandle,prominence,x_tolerance)`
+
+`xray_peak_label(axHandle,prominence,x_tolerance,algorithm)`
+
+`xray_peak_label(axHandle,algorithm)`
 
 <big>**Inputs**</big>
 
-`axHandle` - Axes handle to an open <small> `xray_plot()`</small> object.
+`axHandle` (Required) - handle to an <small> `xray_plot()`</small> axes
 
-`prominence` - (Optional, default=90) percentile between 0 and 100 that specifies the minimum prominence of the x-ray peaks to be labeled.
+`prominence` (Optional) - minimum prominence of peaks to be labeled. Must be a percentile between 1 and 99. Default=90
 
-`x_tolerance` - (Optional, default=0.025) the energy value corresponding to a peak in an EDS spectrum is unlikely to exactly match the literature value for the element, so a tolerance in x must be defined. Tolerance must be in units of keV.
+`x_tolerance` (Optional) - the +/- energy range used to identify elements relative to the energy of the peak. Must be in units of keV. Default=0.025
+
+`algorithm` (Optional) - the labeling algorithm. Default=`'best'`. The other options are `'all'`, which labels each peak with all of the possible elements, and `'first'`, which labels each peak with the first possible element.
 
 <big>**Examples**</big>
 
@@ -415,14 +421,17 @@ Label most prominent peaks in an `xray_plot`
 data = read_msa('file1.msa');
 plt = xray_plot(data);
 xray_peak_label(plt)
-
-% Label the peaks above the 95th percentile in height
-xray_peak_label(plt,95)
 ```
-
 <img alt="X-ray plot with element labels" width="800" src="/MATLAB/images/xraypeaklabel.jpg">
 
-**SEE ALSO** [`xray_plot()`](#xray_plot) [`read_msa()`](#read_msa)
+```matlab
+% Label the peaks above the 88th percentile in height
+% and show all possible elements for each peak
+xray_peak_label(plt,88,[],'all')
+```
+<img alt="X-ray plot with all possible element labels" width="800" src="/MATLAB/images/xraypeaklabelAll.jpg">
+
+**SEE ALSO** [`xray_plot()`](#xray_plot), [`read_msa()`](#read_msa)
 
 
 ## get_sem_metadata ##

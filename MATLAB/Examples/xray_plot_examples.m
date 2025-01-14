@@ -1,4 +1,4 @@
-% Copyright Austin M. Weber 2024
+% Copyright 2025 Austin M. Weber
 %% Clear
 close all
 clear,clc
@@ -40,8 +40,11 @@ vrm =read_msa([dataPath 'vermiculite' ext]);
 %% Visualize biotite spectrum with labels
 figure(1)
 plt = xray_plot(bt);
-xray_peak_label(plt,95) % specifies a minimum peak prominence of 95%
 title('Biotite  K_2(Mg,Fe^{2+})_{6-4}(Fe^{3+},Al,Ti)_{0-2}[Si_{6-5}Al_{2-3}O_{20}](OH,F)_4')
+
+% Label each peak above the 88th percentile in height
+% and show all possible elements for each peak
+xray_peak_label(plt,88,[],'all')
 
 %% Visualize all spectra using normalized units
 figure(2)
