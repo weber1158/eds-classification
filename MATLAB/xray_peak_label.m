@@ -1,4 +1,4 @@
-function xray_peak_label(axHandle,prominence,x_tolerance)
+function xray_peak_label(axHandle,prominence,x_tolerance,algorithm)
 %Label peaks in an EDS spectrum
 %
 %Syntax
