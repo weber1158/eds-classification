@@ -89,13 +89,16 @@ The EDS net intensity data and relevant functions used for training the Weber al
 
 # References
 
-* **Chawla, N. V.**, Bowyer, K. W., Hall, L. O., & Kegelmeyer, W. P. (2002). SMOTE: Synthetic Minority Over-sampling Technique. *Journal of Artificial Intelligence Research*, 16, 321–357. https://doi.org/10.1613/jair.953
+* Chawla, N. V., Bowyer, K. W., Hall, L. O., & Kegelmeyer, W. P. (2002). SMOTE: Synthetic Minority Over-sampling Technique. *Journal of Artificial Intelligence Research*, 16, 321–357. https://doi.org/10.1613/jair.953
 
-* **da Silva, G. F.**, Ferreira, M. V., Costa, I. S. L., Bernardes, R. B., Mota, C. E. M., & Cuadros Jiménez, F. A. (2021). Qmin – A machine learning-based application for processing and analysis of mineral chemistry data. *Computers & Geosciences*, 157, 104949. https://doi.org/10.1016/j.cageo.2021.104949
+* da Silva, G. F., Ferreira, M. V., Costa, I. S. L., Bernardes, R. B., Mota, C. E. M., & Cuadros Jiménez, F. A. (2021). Qmin – A machine learning-based application for processing and analysis of mineral chemistry data. *Computers & Geosciences*, 157, 104949. https://doi.org/10.1016/j.cageo.2021.104949
 
-* **Donarummo Jr., J.**, Ram, M., & Stoermer, E. F. (2003). Possible deposit of soil dust from the 1930’s U.S. dust bowl identified in Greenland ice. Geophysical Research Letters, 30(6). https://doi.org/10.1029/2002GL016641
+* Donarummo Jr., J., Ram, M., & Stoermer, E. F. (2003). Possible deposit of soil dust from the 1930’s U.S. dust bowl identified in Greenland ice. *Geophysical Research Letters*, 30(6). https://doi.org/10.1029/2002GL016641
 
+* Kandler, K., Lieke, K., Benker, N., Emmel, C., Küpper, M., Müller-Ebert, D., Ebert, M., Scheuvens, D., Schladitz, A., Schütz, L., & others. (2011). Electron microscopy of particles collected at Praia, Cape Verde, during the Saharan Mineral Dust Experiment: Particle chemistry, shape, mixing state and complex refractive index. *Tellus B: Chemical and Physical Meteorology*, 63(4), 475-496. https://doi.org/10.1111/j.1600-0889.2011.00550.x
 
-* **Larsen, B. S.** (2024). Synthetic Minority Over-sampling Technique (SMOTE). GitHub. https://github.com/dkbsl/matlab_smote/releases/tag/1.0
+* Larsen, B. S. (2024). Synthetic Minority Over-sampling Technique (SMOTE). GitHub. https://github.com/dkbsl/matlab_smote/releases/tag/1.0
 
-* **Whitney, D. L.**, & Evans, B. W. (2010). Abbreviations for names of rock-forming minerals. *American Mineralogist*, 95(1), 185–187. https://doi.org/10.2138/am.2010.3371
+* Panta, A., Kandler, K., Alastuey, A., González-Flórez, C., González-Romero, A., Klose, M., Querol, X., Reche, C., Yus-Díez, J., & Pérez García-Pando, C. (2023). Insights into the single particle composition, size, mixing state and aspect ratio of freshly emitted mineral dust from field measurements in the Moroccan Sahara using electron microscopy. *Atmospheric Chemistry and Physics*, 23(6), 3861-3885. https://doi.org/10.5194/acp-23-3861-2023
+
+* Whitney, D. L., & Evans, B. W. (2010). Abbreviations for names of rock-forming minerals. *American Mineralogist*, 95(1), 185–187. https://doi.org/10.2138/am.2010.3371
