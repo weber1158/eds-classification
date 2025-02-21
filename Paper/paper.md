@@ -59,7 +59,7 @@ xray_peak_label(plt)
 
 # Acknowledgements
 
-I thank Paul Pohwat and the Smithsonian Institution for contributing the mineral standards used in this project. Thanks are also extended to Lonnie Thompson, Dan Veghte, and Julia Sheets for their various contributions in both advising and teaching. The electron microscopy work used to train the machine learning algorithm was performed at the Center for Electron Microcscopy and Analysis (CEMAS) in the College of Engineering at The Ohio State University. Additional electron microscopy was carried out at the Subsurface Energy Materials Characterization and Analysis Laboratory (SEMCAL) in the School of Earth Sciences at The Ohio State University.
+I thank Paul Pohwat and the Smithsonian Institution for contributing the mineral standards used in this project. I also thank my graduate advisor Lonnie Thompson for his continued support, as well as Dan Veghte, Julia Sheets, Ian Howat, Joachim Moortgat, and Steven Quiring for their teaching and advise. Lastly, I thank Lijia Wei for her internal review of the software. The electron microscopy work used to train the machine learning model was performed at the Center for Electron Microcscopy and Analysis (CEMAS) in the College of Engineering at The Ohio State University. Additional electron microscopy was carried out at the Subsurface Energy Materials Characterization and Analysis Laboratory (SEMCAL) in the School of Earth Sciences at The Ohio State University.
 
 # Copyrights
 
