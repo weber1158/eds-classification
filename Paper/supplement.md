@@ -85,7 +85,7 @@ For individuals seeking mineral classification for economic mineral reasearch an
 
 ### Data Availability Statement
 
-The EDS net intensity data and relevant functions used for training the Weber algorithm are available in the software repository on GitHub [(click here)](https://github.com/weber1158/eds-classification-for-matlab/tree/main/MATLAB/MachineLearningModel).
+The EDS net intensity data and relevant functions used for training the Weber algorithm are available in the software repository on GitHub [(click here)](https://github.com/weber1158/eds-classification/tree/296c98d07d3a960aac5490b5e489edb7a89db03f/MATLAB/MachineLearningModel).
 
 # References
 
