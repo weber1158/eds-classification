@@ -5,10 +5,10 @@ by Austin M. Weber<sup>1,2</sup>
 1 Byrd Polar and Climate Research Center, Columbus, Ohio | 2 School of Earth Sciences, The Ohio State Universtiy, Colubmus, Ohio 
 </sup></small>
 
-## The "Weber Algorithm": A novel machine learning classifier for categorizing minerals from EDS net intensity data
+## The "Weber Algorithm": A machine learning classifier for categorizing minerals from EDS net intensity data
 ### Reference Minerals
 
-A total of 20 mineral standards were prepared in order to collect EDS data for training a novel mineral classification model using supervised machine learning. The mineral specimens used in this study were obtained from the Smithsonian Institution Mineralogy Collections Management Unit at the National Museum of Natural History (henceforth "NMNH"). The acquired mineral specimens are listed in **Table S1** and are grouped alphabetically by general mineral groupings. **Table S1** also lists the abbreviations used for each mineral as defined by Whitney & Evans (2010) unless otherwise specified. These minerals represent the majority of the most common silicate and aluminosilicate minerals that have been previously identified in ice core studies. Quartz and its polymorphs were not included because the simplicity of their EDS spectra makes them very easy to identify without the aid of a classification algorithm. 
+A total of 20 mineral standards were prepared in order to collect EDS data for training a mineral classification model using supervised machine learning. The mineral specimens used in this study were obtained from the Smithsonian Institution Mineralogy Collections Management Unit at the National Museum of Natural History (henceforth "NMNH"). The acquired mineral specimens are listed in **Table S1** and are grouped alphabetically by general mineral groupings. **Table S1** also lists the abbreviations used for each mineral as defined by Whitney & Evans (2010) unless otherwise specified. These minerals represent the majority of the most common silicate and aluminosilicate minerals that have been previously identified in ice core studies. Quartz and its polymorphs were not included because the simplicity of their EDS spectra makes them very easy to identify without the aid of a classification algorithm. 
 
 **Table S1**. Standard mineral specimens and their abbreviations. <sup>*a*</sup>Also belongs to the mica group. <sup>*b*</sup>Abbreviation defined for this study.
 
