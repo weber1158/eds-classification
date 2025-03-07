@@ -33,16 +33,16 @@ pathtool
 View the test script by clicking [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) and navigating to the Examples tab, or download and run the `matlab_test.mlx` file [(here)](https://github.com/weber1158/eds-classification/tree/beac5acc06f7136acb9bb8a34be5c818cbd539f2/MATLAB/Tests) in MATLAB. 
 
 ## How to cite
-Weber, Austin M. (2024) EDS Classification Version #.#.# [Software]. GitHub. https://github.com/weber1158/eds-classification
+Weber, Austin M. (2025) Algorithms for SEM-EDS mineral dust classification Version #.#.# [Software]. GitHub. https://github.com/weber1158/eds-classification
 
 For BibLaTeX:
 ```tex
-@software{weber2024eds
+@software{weber2025
    author = {Weber, Austin M.}, 
-   title = {{EDS} {Classification}}, 
-   year = 2024, 
-   publisher = {GitHub}, 
+   title = {Algorithms for {SEM-EDS} mineral dust classification}, 
+   year = 2025, 
+   publisher = {Github}, 
    version = {#.#.#}, 
-   url = {https://github.com/weber1158/eds-classification} 
+   url = {https://github.com/weber1158/eds-classification},
 }
 ```
