@@ -3,7 +3,9 @@
 [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) 
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx)
 
-[![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
+<a href="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2">
+  <img src="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg" width="200" height="26" alt="status">
+</a>
 
 **Functions for working with SEM-EDS data in MATLAB, including different algorithms for performing mineral classification.**
 
@@ -34,7 +36,9 @@ pathtool
 View the test script by clicking [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) and navigating to the Examples tab, or download and run the `matlab_test.mlx` file [(here)](https://github.com/weber1158/eds-classification/tree/beac5acc06f7136acb9bb8a34be5c818cbd539f2/MATLAB/Tests) in MATLAB. 
 
 ## How to cite
-[![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
+<a href="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2">
+  <img src="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg" width="200" height="26" alt="status">
+</a>
 
 This repository has been peer-reviewed and published in _Journal of Open Source Software_. Please use the information below for citing the software:
 
