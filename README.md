@@ -2,6 +2,7 @@
 
 [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) 
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx)
+
 [![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
 
 **Functions for working with SEM-EDS data in MATLAB, including different algorithms for performing mineral classification.**
@@ -33,16 +34,24 @@ pathtool
 View the test script by clicking [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) and navigating to the Examples tab, or download and run the `matlab_test.mlx` file [(here)](https://github.com/weber1158/eds-classification/tree/beac5acc06f7136acb9bb8a34be5c818cbd539f2/MATLAB/Tests) in MATLAB. 
 
 ## How to cite
-Weber, Austin M. (2025) Algorithms for SEM-EDS mineral dust classification Version #.#.# [Software]. GitHub. https://github.com/weber1158/eds-classification
+[![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
 
-For BibLaTeX:
+This repository has been peer-reviewed and published in _Journal of Open Source Software_. Please use the information below for citing the software:
+
+
+#### APA-like
+Weber, Austin M., (2025). Algorithms for SEM-EDS Mineral Dust Classification. _Journal of Open Source Software_, **10**(107), 7533, https://doi.org/10.21105/joss.07533
+
+#### BibLaTeX:
 ```tex
-@software{weber2025
-   author = {Weber, Austin M.}, 
-   title = {Algorithms for {SEM-EDS} mineral dust classification}, 
-   year = 2025, 
-   publisher = {Github}, 
-   version = {#.#.#}, 
-   url = {https://github.com/weber1158/eds-classification},
+@article{weber2025,
+    author = {Weber, Austin M.},
+    title = {Algorithms for {SEM-EDS} mineral dust classification},
+    journal = {Journal of Open Source Software},
+    volume = {10},
+    number = {107},
+    pages = {7533},
+    year = {2025},
+    note = {\url{https://doi.org/10.21105/joss.07533}}
 }
 ```
