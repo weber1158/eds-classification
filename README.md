@@ -1,16 +1,7 @@
 # SEM-EDS Mineral Dust Classification
+[![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx)
 
-<a href="https://www.mathworks.com/matlabcentral/fileexchange/170771">
-  <img src="https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg" width="200" height="26" alt="View my project on File Exchange">
-</a>
-
-<a href="https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx">
-  <img src="https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg" width="200" height="26" alt="Open in MATLAB Online">
-</a>
-
-<a href="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2">
-  <img src="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg" width="200" height="26" alt="status">
-</a>
+[![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
 
 **Functions for working with SEM-EDS data in MATLAB, including different algorithms for performing mineral classification.**
 
