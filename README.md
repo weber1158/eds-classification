@@ -40,9 +40,9 @@ This repository has been peer-reviewed and published in _Journal of Open Source 
 
 
 #### APA-like
-Weber, Austin M., (2025). Algorithms for SEM-EDS Mineral Dust Classification. _Journal of Open Source Software_, **10**(107), 7533, https://doi.org/10.21105/joss.07533
+Weber, Austin M., (2025). Algorithms for SEM-EDS mineral dust classification. _Journal of Open Source Software_, *10*(107), 7533, https://doi.org/10.21105/joss.07533
 
-#### BibLaTeX:
+#### `BibTeX`:
 ```tex
 @article{weber2025,
     author = {Weber, Austin M.},
@@ -52,6 +52,6 @@ Weber, Austin M., (2025). Algorithms for SEM-EDS Mineral Dust Classification. _J
     number = {107},
     pages = {7533},
     year = {2025},
-    note = {\url{https://doi.org/10.21105/joss.07533}}
+    DOI = {10.21105/joss.07533}
 }
 ```
