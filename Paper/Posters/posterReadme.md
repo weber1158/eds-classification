@@ -1,6 +1,4 @@
-# View the poster PDFs in your browser
-
-### **IceCOMM25** ([click here to view PDF](https://nbviewer.org/github/weber1158/eds-classification/blob/main/Paper/Posters/IceCOMM25.pdf))
+### **IceCOMM25** ([click here to view PDF in your browser](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/weber1158/eds-classification/main/Paper/Posters/IceCOMM25.pdf))
 
 ### Citation
 ```tex
