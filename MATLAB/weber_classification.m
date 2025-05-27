@@ -105,7 +105,7 @@ predictors = netIntensityRatios(data);
 % Convert scores into a table
 varnames = {'Ab','Ap','Aug','Bt','Chl','En',...
             'Hbl','Kln','Lab','Mc','Mnt','Ms','Olig',...
-            'Pgt','Plg','Spn','Spl','Vrm'};
+            'Plg','Pgt','Spn','Spl','Vrm'};
 scores = array2table(scores,'VariableNames',varnames);
 
 % Create model groups
