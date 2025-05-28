@@ -1,10 +1,10 @@
-# SEM-EDS Mineral Dust Classification
+# Algorithms for SEM-EDS Mineral Dust Classification
 [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx)
 
 [![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
 
 # 🚨 **ATTENTION**
-#### THE MATHWORKS SERVERS ARE CURRENTLY DOWN. YOU WILL NEED TO DOWNLOAD THIS REPOSITORY THROUGH GITHUB UNTIL FURTHER NOTICE. MATLAB DESKTOP MAY OR MAY NOT BE FUNCTIONING FOR YOU. I AM NOT A MATHWORKS EMPLOYEE, SO I CANNOT SPEAK ON WHEN THE SERVERS WILL BE BACK ONLINE, BUT YOU CAN MONITOR THE MATHWORKS STATUS PAGE BY CLICKING: [HERE](https://status.mathworks.com/). 
+#### The files in the Julia folder will no longer be updated here. The files are being migrated to [https://github.com/weber1158/eds-classification.jl](https://github.com/weber1158/eds-classification.jl).
 
 ## About
 
