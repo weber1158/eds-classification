@@ -39,7 +39,9 @@ else
     end
 end
 if ~strcmp(filename(end-3:end),'.msa')
-    filename = [filename '.msa'];
+    if ~strcmp(filename(end-4:end),'.emsa')
+        filename = [filename '.msa'];
+    end
 end
 if exist(filename, 'file') ~= 2
     error_string = ['The input ''' sprintf('%s',filename) ''' does not exist on the current path.'];
