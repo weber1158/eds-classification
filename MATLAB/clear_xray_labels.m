@@ -14,7 +14,7 @@ function clear_xray_labels(axHandle)
 % clear_xray_labels(plt1)
 %
 % See also
-%  xray_plot, add_xray_plot, read_msa
+%  xray_peak_label, xray_plot, add_xray_plot, read_msa
 
 % Copyright 2025 Austin M. Weber
 
