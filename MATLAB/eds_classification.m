@@ -97,7 +97,7 @@ function classes = eds_classification(data,varargin)
 %See also
 % weber_classification, donarummo_classification, kandler_classification, panta_classification
 
-% Function code ©2024 Austin M. Weber
+% Copyright 2025 Austin M. Weber
 
 %
 % Begin function body
@@ -133,6 +133,5 @@ else
  disp('Algorithm not supported. Try Algorithm=''Weber'', ''Donarummo'', ''Kandler'', or ''Panta''.')
 
 end
-% Function code ©2024 Austin M. Weber
 
 end

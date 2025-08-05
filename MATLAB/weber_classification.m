@@ -88,13 +88,18 @@ function [minerals,groups,scores] = weber_classification(data)
 %------------------------------------------
 %
 %
+% Timeline of major changes:
+%  August 2025 - The original model (Weber, 2025) has been updated using more robust training techniques. Accuracy is still ~99%, though the internal model structure is no longer the same.
+%
+%  Reference
+%  Weber, A. M. (2025). Journal of Open Source Software, 10(107), 7533, https://doi.org/10.21105/joss.07533
 
-% (C) Austin M. Weber 2024
+% Copyright 2025 Austin M. Weber
 
 % Import model
 warning off
-load weber_trained_model.mat
-weber_classifier = trainedModel.predictFcn;
+load baggedTreeClassifierModel.mat
+weber_classifier = baggedTreeClassifierModel.predictFcn;
 
 % Convert net intensities to ratios (i.e., the 23 model predictors)
 predictors = netIntensityRatios(data);
@@ -103,9 +108,10 @@ predictors = netIntensityRatios(data);
 [minerals,scores] = weber_classifier(predictors);
 
 % Convert scores into a table
-varnames = {'Ab','Ap','Aug','Bt','Chl','En',...
-            'Hbl','Kln','Lab','Mc','Mnt','Ms','Olig',...
-            'Plg','Pgt','Spn','Spl','Vrm'};
+varnames = {'Albite','Apatite','Augite','Biotite','Chlorite','Enstatite',...
+            'Hornblende','Kaolinite','Labradorite','Microcline',...
+            'Montmorillonite','Muscovite','Oligoclase','Pigeonite',...
+            'Palygorskite','Spinel','Sphene','Vermiculite'};
 scores = array2table(scores,'VariableNames',varnames);
 
 % Create model groups
