@@ -29,7 +29,7 @@ function xray_peak_label(axHandle,prominence,x_tolerance,algorithm)
 % xray_peak_label(plt2,95,0.027,'all')
 %
 % See also
-%  xray_plot, read_msa
+%  clear_xray_labels, xray_plot, add_xray_plot, read_msa
 
 % Copyright 2025 Austin M. Weber
 
