@@ -65,6 +65,17 @@ function plt2 = add_xray_plot(plt,new)
   if plt2Alpha > idealAlpha
     plt2.FaceAlpha = idealAlpha;
   end
+
+  % Update plot appearance
+  xlabel('keV','FontWeight','bold')
+  set(gca,'TickDir','out','YGrid','on','YMinorTick','on','YMinorGrid','on','MinorGridLineStyle','-.','MinorGridAlpha',0.1)
+	box off
+	fontname(gcf,'Default')
+	fontsize(gcf,12,"points")
+  f = gcf;
+  f.Units = 'pixels';
+  f.Position = [488 242 640 360]; % 16:9 aspect ratio
+
 end
 
 function normalize_xray_plot(plt)
