@@ -372,17 +372,10 @@ plt = xray_plot('file1.msa');
 <img alt="Simple x-ray plot" width="800" src="/MATLAB/images/xrayplot.jpg">
 
 ```matlab
-% Plot multiple spectra on the same plot with normalized units
-f1 = read_msa('file1.msa');
-f2 = read_msa('file2.msa');
-f1.Counts = normalize(f1.Counts,'Range',[0 1]);
-f2.Counts = normalize(f2.Counts,'Range',[0 1]);
-figure
-plt = xray_plot(f2);
-hold on
-  xray_plot(f1);
-hold off
-legend('F2','F1')
+% Superimpose multiple spectra on the same plot using the add_xray_plot() function
+f1 = xray_plot('file1.msa');
+f2 = add_xray_plot(f1,'file2.msa');
+legend('File 1','File 2')
 ```
 
 <img alt="Stacked x-ray plot" width="800" src="/MATLAB/images/xrayplot2.jpg">
@@ -428,6 +421,8 @@ xray_peak_label(plt)
 % Label the peaks above the 88th percentile in height
 % and show all possible elements for each peak
 xray_peak_label(plt,88,[],'all')
+
+% Remove labels with clear_xray_labels(plt)
 ```
 <img alt="X-ray plot with all possible element labels" width="800" src="/MATLAB/images/xraypeaklabelAll.jpg">
 
