@@ -69,7 +69,7 @@ function minerals = donarummo_classification(peak_intensity_table)
 % added a local function to check that the variable names in the input
 % table match the required elements. Additional documentation updates.
 
-% Function code ©2024 Austin M. Weber
+% Function code ©2025 Austin M. Weber
 
 %
 % BEGIN FUNCTION BODY

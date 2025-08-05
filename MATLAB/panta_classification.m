@@ -74,7 +74,7 @@ function minerals = panta_classification(data_table)
 %Updates
 % 20/Jul/2024 - Changed mineral IDs from full names to abbreviations
 
-% Function code ©2024 Austin M. Weber
+% Function code ©2025 Austin M. Weber
 
 %
 % BEGIN FUNCTION BODY
