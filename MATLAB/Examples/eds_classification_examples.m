@@ -1,29 +1,19 @@
-% Copyright Austin M. Weber 2024
-%% Clear
+% Copyright Austin M. Weber 2025
+
 close all
 clear,clc
-
-%% Define paths
-% Get current folder
-currentFolder = pwd;
-% Define path to data
-dataPath = [currentFolder '/eds_data/'];
-% Define path to functions
-exStr = 'Examples';
-functionPath = currentFolder(1:end-length(exStr));
-addpath(functionPath)
 
 %% Import data
 filename = 'eds_mineral_data.xlsx';
 
 % EDS net intensity data
-net = readtable([dataPath filename],'FileType','spreadsheet',...
+net = readtable(filename,'FileType','spreadsheet',...
     'Sheet','Net_Intensity');
 % Get true classes from EDS net intensity data
 netTrueClass = categorical(net.ABBREVIATION);
 
 % EDS atom percent data
-atP = readtable([dataPath filename],'FileType','spreadsheet',...
+atP = readtable(filename,'FileType','spreadsheet',...
     'Sheet','Atom_Percent');
 % Get true classes from EDS atom percent data
 atTrueClass = categorical(atP.ABBREVIATION);
@@ -51,7 +41,7 @@ atTrueClass = categorical(atP.ABBREVIATION);
 
     % Compare the results of eds_classifcation and weber_classification and
     % confirm that they are the same:
-    eds_weber = eds_classification(net,Algorith="Weber");
+    eds_weber = eds_classification(net,Algorithm="Weber");
     weber = weber_classification(net);
     condition = isequal(eds_weber,weber);
     if condition == true
