@@ -20,22 +20,11 @@ function axHandle = xray_plot(data)
 % % Or,
 % plt = XRAY_PLOT('file1.msa');
 %
-% % Plot multiple spectra on the same plot with normalized units
-% f1 = read_msa('file1.msa');
-% f2 = read_msa('file2.msa');
-% f1.Counts = normalize(f1.Counts,'Range',[0 1]);
-% f2.Counts = normalize(f2.Counts,'Range',[0 1]);
-% figure
-% plt = XRAY_PLOT(f2);
-% hold on
-%  XRAY_PLOT(f1);
-% hold off
-% legend('F2','F1')
 %
 % See also
-%  xray_peak_label, read_msa
+%  add_xray_plot, xray_peak_label, clear_xray_labels, read_msa
 
-% Copyright ©Austin M. Weber 2024
+% Copyright ©Austin M. Weber 2025
 
 
 %
@@ -84,9 +73,8 @@ function plotDetails(figHandle)
 	fontsize(gcf,12,"points")
 	ax = ancestor(figHandle, 'axes');
     ax.YAxis.Exponent = 0;
-    xtickformat('%.0f')
 	f = gcf;
-	f.Units = 'inches';
-	f.Position = [5,4,6,3];
+	f.Units = 'pixels';
+	f.Position = [488 242 640 360]; % 16:9 aspect ratio
 	f.Name = 'Xray Plot';
 end
