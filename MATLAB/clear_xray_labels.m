@@ -24,4 +24,10 @@ textlabels = findall(axHandle.Parent,'Type','Text');
 delete(markers)
 delete(textlabels)
 
+% Replace axes labels
+ylabel('Counts','FontWeight','bold')
+xlabel('keV','FontWeight','bold')
+fontname(gcf,'Default')
+fontsize(gcf,12,"points")
+
 end
