@@ -32,20 +32,20 @@ function classes = eds_classification(data,varargin)
 % "Algorithm" or Algorithm=
 %
 % VALUE         DATA_TYPE       REQUIRED_ELEMENTS           REFERENCE
-% "Weber"       Net intensity   Na,Mg,Al,Si,P,K,Ca,Ti,Fe    [1]
-% "Donarummo"   Net intensity   Na,Mg,Al,Si,K,Ca,Fe         [2] 
-% "Kandler"     Atom percent    Na,Mg,Al,Si,P,S,Cl,K,Ca,    [3]
+% "Weber"       Net intensity   Na,Mg,Al,Si,P,K,Ca,Ti,Fe    This study
+% "Donarummo"   Net intensity   Na,Mg,Al,Si,K,Ca,Fe         [1] 
+% "Kandler"     Atom percent    Na,Mg,Al,Si,P,S,Cl,K,Ca,    [2]
 %                               Ti,Cr,Mn,Fe
-% "Panta"       Atom percent    F,Na,Mg,Al,Si,P,S,Cl,K,     [4]
+% "Panta"       Atom percent    F,Na,Mg,Al,Si,P,S,Cl,K,     [3]
 %                               Ca,Ti,Cr,Mn,Fe              
 %
 %EXAMPLES
-% % Use the machine learning algorithm by Weber [1] to classify the mineral
+% % Use a custom machine learning algorithm to classify the mineral
 % % composition of each row in an EDS net intenstiy data table.
 % load eds_mineral_net_intensities.mat
 % weber = EDS_CLASSIFICATION(data);
 %
-% % Use the sorting scheme algorithm from Donarummo et al. [2] to classify
+% % Use the sorting scheme algorithm from Donarummo et al. [1] to classify
 % % the same data.
 % donarummo = EDS_CLASSIFICATION(data,Algorithm="Donarummo");
 %
@@ -65,32 +65,28 @@ function classes = eds_classification(data,varargin)
 % the results from multiple algorithms before making any final decisions
 % regarding the mineral classifications for a dataset. It is also
 % recommended that the user compares the x-ray spectrum for each EDS
-% measurement to the standard spectra in Severin [5] as an additional check
+% measurement to the standard spectra in Severin [4] as an additional check
 % on the mineral classifications.
 %
 %
 %REFERENCES
-% [1] Weber, Austin M. (2024). "EDS Classification for MATLAB"
-%     [Software]. Github. <a href="matlab:
-%     web('https://github.com/weber1158/eds-classification-for-matlab')">https://github.com/weber1158/eds-classification-for-MATLAB</a>.
-%
-% [2] Donarummo, J., Ram, M., & Stoermer, E. F. (2003). Possible deposit of
+% [1] Donarummo, J., Ram, M., & Stoermer, E. F. (2003). Possible deposit of
 %     soil dust from the 1930 s U.S. dust bowl identified in Greenland ice.
 %     Geophysical Research Letters, 30(6). <a href="matlab:
 %     web('https://doi.org/10.1029/2002GL016641')">DOI</a>.
 %
-% [3] Kandler, K., Lieke, K., Benker, N., Emmel, C., Küpper, M., Müller-Ebert,
+% [2] Kandler, K., Lieke, K., Benker, N., Emmel, C., Küpper, M., Müller-Ebert,
 %     D., Ebert, M., Scheuvens, D., Schladitz, A., Schütz, L., & Weinbruch, S.
 %     (2011). Electron microscopy of particles collected at Praia, Cape Verde,
 %     during the Saharan Mineral Dust Experiment: Particle chemistry, shape,
 %     mixing state and complex refractive index. Tellus B, 63(4), 475–496. <a href="matlab: web('https://doi.org/10.1111/j.1600-0889.2011.00550.x')">DOI</a>.
 %
-% [4] Panta , et al. (2023). "Insights into the single-particle composition,
+% [3] Panta , et al. (2023). "Insights into the single-particle composition,
 %     size, mixing state, and aspect ratio of freshly emitted mineral dust 
 %     from field measurements in the Moroccan Sahara using electron micro-
 %     scopy." Atmos. Chem. Phys. 23, 3861–3885. <a href="matlab: web('https://doi.org/10.5194/acp-23-3861-2023')">DOI</a>.
 %
-% [5] Severin, K. P. (2004). Energy Dispersive Spectrometry of Common Rock 
+% [4] Severin, K. P. (2004). Energy Dispersive Spectrometry of Common Rock 
 %     Forming Minerals. Kluwer Academic Publishers. <a href="matlab:
 % web('https://doi.org/10.1007/978-1-4020-2841-0')">DOI</a>.
 %
