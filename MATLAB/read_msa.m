@@ -20,11 +20,8 @@ function [data,metadata] = read_msa(filename)
 % % View metadata for 'file2.msa'
 % [~,md] = READ_MSA('file2.msa')
 %
-% % Note that the output of the 2nd command can also be achieved by:
-% md = get_msa_metadata('file2.msa')
-%
 %See also
-% GET_MSA_METADATA
+% SUBTRACT_BACKGROUND
 
 % Copyright ©Austin M. Weber 2024
 
