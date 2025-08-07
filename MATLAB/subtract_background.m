@@ -171,6 +171,8 @@ if nargout == 2
   box off
   legend('Background Subtracted Data',...
     'Location','northeast');
+  ax = ancestor(plt3, 'axes');
+  ax.YAxis.Exponent = 0;
 
   % Reposition figure, adjust fonts, modify aspect ratio
   f=gcf;
