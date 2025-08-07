@@ -4,8 +4,8 @@
 [![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
 
 ## 🚨 **ATTENTION**
-#### 1. Version 1.5.0 will be released soon. To view and access the most recent commits, download the files on [GitHub](https://github.com/weber1158/eds-classification). When I have finished updating the files in the GitHub repository I will push a new release that can be downloaded from the MATLAB Central File Exchange.
-#### 2. The files in the Julia folder will no longer be updated here. The files have been migrated to [https://github.com/weber1158/eds-classification.jl](https://github.com/weber1158/eds-classification.jl).
+#### 1. v1.5.0 introduced an improved version of the supervised machine learning mineral classification model (`weber_classification.m`). For details on how the new model was trained, see `/MATLAB/MachineLearningModel/weber_algorithm_training.mlx`. The training description provided in `/Paper/supplement.md` is no longer accurate.
+#### 2. For the convenience of Julia users, all Julia files have been migrated to [https://github.com/weber1158/eds-classification.jl](https://github.com/weber1158/eds-classification.jl).
 
 ## About
 
