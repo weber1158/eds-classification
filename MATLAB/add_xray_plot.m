@@ -17,7 +17,7 @@ function plt2 = add_xray_plot(plt,new)
 %
 %Example
 % f1 = xray_plot('file1.msa');
-% f2 = ADD_XRAY_PLOT('file2.msa');
+% f2 = ADD_XRAY_PLOT(f1,'file2.msa');
 % legend('File1','File2')
 %
 %
