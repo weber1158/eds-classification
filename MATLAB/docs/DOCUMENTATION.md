@@ -45,6 +45,8 @@ doc function
   - [`kandler_classification()`](#kandler_classification) - EDS classification scheme from Kandler et al. (2011)
   - [`panta_classifiction()`](#panta_classification) - Mineral classification scheme from Panta et al. (2023)
   - [`read_msa()`](#read_msa) - Read EMSA spectral data files (.msa)
+  - [`subtract_background()`](#subtract_background) - Subtract Bremsstrahlung radiation from spectral data
+  - [`peak_intensity()`](#peak_intensity) - Evaluate the peak intensity of each mineral-forming element in an x-ray spectrum
   - [`xray_plot()`](#xray_plot) - Plot EDS spectra
   - [`xray_peak_label()`](#xray_peak_label) - Identify characteristic x-ray peaks in spectra
   - [`get_sem_metadata()`](#get_sem_metadata) - Extract metadata from SEM images (.tif or .tiff)
@@ -336,6 +338,81 @@ md = get_msa_metadata('file2.msa');
 <big>**Limitations**</big>
 
 I have tested and verified that this function works on .msa files generated using EDS analysis software from APEX™ and Bruker. However, I cannot guarantee that the function will work for .msa data collected using alternative sofware.
+
+
+## subtract_background ##
+Subtract Bremsstrahlung radiation from spectral data
+
+<big>**Syntax**</big>
+
+`subtract_background(data)`
+
+`subtract_background(data,Name=Value)`
+
+`new_data = subtract_background(data)`
+
+`[new_data,figHandle] = subtract_background(data)`
+
+
+<big>**Inputs**</big>
+
+`data` - table produced by the `read_msa` function or the name of a spectral file on the search path
+
+<big>**Name-Value Pairs**</big>
+
+`Degree` - The degree of the polynomial. Default=10
+
+`MinSeparation` - The minimum separation between peaks (in keV). Default=0.13
+
+`SmoothingFactor` - The smoothing parameter. Default=15
+
+<big>**Outputs**</big>
+
+`new_data` - Background-subtracted data table with columns: keV and Counts
+
+`figHandle` - Visualization of the background subtraction
+
+<big>**Example**</big>
+
+```matlab
+filename = 'file1.msa';
+data = read_msa(filename);
+[data_bs,fig] = subtract_background(data,Degree=9,SmoothingFactor=10);
+```
+
+<img alt="Background subtraction example" width="800" src="/MATLAB/images/background-subtraction.jpg">
+
+**SEE ALSO**: [`read_msa()`](#read_msa) [`xray_plot()`](#xray_plot)
+
+
+## peak_intensity ##
+Evaluate the peak intensity of each mineral-forming element in an x-ray spectrum
+
+<big>**Syntax**</big>
+
+`peak_intensity(data)`
+
+`intensities = peak_intensity(data)`
+
+
+<big>**Input**</big>
+
+`data` - Table of EDS data produced by the [`read_msa()`](#read_msa) and/or [`subtract_background()`](#subtract_background) function
+
+<big>**Output**</big>
+
+`intensities` - Table of peak intensities for the mineral-forming elements
+
+<big>**Example**</big>
+
+```matlab
+filename = 'file1.msa';
+data = read_msa(filename);
+data_bs = background_subtraction(data);
+peakInt = peak_intensity(data_bs);
+mineral = donarummo_classification(peakInt);
+```
+**SEE ALSO**: [`read_msa()`](#read_msa) [`subtract_background()`](#subtract_background)
 
 
 ## xray_plot ##
