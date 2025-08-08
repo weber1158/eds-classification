@@ -70,8 +70,10 @@ for peak = 1:num_peaks
 	% Add red marker to peak
 	plot_red_marker(local_maxima_energies,peak)
 	% Add label to peak
+	if ~isempty(element_list)
 	plot_element_label(local_maxima_energies,peak,element_list{1})
 	hold('off')
+	end
  else
 	% Loop through the remaining peaks to check their element lists
 	for n=(peak+1):num_peaks
