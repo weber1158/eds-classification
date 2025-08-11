@@ -38,7 +38,7 @@ pathtool
 4. Finalize your choice by clicking `Save` or `Apply`.
 
 ## Test Examples
-View the test script by clicking [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) and navigating to the Examples tab, or download and run the `matlab_test.mlx` file [(here)](https://github.com/weber1158/eds-classification/tree/beac5acc06f7136acb9bb8a34be5c818cbd539f2/MATLAB/Tests) in MATLAB. 
+View the test script by clicking [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) and navigating to the Examples tab, or download and run the `eds_demo.mlx` file [(here)](https://github.com/weber1158/eds-classification/tree/main/MATLAB/Tests) in MATLAB. 
 
 ## How to cite
 <a href="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2">
