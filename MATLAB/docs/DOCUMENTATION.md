@@ -39,16 +39,22 @@ doc function
 
 ### List of Functions ###
 
+*Mineral Classification*
   - [`eds_classification()`](#eds_classification) - EDS mineral classification
   - [`weber_classification()`](#weber_classification) -  Machine learning mineral classification model for EDS data
   - [`donarummo_classification()`](#donarummo_classification) - Mineral classification scheme from Donarummo et al. (2003)
   - [`kandler_classification()`](#kandler_classification) - EDS classification scheme from Kandler et al. (2011)
+  - [`kutuzov_classification()`](#kutuzov_classification) - Mineral classification scheme from Kutuzov et al. (2026)
   - [`panta_classifiction()`](#panta_classification) - Mineral classification scheme from Panta et al. (2023)
+
+*Energy Spectrum Visualization and Analysis*
   - [`read_msa()`](#read_msa) - Read EMSA spectral data files (.msa)
   - [`subtract_background()`](#subtract_background) - Subtract Bremsstrahlung radiation from spectral data
   - [`peak_intensity()`](#peak_intensity) - Evaluate the peak intensity of each mineral-forming element in an x-ray spectrum
   - [`xray_plot()`](#xray_plot) - Plot EDS spectra
   - [`xray_peak_label()`](#xray_peak_label) - Identify characteristic x-ray peaks in spectra
+
+*SEM Imagery Functions*
   - [`get_sem_metadata()`](#get_sem_metadata) - Extract metadata from SEM images (.tif or .tiff)
   - [`sem_pixel_size()`](#sem_pixel_size) - Calculate pixel size in a SEM image
   - [`convergence_angle()`](#convergence_angle) - Calculate the convergence angle for an SEM image
@@ -67,7 +73,7 @@ EDS mineral dust classification
 
 <big>**Description**</big>
 
-Four algorithms for mineral classification in a single function. Simply pass a table of EDS data (either net intensity or atom percent, depending on the algorithm you want) as the first input argument and then use the `Algorithm="Name"` name-value pair to choose you algorithm.
+Five algorithms for mineral classification in a single function. Simply pass a table of EDS data (either net intensity or atom percent, depending on the algorithm you want) as the first input argument and then use the `Algorithm="Name"` name-value pair to choose you algorithm.
 
 <big>**Inputs**</big>
 
@@ -90,7 +96,8 @@ NAME
 |`"Weber"`|Net intensity|Na,Mg,Al,Si,P,K,Ca,Ti,Fe|[`weber_classification()`](#weber_classification)|[[1]](#copyrights)|
 |`"Donarummo"`|Net intensity|Na,Mg,Al,Si,K,Ca,Fe|[`donarummo_classification()`](#donarummo_classification)|[[2]](#copyrights)|
 |`"Kandler"`|Atom percent|Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[`kandler_classification()`](#kandler_classification)|[[3]](#copyrights)|
-|`"Panta"`|Atom percent|F,Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[`panta_classification()`](#panta_classification)|[[4]](#copyrights)|
+|`"Kutuzov"`|Atom fraction|Na,Mg,Al,Si,Ca,Ti,Fe|[`kutuzov_classification`](#kutuzov_classification)|[[4]](#copyrights)|
+|`"Panta"`|Atom percent|F,Na,Mg,Al,Si,P,S,Cl,K,Ca,Ti,Cr,Mn,Fe|[`panta_classification()`](#panta_classification)|[[5]](#copyrights)|
 
 
 <big>**Examples**</big>
@@ -108,7 +115,7 @@ weber = eds_classification(data); %Or, weber = eds_classification(data,Algorithm
 donarummo = eds_classification(data,Algorithm="Donarummo");
 ```
 
-**SEE ALSO** [`weber_classification()`](#weber_classification), [`donarummo_classification()`](#donarummo_classification), [`kandler_classification()`](#kandler_classification),  [`panta_classification()`](#panta_classification).
+**SEE ALSO** [`weber_classification()`](#weber_classification), [`donarummo_classification()`](#donarummo_classification), [`kandler_classification()`](#kandler_classification), [`kutuzov_classification()`](#kutuzov_classification), [`panta_classification()`](#panta_classification).
 
 ## weber_classification ##
 Machine learning mineral classification model for EDS data
@@ -166,7 +173,7 @@ The purpose of this function is to assist in the mineral classification of compl
 
 <big>**Limitations**</big>
 
-The `weber_classification()` algorithm can only classify minerals listed in the table above. Any other mineral that may be represented by the data in the input table will be misclassified. This function is therefore best used in conjunction with additional classification techniques. See [`donarummo_classification()`](#donarummo_classification), [`kandler_classification()`](#kandler_classification), and [`panta_classification()`](#panta_classification).
+The `weber_classification()` algorithm can only classify minerals listed in the table above. Any other mineral that may be represented by the data in the input table will be misclassified. This function is therefore best used in conjunction with additional classification techniques. See [`donarummo_classification()`](#donarummo_classification), [`kandler_classification()`](#kandler_classification), [`kutuzov_classification()`](#kutuzov_classification), and [`panta_classification()`](#panta_classification).
 
 ## donarummo_classification ##
 Mineral classification scheme from Donarummo et al. (2003)
@@ -210,7 +217,7 @@ This function automates the mineral classification workflow published by Donarum
 
 <big>**Limitations**</big>
 
-The `donarummo_classifiation()` function will misclassify any mineral not present in the list above. For instance, net intensity data for the mineral quartz will never be classified as quartz. To maximize the usefulness of this algorithm the user should also consult the results of additional classification methods. See [`weber_classification()`](#weber_classification), [`kandler_classification()`](#kandler_classification), and [`panta_classification()`](#panta_classification).
+The `donarummo_classifiation()` function will misclassify any mineral not present in the list above. For instance, net intensity data for the mineral quartz will never be classified as quartz. To maximize the usefulness of this algorithm the user should also consult the results of additional classification methods. See [`weber_classification()`](#weber_classification), [`kandler_classification()`](#kandler_classification), [`kutuzov_classification()`](#kutuzov_classification), and [`panta_classification()`](#panta_classification).
 
 <big>**References**</big>
 
@@ -238,12 +245,58 @@ This  function automates the classification workflow published by Kandler et al.
 
 <big>**Limitations**</big>
 
-The `kandler_classification()` algorithm does not distinctly classifiy any mineral species and is most useful for identifying generalized mineral classes. For mineral-specific classification algorithms see [`weber_classification()`](#weber_classification), [`donarummo_classification()`](#donarummo_classification), and [`panta_classification()`](#panta_classification).
+The `kandler_classification()` algorithm does not distinctly classifiy any mineral species and is most useful for identifying generalized mineral classes. For mineral-specific classification algorithms see [`weber_classification()`](#weber_classification), [`donarummo_classification()`](#donarummo_classification), [`kutuzov_classification()`](#kutuzov_classification), and [`panta_classification()`](#panta_classification).
 
 <big>**References**</big>
 
 Kandler, K., Lieke, K., Benker, N., Emmel, C., Küpper, M., Müller-Ebert, D., Ebert, M., Scheuvens, D., Scladitz, A., Schütz, L., & Weinbruch, S. (2011). Electron microscopy of particles collected at Praia, Cape Verde, during the Saharan Mineral Dust Experiment: Particle chemistry, shape, mixing state and complex refractive index. Tellus B, 63(4), 475-496. https://doi.org/10.1111/j.1600-0889.2011.00550.x
 
+## kutuzov_classification ##
+Mineral classification scheme from Kutuzov et al. (2026)
+
+<big>**Description**</big>
+
+This  function automates the classification workflow published by Kutuzov et al. (2026). Although the algorithm was originally designed for interpretting elemental data acquired with sp-ICP-TOFMS, this function has been written so that it can be applied to EDS data.
+
+<big>**Syntax**</big>
+
+`minerals = kutuzov_classification(data)`
+
+<big>**Input**</big>
+
+`data` - table of elemental data containing columns for each of the following elements: Na, Mg, Al, Si, Ca, Ti, and Fe. The name of each column may be the full element name or its abbreviation. For instance, "Silicon" and "Si" are valid table variable names. Both the American and British spelling of "Aluminum" ("Aluminium") are also valid. Capitalization is not required, but spelling is paramount.
+
+<big>**Output**</big>
+
+`minerals` - categorical vector of mineral names corresponding to each row in the input table. The possible mineral classifications are given below.
+
+<big>**List of Possible Mineral Classifications**</big>
+
+| Mineral | Description |
+| --- | --- |
+|Phyllosilicate|Clay minerals and mica|
+|Augite|Clinopyroxene (high Ca)|
+|Diopside|Clinopyroxene (low Fe)|
+|Pigeonite|Orthopyroxene (low Ca)|
+|High-Fe Hornblende|Amphibole|
+|High-Mg Hornblende|Amphibole|
+|Chlorite|Clay mineral|
+|Kaolinite|Clay mineral|
+|Albite|Feldspar (Na end-member)|
+|Anorthite|Feldspar (Ca end-member)|
+|Hypersthene|Orthopyroxene (a variety of enstatite; high Mg)|
+|Quartz|Quartz (SiO<sub>2</sub>)|
+|Ca-dominant|e.g., Calcite, Apatite, Fluorite|
+|Fe-dominant|e.g., Hematite, Goethite, Magnetite|
+|Unknown|i.e., Elemental data do not match any of the known criteria|
+
+<big>**Limitations**</big>
+
+The `kutuzov_classification()` function will misclassify any mineral not present in the list above. For instance, element data for titanite will never be classified as titanite. To maximize the usefulness of this algorithm the user should also consult the results of additional classification methods. See [`weber_classification()`](#weber_classification), [`donarummo_classification()`](#donarummo_classification), [`kandler_classification()`](#kandler_classification), and [`panta_classification()`](#panta_classification).
+
+<big>**References**</big>
+
+Kutuzov. *et al.* (2026). Geochemical characterization of millions of individual atmospheric particles entrapped in Antarctic ice across the last glacial-interglacial transition. Scientific Reports 16(1), 10556. https://doi.org/10.1038/s41598-026-45260-3
 
 ## panta_classification ##
 Mineral classification scheme from Panta et al. (2023)
@@ -290,7 +343,7 @@ The algorithm also has classifications for *Ca-rich silicate/Ca-Si-mix*, *Comple
 
 <big>**Limitations**</big>
 
-The `panta_classification()` function will misclassify any mineral not present in the list above. For instance, atom percent data for pyroxene will never be classified as pyroxene. To maximize the usefulness of this algorithm the user should also consult the results of additional classification methods. See [`weber_classification()`](#weber_classification), [`donarummo_classification()`](#donarummo_classification), and [`kandler_classification()`](#kandler_classification).
+The `panta_classification()` function will misclassify any mineral not present in the list above. For instance, atom percent data for pyroxene will never be classified as pyroxene. To maximize the usefulness of this algorithm the user should also consult the results of additional classification methods. See [`weber_classification()`](#weber_classification), [`donarummo_classification()`](#donarummo_classification), [`kandler_classification()`](#kandler_classification), and [`kutuzov_classification()`](#kutuzov_classification).
 
 <big>**References**</big>
 
@@ -624,4 +677,6 @@ This software is made available under a MIT license meaning that users are free 
 
 **[3]** Kandler, K., Lieke, K., Benker, N., Emmel, C., Küpper, M., Müller-Ebert, D., Ebert, M., Scheuvens, D., Schladitz, A., Schütz, L., & Weinbruch, S. (2011). Electron microscopy of particles collected at Praia, Cape Verde, during the Saharan Mineral Dust Experiment: Particle chemistry, shape, mixing state and complex refractive index. *Tellus B*, *63*(4), 475–496. https://doi.org/10.1111/j.1600-0889.2011.00550.x
 
-**[4]** Panta, A., Kandler, K., Alastuey, A., González-Flórez, C., González-Romero, A., Klose, M., Querol, X., Reche, C., Yus-Díez, J., & Pérez García-Pando, C. (2023). Insights into the single-particle composition, size, mixing state, and aspect ratio of freshly emitted mineral dust from field measurements in the Moroccan Sahara using electron microscopy. *Atmospheric Chemistry and Physics*, *23*(6), 3861–3885. https://doi.org/10.5194/acp-23-3861-2023
+**[4]** Kutuzov, S., Olesik, J. W., Lomax-Vogt, M. C., Carter, L. M., Lowry, G. V., Bland, G. D., Wielinski, J., Sullivan, R. C., & Gabrielli, P. (2026). Geochemical characterization of millions of individual atmospheric particles entrapped in Antarctic ice across the last glacial-interglacial transition. *Scientific Reports, 16*(1), 10556. https://doi.org/10.1038/s41598-026-45260-3
+
+**[5]** Panta, A., Kandler, K., Alastuey, A., González-Flórez, C., González-Romero, A., Klose, M., Querol, X., Reche, C., Yus-Díez, J., & Pérez García-Pando, C. (2023). Insights into the single-particle composition, size, mixing state, and aspect ratio of freshly emitted mineral dust from field measurements in the Moroccan Sahara using electron microscopy. *Atmospheric Chemistry and Physics*, *23*(6), 3861–3885. https://doi.org/10.5194/acp-23-3861-2023
