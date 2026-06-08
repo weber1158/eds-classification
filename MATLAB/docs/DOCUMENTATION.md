@@ -126,19 +126,23 @@ Machine learning mineral classification model for EDS data
 
 `minerals = weber_classification(data)`
 
+`minerals = weber_classification(data, FullNames=true)`
+
 `[~,groups] = weber_classification(data)`
 
 `[~,~,scores] = weber_classification(data)`
 
 <big>**Description**</big>
 
-This **bagged tree ensemble** model was trained using EDS net intensity data collected on 18 mineral standards at the Center for Electron Microscopy and Analysis (CEMAS) at The Ohio State University. The instrument that was used was a Quattro Environmental SEM with an EDAX Octane Elect Super EDS detector. Operating conditions included a 15 kV acceleration voltage, 11 nA beam current, and 12 mm working distance.
+This **bagged tree ensemble** model was trained using EDS net intensity data collected on 18 reference minerals at the Center for Electron Microscopy and Analysis (CEMAS) at The Ohio State University. The instrument that was used was a Quattro Environmental SEM with an EDAX Octane Elect Super EDS detector. Operating conditions included a 15 kV acceleration voltage, 11 nA beam current, and 12 mm working distance.
 
 The purpose of this function is to assist in the mineral classification of complex EDS spectra, with emphasis on minerals that are often found in ice core dust studies. Minerals with simple chemistry, such as quartz, can be easily identified from their spectra alone and were therefore excluded from the model training. 
 
 <big>**Input**</big>
 
 `data` - table of EDS net intensity data containing variables (i.e. columns) for the elements Na, Mg, Al, Si, P, K, Ca, Ti, and Fe.
+
+`FullNames` - (Optional, default=false) Set `FullNames=true` as the second input argument to convert the mineral abbreviations to full mineral names. For example, "Ab" will become "Albite".
 
 <big>**Outputs**</big>
 
