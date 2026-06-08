@@ -1,16 +1,17 @@
-function [minerals,groups,scores] = weber_classification(data)
+function [minerals,groups,scores] = weber_classification(data,varargin)
 %Machine learning mineral classification model for EDS data
 %
 %SYNTAX
 % WEBER_CLASSIFICATION(data)
 % minerals = WEBER_CLASSIFICATION(data)
+% minerals = WEBER_CLASSIFICATION(data, FullNames=true)
 % [~,groups] = WEBER_CLASSIFICATION(data)
 % [~,~,scores] = WEBER_CLASSIFICATION(data)
 %
 %
 %DESCRIPTION
 % This bagged tree ensemble model was trained using EDS net intensity data
-% collected on 18 mineral standards at the Center for Electron Microscopy
+% collected on 18 reference minerals at the Center for Electron Microscopy
 % and Analysis (CEMAS) at The Ohio State Universtiy. The instrument that
 % was used was a Quattro Environmental SEM with an EDAX Octane Elect Super
 % EDS detector. Operating conditions included a 15 kV acceleration voltage,
@@ -28,10 +29,15 @@ function [minerals,groups,scores] = weber_classification(data)
 % data : Table of EDS net intensity data containing variables (i.e. columns)
 %        for the elements Na, Mg, Al, Si, P, K, Ca, Ti, and Fe.
 %
+% FullNames : (Optional, default=false) Set FullNames=true as the second input
+%             argument to convert the mineral abbreviations to full mineral
+%             names. For example, "Ab" will become "Albite".
+%
 %OUTPUTS
 % minerals : Categorical vector of mineral classifications for each row in
 %            the input table. All classifications are given using
-%            standardized abbreviations (see the table below for details).
+%            standardized abbreviations (see the table below for details),
+%            unless the FullNames=true argument is passed.
 %
 % groups   : (Optional) Categorical vector of generalized mineral groups
 %            for each row in the input table. For example, if the mineral 
@@ -51,7 +57,7 @@ function [minerals,groups,scores] = weber_classification(data)
 %
 %
 %See also
-% eds_classification, donarummo_classification, kandler_classification, panta_classification
+% eds_classification, donarummo_classification, kandler_classification, kutuzov_classification, panta_classification
 %
 %
 %LIST OF POSSIBLE MINERAL CLASSIFICATIONS:
@@ -89,12 +95,20 @@ function [minerals,groups,scores] = weber_classification(data)
 %
 %
 % Timeline of major changes:
+%  June 2026 - Added a FullNames=true name-value pair so that the output 'minerals' will list full mineral names instead of abbreviations 
 %  August 2025 - The original model (Weber, 2025) has been updated using more robust training techniques. Accuracy is still ~99%, though the internal model structure is no longer the same.
 %
 %  Reference
 %  Weber, A. M. (2025). Journal of Open Source Software, 10(107), 7533, https://doi.org/10.21105/joss.07533
 
-% Copyright 2025 Austin M. Weber
+% Copyright 2026 Austin M. Weber
+
+inP = inputParser();
+addRequired(inP, 'data', @istable);
+addParameter(inP, 'FullNames', false, @islogical);
+parse(inP, data, varargin{:});
+data = inP.Results.data;
+FullNames = inP.Results.FullNames;
 
 % Import model
 warning off
@@ -108,10 +122,10 @@ predictors = netIntensityRatios(data);
 [minerals,scores] = weber_classifier(predictors);
 
 % Convert scores into a table
-varnames = {'Albite','Apatite','Augite','Biotite','Chlorite','Enstatite',...
-            'Hornblende','Kaolinite','Labradorite','Microcline',...
-            'Montmorillonite','Muscovite','Oligoclase','Pigeonite',...
-            'Palygorskite','Spinel','Sphene','Vermiculite'};
+varnames = {'Albite','Apatite','Augite','Biotite','Chlorite','Enstatite (Bronzite)',...
+            'Hornblende','Kaolinite','Labradorite','Microcline (K-feldspar)',...
+            'Montmorillonite (Smectite)','Muscovite (Illite)','Oligoclase','Pigeonite',...
+            'Palygorskite','Spinel','Titanite (Sphene)','Vermiculite'};
 scores = array2table(scores,'VariableNames',varnames);
 
 % Create model groups
@@ -136,8 +150,7 @@ if nargout >= 2
      groups = renamegroups(groups,idx,'Feldspar');
     % Pyroxenes
      idx = find(pyroxene_idx);
-     groups = renamegroups(groups,idx,'Pyroxene');
-    
+     groups = renamegroups(groups,idx,'Pyroxene');    
     % Apatite
      idx = find(strcmp(groups,'Ap'));
      groups = renamegroups(groups,idx,'Apatite');
@@ -159,7 +172,19 @@ if nargout >= 2
 
 end
 warning on % Turns warning notifications back on
+
+if FullNames
+  oldLabels = {'Ab','Ap','Aug','Bt','Chl','En','Hbl','Kln','Lab','Mc',...
+               'Mnt','Ms','Olig','Pgt','Plg','Spl','Spn','Vrm'};
+  newLabels = {'Albite','Apatite','Augite','Biotite','Chlorite','Enstatite',...
+    'Hornblende','Kaolinite','Labradorite','Microcline','Montmorillonite',...
+    'Muscovite (Illite)','Oligoclase','Pigeonite','Palygorskite','Spinel',...
+    'Titanite','Vermiculite'};
+  [~,idx] = ismember(minerals, oldLabels);
+  minerals = categorical(newLabels(idx))';
 end
+
+end % End main function
 
 function groups = renamegroups(groups,index,group_name)
  for ii = 1:length(index)
