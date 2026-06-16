@@ -190,9 +190,13 @@ This function automates the mineral classification workflow published by Donarum
 
 `minerals = donarummo_classification(data)`
 
+`minerals = donarummo_classification(data, FullNames=true)`
+
 <big>**Input**</big>
 
 `data` - table of net intensity data containing a column for each of the following elements: Na, Mg, Al, Si, K, Ca, and Fe. The name of each column may be the full element name or its abbreviation. For instance, "Silicon" and "Si" are valid table variable names. Both the American and British spelling of "Aluminum" ("Aluminium") are also valid. Capitalization is not required, but spelling is paramount.
+
+`FullNames=true` - (optional) name-value that will save classifications as full mineral names instead of abbreviations.
 
 <big>**Output**</big>
 
@@ -313,9 +317,13 @@ This function automates the mineral classification workflow published by Panta e
 
 `minerals = panta_classification(data)`
 
+`minerals = panta_classification(data, FullNames=true)`
+
 <big>**Input**</big>
 
 `data` - table of EDS atom percent data containing columns for each of the following elements: F, Na, Mg, Al, Si, P, S, Cl, K, Ca, Ti, Cr, Mn, and Fe. The name of each column may be the full element name or its abbreviation. For instance, "Silicon" and "Si" are valid table variable names. Both the American and British spelling of "Aluminum" ("Aluminium") are also valid. Capitalization is not required, but spelling is paramount.
+
+`FullNames=true` - (optional) name-value pair that will save classifications as full mineral names instead of abbreviations.
 
 <big>**Output**</big>
 
