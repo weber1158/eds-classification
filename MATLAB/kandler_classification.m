@@ -42,9 +42,9 @@ function minerals = kandler_classification(data_table)
 %  https://doi.org/10.1111/j.1600-0889.2011.00550.x
 %
 %See also:
-% eds_classification, donarummo_classification, panta_classification, weber_classification
+% eds_classification, donarummo_classification, kutuzov_classification, panta_classification, weber_classification
 
-% Function code ©2025 Austin M. Weber
+% Function code ©2026 Austin M. Weber
 
 %
 % BEGIN MAIN FUNCTION
