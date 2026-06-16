@@ -1,4 +1,4 @@
-function minerals = donarummo_classification(peak_intensity_table)
+function minerals = donarummo_classification(peak_intensity_table, varargin)
 %Mineral classification scheme from Donarummo et al. (2003)
 %
 %DESCRIPTION
@@ -8,6 +8,7 @@ function minerals = donarummo_classification(peak_intensity_table)
 %
 %SYNTAX
 % minerals = DONARUMMO_CLASSIFICATION(peak_intensity_table)
+% minerals = DONARUMMO_CLASSIFICATION(peak_intensity_table, FullNames=true)
 %
 %INPUT
 % peak_intensity_table - Table containing a column for each of the
@@ -17,6 +18,9 @@ function minerals = donarummo_classification(peak_intensity_table)
 %  British spelling of "Aluminum" ("Aluminium") are also valid.
 %  Capitalization is not required, but spelling is paramount. The values in
 %  the table should represent the measured net intensity for each element.
+%
+% FullNames=true - optional name-value pair; will save classifications as
+%   full mineral names instead of abbreviations.
 %
 %OUTPUT
 % minerals - Categorical vector of mineral names corresponding to each row
@@ -62,22 +66,27 @@ function minerals = donarummo_classification(peak_intensity_table)
 %  https://doi.org/10.2138/am.2010.3371
 %
 %See also
-% eds_classification, kandler_classification, panta_classification, weber_classification
+% eds_classification, kandler_classification, kutuzov_classification, panta_classification, weber_classification
 
 %Updates
+% June 2026 - Added FullNames=true optional name-value pair
+%
 % 20/Jul/2024 - Changed mineral IDs from full names to abbreviations and
 % added a local function to check that the variable names in the input
 % table match the required elements. Additional documentation updates.
 
-% Function code ©2025 Austin M. Weber
+% Function code ©2026 Austin M. Weber
 
 %
 % BEGIN FUNCTION BODY
 %
 % Perform initial function checks
-if ~istable(peak_intensity_table)
-	error('Input must be a table.')
-end
+inP = inputParser();
+addRequired(inP, 'peak_intensity_table', @istable);
+addParameter(inP, 'FullNames', false, @islogical);
+parse(inP, peak_intensity_table, varargin{:});
+peak_intensity_table = inP.Results.peak_intensity_table;
+FullNames = inP.Results.FullNames;
 
 % Does the table contain the correct variable names?
 peak_intensity_table = parseTableVariableNames(peak_intensity_table); % Local function, defined at bottom of file
@@ -90,7 +99,21 @@ for n = 1:num_classifications
 	minerals(n) = mineral;
 end
 minerals = minerals'; % Convert to column vector
-% That's it! (Of course, there are a LOT of local functions behind the magic)
+
+if FullNames
+  oldLabels = {'Ab','Afs','An','Aug','Bt','Chl','Hbl','Htr','Ilt','Ilt/Sme',...
+               'Kln','Lab/Byt','Mnt','Ms','Olig/Ans','Vrm','U-A','U-B1','U-B2',...
+               'U-B3','U-C1','U-C2','U-D1','U-D2','U-D3','U-D4','U-D5',...
+               'U-E','U-F'};
+  newLabels = {'Albite','Alkali feldspar','Anorthite','Augite','Biotite',...
+               'Chlorite','Hornblende','Hectorite','Illite','Illite/Smectite 70/30 Mix','Kaolinite',...
+               'Labradorite/Bytownite','Ca-Montmorillonite','Muscovite','Oligoclase/Andesine',...
+               'Vermiculite','Unknown A','Unknown B1','Unknown B2','Unknown B3',...
+               'Unknown C1','Unknown C2','Unknown D1','Unknown D2','Unknown D3',...
+               'Unknown D4','Unknown D5','Unknown E','Unknown F'};
+  [~,idx] = ismember(minerals, oldLabels);
+  minerals = categorical(newLabels(idx))';
+end
 
 %
 % LOCAL FUNCTIONS
