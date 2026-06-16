@@ -1,4 +1,4 @@
-function minerals = panta_classification(data_table)
+function minerals = panta_classification(data_table, varargin)
 %Mineral classification scheme from Panta et al. (2023)
 %
 %DESCRIPTION
@@ -8,6 +8,7 @@ function minerals = panta_classification(data_table)
 %
 %SYNTAX
 % minerals = PANTA_CLASSIFICATION(data_table) 
+% minerals = PANTA_CLASSIFICATION(data_table, FullNames=true)
 %
 %INPUT
 % data_table - Table containing a column for each of the following
@@ -18,6 +19,8 @@ function minerals = panta_classification(data_table)
 %  valid. Capitalization is not required, but spelling is paramount. The 
 %  values in the table should represent the measured atomic percent for 
 %  each element.
+% FullNames=true - optional name-value pair; will save classifications
+%  as full mineral names instead of abbreviations
 %
 %OUTPUT
 % minerals - Categorical vector of mineral names corresponding to each row
@@ -69,20 +72,25 @@ function minerals = panta_classification(data_table)
 %  https://doi.org/10.2138/am.2010.3371
 %
 %See also
-% eds_classification, donarummo_classification, kandler_classification, weber_classification
+% eds_classification, donarummo_classification, kandler_classification, kutuzov_classification, weber_classification
 
 %Updates
+% June 2026 - Added FullNames=true optional name-value pair
 % 20/Jul/2024 - Changed mineral IDs from full names to abbreviations
 
-% Function code ©2025 Austin M. Weber
+% Function code ©2026 Austin M. Weber
 
 %
 % BEGIN FUNCTION BODY
 %
 % Perform intial function checks
-if ~istable(data_table)
-	error('Input must be a table.');
-end
+inP = inputParser();
+addRequired(inP, 'data_table', @istable);
+addParameter(inP, 'FullNames', false, @islogical);
+parse(inP, data_table, varargin{:});
+data_table = inP.Results.data_table;
+FullNames = inP.Results.FullNames;
+
 % Convert full-name table variables to abbreviations
 element_names = lower({'Aluminum','Aluminium','Silicon','Iron','Sodium','Magnesium','Phosphorus','Sulfur',...
 	'Chlorine','Potassium','Calcium','Titanium','Chromium','Manganese','Fluorine'});
@@ -105,6 +113,19 @@ if sum(ismember(vars,element_list)) ~= 14
 end
 % Evaluate mineralogies with local functions
 minerals = categorical(mineralogy_classification(data_table)); % Calls numerous local functions; Optimized for speed.
+
+if FullNames
+  oldLabels = {'Ab','Alu','Ap','Complex Fsp','Complex Fsp/Clay mix',...
+               'Complex Qz','Cal','Chl','Dol','Fsp','Gp','Hl','Hem','Ilm',...
+               'Ilt','Kln','Mc','Qz','Rt','Sme'};
+  newLabels = {'Albite','Alunite','Apatite',...
+               'Complex Feldspar','Complex Feldspar/Clay mix','Complex Quartz',...
+               'Calcite','Chlorite','Dolomite',...
+               'Feldspar','Gypsum','Halite','Hematite','Ilmenite','Illite',...
+               'Kaolinite','Microcline','Quartz','Rutile','Smectite'};
+  [~,label_idx] = ismember(minerals, oldLabels);
+  minerals = categorical(newLabels(label_idx))';
+end
 
 %
 % LOCAL FUNCTIONS
