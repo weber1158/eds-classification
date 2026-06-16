@@ -32,7 +32,7 @@ function classes = eds_classification(data,varargin)
 % "Algorithm" or Algorithm=
 %
 % VALUE         DATA_TYPE       REQUIRED_ELEMENTS           REFERENCE
-% "Weber"       Net intensity   Na,Mg,Al,Si,P,K,Ca,Ti,Fe    [1]]
+% "Weber"       Net intensity   Na,Mg,Al,Si,P,K,Ca,Ti,Fe    [1]
 % "Donarummo"   Net intensity   Na,Mg,Al,Si,K,Ca,Fe         [2] 
 % "Kandler"     Atom percent    Na,Mg,Al,Si,P,S,Cl,K,Ca,    [3]
 %                               Ti,Cr,Mn,Fe
@@ -101,7 +101,7 @@ function classes = eds_classification(data,varargin)
 %See also
 % weber_classification, donarummo_classification, kandler_classification, kutuzov_classification, panta_classification
 
-% Copyright 2025 Austin M. Weber
+% Copyright 2026 Austin M. Weber
 
 %
 % Begin function body
