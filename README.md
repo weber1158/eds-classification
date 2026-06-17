@@ -1,6 +1,6 @@
 # Algorithms for SEM-EDS Mineral Dust Classification
-[![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx)
-
+[![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) 
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx)
 [![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
 
 ## 🚨 **ATTENTION**
@@ -11,7 +11,7 @@
 
 **A repository of functions for identifying mineral species in SEM-EDS data**
 
-This repository includes several functions designed to quickly identify common mineral species from energy dispersive spectrometry (EDS) data. The <small>`eds_classification()`</small> function is encoded with four EDS mineral classification algorithms, including a machine learning classifier trained on 18 mineral standards with an accuracy ≅ 99%. Three additional sorting algorithms (that have been transcribed from the peer-reviewed literature) are also available for discriminating mineral classes from EDS data. 
+This repository includes several functions designed to quickly identify common mineral species from energy dispersive spectrometry (EDS) data. The <small>`eds_classification()`</small> function is encoded with five mineral classification algorithms, including a machine learning classifier trained on 18 reference minerals with an accuracy ≅ 99%. The four additional algorithms (which have been transcribed from the peer-reviewed literature) are also available for discriminating mineral classes using elemental data. 
 
 ## Documentation
 See the online **[Documentation](https://github.com/weber1158/eds-classification-for-matlab/blob/main/MATLAB/docs/DOCUMENTATION.md)** for details on each of the algorithms.
@@ -20,8 +20,6 @@ The docs also include MATLAB functions for importing EDS x-ray spectral data (<s
 
 ## Installation
 You can download the repository from the MATLAB Central File Exchange [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771), or open it directly in your browser [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx) (recommended). 
-
-The repository was developed in MATLAB Online, which uses the most up-to-date version of MATLAB. To ensure backwards compatability, it is recommended that users also utilize the functions in MATLAB Online.
 
 To add the EDS Classification functions to the default search path:
 
@@ -38,7 +36,7 @@ pathtool
 4. Finalize your choice by clicking `Save` or `Apply`.
 
 ## Test Examples
-View the test script by clicking [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) and navigating to the Examples tab, or download and run the `eds_demo.mlx` file [(here)](https://github.com/weber1158/eds-classification/tree/main/MATLAB/Tests) in MATLAB. 
+View the test script by clicking [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771-eds-classification/files/MATLAB/Tests/eds_demo.mlx), or download and run the `eds_demo.mlx` file [(here)](https://github.com/weber1158/eds-classification/tree/main/MATLAB/Tests) in MATLAB. 
 
 ## How to cite
 <a href="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2">
