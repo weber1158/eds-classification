@@ -22,7 +22,7 @@
    - `xray_plot`
 
 #### 🚨 Previous Updates
-##### 1. `v1.5` introduced an improved version of the supervised machine learning mineral classification model (`weber_classification.m`). For details on how the new model was trained, see `/MATLAB/MachineLearningModel/weber_algorithm_training.mlx`. The training description provided in `/Paper/supplement.md` is no longer accurate.
+##### 1. `v1.5` introduced an improved version of the supervised machine learning mineral classification model (`weber_classification.m`). For details on how the new model was trained, see the contents of the [`machine_learning_models`](https://github.com/weber1158/eds-classification/tree/v2-setup/machine_learning_models/weber_classification_training) folder. The training description provided in `/Paper/supplement.md` is no longer accurate.
 ##### 2. For the convenience of Julia users, all Julia files have been migrated to [https://github.com/weber1158/eds-classification.jl](https://github.com/weber1158/eds-classification.jl).
 
 ## 💡 About
