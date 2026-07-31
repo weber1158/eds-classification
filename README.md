@@ -4,8 +4,9 @@
 [![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
 
 ## 🚨 **ATTENTION**
-#### 1. v1.5.0 introduced an improved version of the supervised machine learning mineral classification model (`weber_classification.m`). For details on how the new model was trained, see `/MATLAB/MachineLearningModel/weber_algorithm_training.mlx`. The training description provided in `/Paper/supplement.md` is no longer accurate.
-#### 2. For the convenience of Julia users, all Julia files have been migrated to [https://github.com/weber1158/eds-classification.jl](https://github.com/weber1158/eds-classification.jl).
+#### 1. I am in the process of updating the repository. The version `v2.x` release should be available in early August 2026. 
+#### 2. `v1.5` introduced an improved version of the supervised machine learning mineral classification model (`weber_classification.m`). For details on how the new model was trained, see `/MATLAB/MachineLearningModel/weber_algorithm_training.mlx`. The training description provided in `/Paper/supplement.md` is no longer accurate.
+#### 3. For the convenience of Julia users, all Julia files have been migrated to [https://github.com/weber1158/eds-classification.jl](https://github.com/weber1158/eds-classification.jl).
 
 ## About
 
