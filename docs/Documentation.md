@@ -4,7 +4,7 @@
 
 **Documentation**
 
-The examples in this documentation are available in `eds_demo.m`
+The examples in this documentation can be viewed by running `eds_demo.m`.
 
 <!-- Begin Toc -->
 
@@ -220,7 +220,7 @@ Create object from EDS spectral data file (.msa / .emsa)
 Read an x\-ray energy file and access its metadata.
 
 ```matlab
-s = eds_read('.\data\phenom_osu.emsa');
+s = eds_read('phenom_osu.emsa');
 md = s.Metadata
 ```
 
@@ -331,7 +331,7 @@ This is the process that I used to determine the optimal default values, but I r
 Identify the mineralogy of a sample directly from its `.msa` file.
 
 ```matlab
-mineral = msa_classification('.\data\apreo_cemas.msa');
+mineral = msa_classification('apreo_cemas.msa');
 ```
 
 <a id="TMP_97f3"></a>
@@ -404,7 +404,7 @@ The following name\-value arguments are **optional**. If you do not specify char
 Create a simple Spectrum object visualization.
 
 ```matlab
-s = eds_read('.\data\phenom_osu.emsa');
+s = eds_read('phenom_osu.emsa');
 figure
 plt = Spectrum(s.Energy, s.Counts);
 ```
@@ -417,8 +417,8 @@ Note that Example 1 above is equivalent to the quick visualization method: `eds_
 Overlay a second spectrum onto the original Spectrum, and normalize the y\-axes for better comparison.
 
 ```matlab
-s1 = eds_read('.\data\phenom_osu.emsa');
-s2 = eds_read('.\data\quattro_cemas.msa');
+s1 = eds_read('phenom_osu.emsa');
+s2 = eds_read('quattro_cemas.msa');
 figure
 plt2 = Spectrum(s1.Energy, s1.Counts);
 plt2.addSpectrum(s2.Energy, s2.Counts);
@@ -431,7 +431,7 @@ plt2.normalizeSpectrum();
 Add characteristic x\-ray labels to a Spectrum.
 
 ```matlab
-s3 = eds_read('.\data\apreo_cemas.msa');
+s3 = eds_read('apreo_cemas.msa');
 figure
 plt3 = Spectrum(s3.Energy, s3.Counts);
 plt3.addXrayLabels('prominence',94,'marker','sr');
@@ -449,14 +449,12 @@ This function quantifies the stoichiometric composition of a sample by means of 
 
  $$ C_{i,sample} =\frac{I_{i,sample} }{I_{i,standard} }\times C_{i,standard} $$ 
 
-where `C` is normalized weight percent and `i` represents an element of the sample or standard. This function should only be used when you acquire data for a reference material and a sample using the same instrument conditions (acceleration voltage, spot size, etc.).
+where `C` is normalized weight percent, `I` is the net intensity of a characteristic x-ray peak in an EDS spectrum, and `i` represents the corresponding element of the sample or standard. This function should only be used when you acquire data for a reference material and a sample using the same instrument conditions (acceleration voltage, spot size, etc.).
 
 <a id="TMP_6b9f"></a>
 ### Syntax
 
-`quant = standard_stoich_quant(num_Oxygens, elements, ...`
-
- `norm_wt_pct_standard, net_counts_standard, net_counts_sample)` 
+`quant = standard_stoich_quant(num_Oxygens, elements, norm_wt_pct_standard, net_counts_standard, net_counts_sample)` 
 
 <a id="TMP_3c5d"></a>
 ### Input Arguments
@@ -506,7 +504,7 @@ Standardless stoichiometric quantification
 
 `num_Oxygens           double` | Number of expected oxygens in chemical formula.
 
-`elements                cell` | List of elements in the measured data. For example: `{'O','Mg','Al','Si'}.`
+`elements                cell` | List of elements in the measured data. For example: `{'O','Mg','Al','Si'}`.
 
 `norm_wt_pct           double` | Numeric array of normalized weight percents corresponding to the elements in the sample.
 
