@@ -234,7 +234,7 @@ figure
 s.plot_spectrum; % Equivalent to eds_read(filename).plot_spectrum();
 ```
 
-**Note:** For a better method for visualizing EDS spectra, see the documentation entry for the **Spectrum** class.
+**Note:** For a better method for visualizing EDS spectra, see the documentation entry for the [`Spectrum`](#TMP_44f4) class.
 
 <a id="TMP_2982"></a>
 
