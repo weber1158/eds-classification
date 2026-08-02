@@ -6,10 +6,10 @@ function quant = standard_stoich_quant(num_Oxygens, elements, ...
 % This function quantifies the stoichiometric composition of a sample by
 % means of Casting's approximation:
 %   C(i,sample) = [I(i,sample)/I(i,standard)] * C(i,standard)
-% where C is normalized weight percent and i represents an element of the
-% sample or standard. This function should only be used when you acquire
-% data for a reference material and a sample using the same instrument
-% conditions (acceleration voltage, spot size, etc.).
+% where C is normalized weight percent, I is intensity, and i represents an
+% element of the sample or standard. This function should only be used when
+% you acquire data for a reference material and a sample using the same
+% instrument conditions (acceleration voltage, spot size, etc.).
 %
 %SYNTAX
 % quant = STANDARD_STOICH_QUANT(num_Oxygens, elements,...

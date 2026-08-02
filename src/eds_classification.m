@@ -36,14 +36,14 @@ function mineral = eds_classification(data,varargin)
 % "Donarummo"   Net intensity   Na,Mg,Al,Si,K,Ca,Fe         [2] 
 % "Kandler"     Atom percent    Na,Mg,Al,Si,P,S,Cl,K,Ca,    [3]
 %                               Ti,Cr,Mn,Fe
-% "Kutuzov"     Atom fraction   Na,Mg,Al,Si,Ca,Ti,Fe        [4]
+% "Kutuzov"     Atom percent    Na,Mg,Al,Si,Ca,Ti,Fe        [4]
 % "Panta"       Atom percent    F,Na,Mg,Al,Si,P,S,Cl,K,     [5]
 %                               Ca,Ti,Cr,Mn,Fe              
 %
 %EXAMPLES
 % % Use a custom machine learning algorithm to classify the mineral
 % % composition of each row in an EDS net intenstiy data table.
-% load eds_mineral_net_intensities.mat
+% load('eds_data.mat','data')f
 % weber = EDS_CLASSIFICATION(data);
 %
 % % Use the sorting scheme algorithm from Donarummo et al. [2] to classify
@@ -99,7 +99,7 @@ function mineral = eds_classification(data,varargin)
 % web('https://doi.org/10.1007/978-1-4020-2841-0')">DOI</a>.
 %
 %See also
-% weber_classification, donarummo_classification, kandler_classification, kutuzov_classification, panta_classification
+% msa_classification, weber_classification, donarummo_classification, kandler_classification, kutuzov_classification, panta_classification
 
 % Copyright 2026 Austin M. Weber
 

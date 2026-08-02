@@ -8,8 +8,8 @@ classdef Spectrum < matlab.graphics.chartcontainer.ChartContainer
 %INPUTS
 % x {(:,1) double} :: X-ray energy channels in units of keV
 % y {(:,1) double} :: X-ray counts for each channel in 'x'
-% varargin         :: (Optional) Name-Value pairs; compatible with the
-%                     MATLAB base function area(x,y,varargin)
+% varargin         :: (Optional) Name-Value pairs; mostly compatible with
+%                     the MATLAB base function area(x,y,varargin)
 %
 %OUTPUT
 % plt {1x1 Spectrum} :: Axes handle to the Spectrum chart object
@@ -20,7 +20,8 @@ classdef Spectrum < matlab.graphics.chartcontainer.ChartContainer
 %
 %   DESCRIPTION
 %   Overlay a new spectrum over the original Spectrum object. Optional
-%   name-value arguments compatible with the base function area(x,y).
+%   name-value arguments are mostly compatible with the base function 
+%   area(x,y).
 %
 %
 % removeSpectrum(varargin)
@@ -98,7 +99,7 @@ classdef Spectrum < matlab.graphics.chartcontainer.ChartContainer
 %
 %
 %See also
-% eds_read, eds_classification
+% eds_read
 
 %
 % Copyright 2026 Austin M. Weber

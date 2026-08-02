@@ -9,7 +9,7 @@ function mineral = msa_classification(filename,varargin)
 % filename {char} :: Name of .msa or .emsa file
 % 
 %OUTPUT
-% mineral {struct}:: Mineral ID as a categorical
+% mineral {struct}:: Mineral classification
 %
 %
 %NAME-VALUE PAIRS
@@ -33,7 +33,7 @@ function mineral = msa_classification(filename,varargin)
 %
 %
 %EXAMPLE
-% mineral = MSA_CLASSIFICATION('.\data\quattro_cemas.msa');
+% mineral = MSA_CLASSIFICATION('quattro_cemas.msa');
 %
 %
 %See also
