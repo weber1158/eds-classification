@@ -45,26 +45,26 @@ metadata = get_sem_metadata(backscatter_image)
 % msa_classification
 %==========================================================================
 % Example
-mineral = msa_classification('.\data\apreo_cemas.msa');
+mineral = msa_classification(which('apreo_cemas.msa'));
 
 %% ========================================================================
 % Spectrum
 %==========================================================================
 % Example 1
-s = eds_read('.\data\phenom_osu.emsa');
+s = eds_read(which('phenom_osu.emsa'));
 figure
 plt = Spectrum(s.Energy, s.Counts);
 
 % Example 2
-s1 = eds_read('.\data\phenom_osu.emsa');
-s2 = eds_read('.\data\quattro_cemas.msa');
+s1 = eds_read(which('phenom_osu.emsa'));
+s2 = eds_read(which('quattro_cemas.msa'));
 figure
 plt2 = Spectrum(s1.Energy, s1.Counts);
 plt2.addSpectrum(s2.Energy, s2.Counts);
 plt2.normalizeSpectrum();
 
 % Example 3
-s3 = eds_read('.\data\apreo_cemas.msa');
+s3 = eds_read(which('apreo_cemas.msa'));
 figure
 plt3 = Spectrum(s3.Energy, s3.Counts);
 plt3.addXrayLabels('prominence',94,'marker','sr');
