@@ -13,6 +13,7 @@
 A repository of functions for working with SEM-EDS data, with an emphasis on identifying mineral particles.
 
 ### 🚨 NEW: Latest Release Series: `eds-classification v2`
+Click [here](https://github.com/weber1158/eds-classification/releases/tag/v2.0) to access the full release notes.
 - See the updated [Documentation](https://github.com/weber1158/eds-classification/blob/main/docs/Documentation.md) (`/main/docs/`).
 - Replacing `v1.5.2` and includes significant changes to the repository structure.
 - New main functions (`/main/src/`):
