@@ -3,7 +3,7 @@
 [![MATLAB R2026a](https://img.shields.io/badge/MATLAB-R2026a-FC9D9A.svg?style=flat-square)](https://www.mathworks.com/products/matlab.html)
 [![Tests](https://img.shields.io/badge/Tests-Passing-F9CDAD.svg?style=flat-square)](tests)
 [![Documentation](https://img.shields.io/badge/Documentation-Markdown-C8C8A9.svg?style=flat-square)](docs/Documentation.md)
-[![Contributing](https://img.shields.io/badge/Contributions-Welcome-83AF9B.svg?style=flat-square)](CONTRIBUTING)
+[![Contributing](https://img.shields.io/badge/Contributions-Welcome-83AF9B.svg?style=flat-square)](CONTRIBUTING.md)
 
 [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) 
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx)
