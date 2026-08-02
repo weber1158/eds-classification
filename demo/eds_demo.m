@@ -27,7 +27,7 @@ head(D_vs_K, 4)
 % eds_read
 %==========================================================================
 % Example 1
-s = eds_read('.\data\phenom_osu.emsa');
+s = eds_read(which('phenom_osu.emsa'));
 md = s.Metadata
 
 % Example 2
