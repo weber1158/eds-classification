@@ -43,7 +43,7 @@ function mineral = eds_classification(data,varargin)
 %EXAMPLES
 % % Use a custom machine learning algorithm to classify the mineral
 % % composition of each row in an EDS net intenstiy data table.
-% load('eds_data.mat','data')f
+% load('eds_data.mat','data')
 % weber = EDS_CLASSIFICATION(data);
 %
 % % Use the sorting scheme algorithm from Donarummo et al. [2] to classify
@@ -52,7 +52,7 @@ function mineral = eds_classification(data,varargin)
 %
 %
 %LIMITATIONS
-% The four mineral classification algorithms were programmed using
+% The five mineral classification algorithms were programmed using
 % different SEM-EDS instruments and software and were designed for
 % different applications. In addition, the mineral classes used to
 % develop the algorithms are not the same. For more details on an 
