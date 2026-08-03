@@ -55,10 +55,10 @@ classdef Spectrum < matlab.graphics.chartcontainer.ChartContainer
 %                             In other words, you are setting the minimum
 %                             prominence of the height of the peaks you
 %                             want to label. You can also think of
-%                             prominence as the sensitivity of labeling
-%                             algorithm. The higher the prominence, the
-%                             more intense the peaks have to be in order
-%                             for the algorithm to label them. 
+%                             prominence as the sensitivity of the
+%                             labeling algorithm. The higher the
+%                             prominence, the more intense the peaks have
+%                             to be for the algorithm to label them. 
 %
 %   Marker           'none'   Add markers to each major peak. Accepts any
 %                             combination of a single character marker
