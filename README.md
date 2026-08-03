@@ -17,7 +17,7 @@ Click [here](https://github.com/weber1158/eds-classification/releases/tag/v2.0) 
 - See the updated [Documentation](https://github.com/weber1158/eds-classification/blob/main/docs/Documentation.md) (`/main/docs/`).
 - Replacing `v1.5.2` and includes significant changes to the repository structure.
 - New main functions (`/main/src/`):
-   - `Spectrum`: A custom MATLAB class for EDS x-ray spectra visualizatoin (replaces `xray_plot`).
+   - `Spectrum`: A custom MATLAB class for EDS x-ray spectra visualization (replaces `xray_plot`).
    - `msa_classification`: A new method for mineral classification that allows you to process spectral data files (.msa / .emsa) directly.
    - `eds_read`: A custom MATLAB class for reading spectral data files (replacing `msa_read`).
    - `stoich_quant` & `standard_stoich_quant`: Provide methods for standardless quantification and standard quantification of mineral stoichiometries.
@@ -53,7 +53,7 @@ pathtool
 
 3. A popup menu should open. Click `Add Folder with Subfolders` and select the un-zipped main repository folder. 
 
-4. Finalize your choice by clicking `Save` or `Apply`.
+4. Finalize your chce by clicking `Save` or `Apply`.
 
 ## 🎓 How to cite
 <a href="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2">
