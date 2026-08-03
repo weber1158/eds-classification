@@ -60,7 +60,7 @@ function mineral = msa_classification(filename,varargin)
                              'SmoothingFactor',smFact);
 
   % Identify the net intensity for each mineral-forming element
-  intensities = peak_intensity(data);
+  intensities = net_intensity(data);
 
   % Apply mineral classification to the data
   if contains('KandlerKutuzovPanta',algorithm)
