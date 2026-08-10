@@ -63,7 +63,7 @@ function mineral = msa_classification(filename,varargin)
   intensities = net_intensity(data);
 
   % Apply mineral classification to the data
-  if contains('KandlerKutuzovPanta',algorithm)
+  if contains('kandlerkutuzovpanta',lower(algorithm))
     % Convert to atom percent before identifying mineralogy
     atomic_proporitions = atom_percent(intensities);
     mineral = eds_classification(atomic_proporitions,...
