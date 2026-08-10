@@ -76,6 +76,7 @@ function minerals = panta_classification(data_table, varargin)
 % eds_classification, msa_classification, donarummo_classification, kandler_classification, kutuzov_classification, weber_classification
 
 %Updates
+% August 2026 - Bug fix: Added missing label categories
 % July 2026 - Added FullNames=false argument
 % 20/Jul/2024 - Changed mineral IDs from full names to abbreviations
 
@@ -116,14 +117,14 @@ end
 minerals = categorical(mineralogy_classification(data_table)); % Calls numerous local functions; Optimized for speed.
 
 if FullNames
-  oldLabels = {'Ab','Alu','Ap','Complex clay','Complex Fsp','Complex Fsp/Clay mix',...
+  oldLabels = {'Ab','Alu','Ap','Ca-rich silicate/Ca-Si-mix','Complex clay','Complex Fsp','Complex Fsp/Clay mix',...
                'Complex Qz','Cal','Chl','Dol','Fsp','Gp','Hl','Hem','Ilm',...
-               'Ilt','Kln','Mc','Qz','Rt','Sme'};
-  newLabels = {'Albite','Alunite','Apatite','Complex clay',...
+               'Ilt','Kln','Mc','Mica','Qz','Rt','Sme','Unknown'};
+  newLabels = {'Albite','Alunite','Apatite','Ca-rich silicate/Ca-Si-mix','Complex clay',...
                'Complex Feldspar','Complex Feldspar/Clay mix','Complex Quartz',...
                'Calcite','Chlorite','Dolomite',...
                'Feldspar','Gypsum','Halite','Hematite','Ilmenite','Illite',...
-               'Kaolinite','Microcline','Quartz','Rutile','Smectite'};
+               'Kaolinite','Microcline','Mica','Quartz','Rutile','Smectite','Unknown'};
   [~,label_idx] = ismember(minerals, oldLabels);
   minerals = categorical(newLabels(label_idx))';
 end
