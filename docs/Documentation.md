@@ -315,7 +315,7 @@ I do not want this algorithm to feel like a black box to the user. If you would 
 
  `>>  help subtract_background` 
 
-in the Command Window. Trying run this algorithm individually on a `.msa` file and assign a second output argument to a variable, for example:
+in the Command Window. Try running this algorithm individually on a `.msa` file and assign a second output argument to a variable, for example:
 
 `>> [~,h] = subtract_background('myspectrum.msa');`
 
