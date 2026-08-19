@@ -7,6 +7,7 @@
 
 [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771) 
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx)
+[![View Julia repo](https://img.shields.io/badge/-Julia%20Repo-grey?logo=julia&logoColor=white&labelColor=9558B2)](https://github.com/weber1158/eds-classification.jl)
 [![status](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2/status.svg)](https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/weber1158/eds-classification)](https://img.shields.io/github/stars/weber1158/eds-classification)
