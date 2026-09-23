@@ -136,7 +136,7 @@ The `eds_classification` function can accept one **optional** name\-value pair.
 |||||
 | :-- | :-- | :-- | :-- |
 | **Name**  | **Value**  | **Description**  | **Reference**   |
-| `'Algorithm'`  | `'Weber'` (default)  | Machine learning classifier trained to recognize certain minerals commonly found in dust samples. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, P, K, Ca, Ti, and Fe. The output `struct` will contain (1) a `categorical` list of mineral names, (2) a `categorical` list of mineral group names, and (3) a probability `table` for each mineral ID.  | \[1\]   |
+| `'Algorithm'`  | `'Weber'` (default)  | Machine learning classifier trained to recognize certain minerals commonly found in dust samples. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, P, K, Ca, Ti, and Fe. The output `struct` will contain (1) a `categorical` list of mineral names, (2) a `categorical` list of mineral group names, and (3) a probability `table` for each mineral ID.  | \[1a,1b\]   |
 | `'Algorithm'`  | `'Donarummo'`  | Sorting algorithm designed for the identification of aluminosilicate minerals in ice core samples. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, K, Ca, and Fe. The output `struct` will contain a `categorical` list of mineral names.  | \[2\]   |
 | `'Algorithm'`  | `'Kandler'`  | Comparative criteria algorithm for classifying the general chemistry of particles in dust samples. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, P, S, Cl, K, Ca, Ti, Cr, Mn, and Fe. The output `struct` will contain (1) a `categorical` list of chemical classes, (2) a `categorical` list of generalized mineral groups, and (3) a list of refractive indexes.   | \[3\]   |
 | `'Algorithm'`  | `'Kutuzov'`  | Comparative criteria algorithm originally designed for mineral identification with single particle ICP\-TOFMS, but it also works reasonably well with EDS data. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, Ca, Ti, and Fe. The output `struct` will contain a `categorical` list of mineral names.  | \[4\]   |
@@ -144,7 +144,9 @@ The `eds_classification` function can accept one **optional** name\-value pair.
 
 **References**
 
-1. Weber, A. M. (2025). *Journal of Open Source Software*, *10*. [https://doi.org/10.21105/joss.07533](https://doi.org/10.21105/joss.07533)
+1. Refer to *both* of the following:
+    - (a) Weber, A. M. (2025). *Journal of Open Source Software*, *10*. [https://doi.org/10.21105/joss.07533](https://doi.org/10.21105/joss.07533)
+    - (b) Weber, A. M. (2026). A machine learning model for determining the mineralogy of compositionally ambiguous dust particles in SEM-EDS data. In *Mineral Dust in the Huascarán Ice Cores* (Ph.D. Dissertation, pp. 34‒58). The Ohio State University.
 2. Donarummo et al. (2003). *Geophysical Research Letters*, *30*. [https://doi.org/10.1029/2002GL016641](https://doi.org/10.1029/2002GL016641)
 3. Kandler et al. (2011). *Tellus B*, *63*. [https://doi.org/10.1111/j.1600\-0889.2011.00550.x](https://doi.org/10.1111/j.1600-0889.2011.00550.x)
 4. Kutuzov et al. (2026). *Scientific Reports*, *16*. [https://doi.org/10.1038/s41598\-026\-45260\-3](https://doi.org/10.1038/s41598-026-45260-3)
