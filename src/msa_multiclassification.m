@@ -1,4 +1,4 @@
-function [minerals,all_minerals] = msa_multiclassification(file,varargin)
+function [minerals,all_minerals] = msa_multiclassification(filename,varargin)
 %EDS mineral particle identification using a multi-algorithm approach
 %
 % This function is currently in beta and may not be production-ready.
@@ -27,9 +27,7 @@ function [minerals,all_minerals] = msa_multiclassification(file,varargin)
 %
 %
 %INPUTS
-% file {N×M table} - EDS data table with column headers for the following
-%                    elements: F, Na, Mg, Al, Si, P, S, Cl, K, Ca, Ti, Cr,
-%                    Mn, and Fe.
+% filename {char} - Name of .msa or .emsa file
 %
 %OUTPUTS
 % minerals {N×1 cell} - List of mineral assignments for each mineral-like
@@ -49,12 +47,12 @@ function [minerals,all_minerals] = msa_multiclassification(file,varargin)
 %                       
 %
 %EXAMPLE 1
-% minerals = msa_multiclassification(file);
+% minerals = msa_multiclassification('albite.msa');
 % figure
 % histogram(categorical(minerals))
 %
 %EXAMPLE 2
-% [~,minerals] = msa_multiclassification(file,OmitOther=false);
+% [~,minerals] = msa_multiclassification('albite.emsa',OmitOther=false);
 % histogram(categorical(minerals.Final))
 %
 % 
@@ -66,23 +64,23 @@ function [minerals,all_minerals] = msa_multiclassification(file,varargin)
 % Data input parsing
 %
 P = inputParser();
-P.addRequired('file', @(x) ischar(x));
+P.addRequired('filename', @(x) ischar(x));
 P.addParameter('OmitOther',false,@(x) islogical(x) & isscalar(x));
-parse(P,file,varargin{:});
+parse(P,filename,varargin{:});
 omit_other = P.Results.OmitOther;
 
 
 %
 % Identify mineralogy using multiple algorithms
 % 
-W = msa_classification(file); % The Weber algorithm is the default
+W = msa_classification(filename); % The Weber algorithm is the default
 
 
-D = msa_classification(file,'Algorithm','Donarummo');
+D = msa_classification(filename,'Algorithm','Donarummo');
 
-A = msa_classification(file,'Algorithm','Kandler'); % There are 2 algorithms that start with 'K', so I am labeling the Kandler algorithm as 'A'
-K = msa_classification(file,'Algorithm','Kutuzov');
-P = msa_classification(file,'Algorithm','Panta');
+A = msa_classification(filename,'Algorithm','Kandler'); % There are 2 algorithms that start with 'K', so I am labeling the Kandler algorithm as 'A'
+K = msa_classification(filename,'Algorithm','Kutuzov');
+P = msa_classification(filename,'Algorithm','Panta');
 
 %
 % Table of all output classes
