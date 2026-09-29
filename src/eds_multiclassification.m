@@ -331,8 +331,8 @@ minerals(chl_idx) = deal({'Chlorite-like'});
 %
 % Assign illite to data
 %
-W_ilt = ismember(W.Mineral, 'Illite');
-D_ilt = ismember(D.Mineral, {'Illite','Illite/Smectite 70/30 mix.','Muscovite'});
+W_ilt = ismember(W.Mineral, 'Muscovite (Illite)');
+D_ilt = ismember(D.Mineral, {'Illite','Illite/Smectite 70/30 Mix','Muscovite'});
 A_ilt = ismember(A.Class, 'SiAlK');
 K_phy = ismember(K.Mineral, 'Phyllosilicate');
 P_ilt = ismember(P.Mineral, {'Illite', 'Complex Clay','Mica'}); % Mica could be illite if muscovite
@@ -344,7 +344,7 @@ minerals(ilt_idx) = deal({'Illite-like'});
 % Assign montmorillonite/smectite to data
 %
 W_sme = ismember(W.Mineral, 'Montmorillonite');
-D_sme = ismember(D.Mineral, {'Ca-Montmorillonite','Illite/Smectite 70/30 mix.'});
+D_sme = ismember(D.Mineral, {'Ca-Montmorillonite','Illite/Smectite 70/30 Mix'});
 K_phy = ismember(K.Mineral, 'Phyllosilicate');
 P_sme = ismember(P.Mineral, {'Smectite','Complex Clay'});
 sme_idx = (W_sme & D_sme) | (W_sme & K_phy) | (W_sme & P_sme) | ...
@@ -354,7 +354,7 @@ minerals(sme_idx) = deal({'Montmorillonite-like'});
 %
 % Assign mica to data
 %
-W_mica = ismember(W.Mineral, {'Muscovite','Biotite'});
+W_mica = ismember(W.Mineral, {'Muscovite (Illite)','Biotite'});
 W_verm = ismember(W.Mineral, 'Vermiculite'); % Could be confused with biotite
 D_mica = ismember(D.Mineral, {'Muscovite','Biotite'});
 D_verm = ismember(D.Mineral, 'Vermiculite'); % Could be confused with biotite
