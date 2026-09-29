@@ -223,14 +223,19 @@ ilmenite_idx = (A_ilmenite & P_ilmenite) & other_idx(minerals);
 minerals(ilmenite_idx) = deal({'Ilmenite-like'});
 
 %
-% Assign Ti oxide
+% Assign Ti-bearing
 %
 W_titanite = ismember(W.Mineral, 'Titanite');
 A_rutile = ismember(A.Class, 'Ti oxide');
+A_titanite = ismember(A.Class, {'SiCaTi'});
 P_rutile = ismember(P.Mineral, 'Rutile');
-rutile_idx = (W_titanite & A_rutile) | (W_titanite & P_rutile) | ...
-             (A_rutile & P_rutile) & other_idx(minerals);
-minerals(rutile_idx) = deal({'Ti oxide-like'});
+  titanite_idx = (W_titanite & A_titanite) & other_idx(minerals);
+  minerals(titanite_idx) = deal({'Titanite-like'});
+  
+  rutile_idx = (W_titanite & A_rutile) | (W_titanite & P_rutile) |...
+    (A_rutile & P_rutile) & other_idx(minerals);
+  minerals(rutile_idx) = deal({'Ti oxide-like'});
+
 
 %
 % Assign quartz to data
@@ -308,7 +313,7 @@ minerals(feld_idx) = deal({'Feldspar-like'});
 %
 W_kln = ismember(W.Mineral, 'Kaolinite');
 D_kln = ismember(D.Mineral, 'Kaolinite');
-A_kln = ismember(A.Class, 'AlSi');
+A_kln = ismember(A.Class, 'SiAl');
 K_kln = ismember(K.Mineral, 'Kaolinite');
 P_kln = ismember(P.Mineral, {'Kaolinite','Complex Feldspar/Clay mix','Complex clay'});
 kln_idx = (W_kln & D_kln) | (W_kln & A_kln & P_kln) | (D_kln & A_kln & K_kln) ...
@@ -335,7 +340,7 @@ W_ilt = ismember(W.Mineral, 'Muscovite (Illite)');
 D_ilt = ismember(D.Mineral, {'Illite','Illite/Smectite 70/30 Mix','Muscovite'});
 A_ilt = ismember(A.Class, 'SiAlK');
 K_phy = ismember(K.Mineral, 'Phyllosilicate');
-P_ilt = ismember(P.Mineral, {'Illite', 'Complex Clay','Mica'}); % Mica could be illite if muscovite
+P_ilt = ismember(P.Mineral, {'Illite', 'Complex clay','Mica'}); % Mica could be illite if muscovite
 ilt_idx = (W_ilt & D_ilt) | (W_ilt & A_ilt & K_phy) | (W_ilt & A_ilt & P_ilt) | ...
           (D_ilt & A_ilt & K_phy & P_ilt) & other_idx(minerals);
 minerals(ilt_idx) = deal({'Illite-like'});
@@ -346,7 +351,7 @@ minerals(ilt_idx) = deal({'Illite-like'});
 W_sme = ismember(W.Mineral, 'Montmorillonite');
 D_sme = ismember(D.Mineral, {'Ca-Montmorillonite','Illite/Smectite 70/30 Mix'});
 K_phy = ismember(K.Mineral, 'Phyllosilicate');
-P_sme = ismember(P.Mineral, {'Smectite','Complex Clay'});
+P_sme = ismember(P.Mineral, {'Smectite','Complex clay'});
 sme_idx = (W_sme & D_sme) | (W_sme & K_phy) | (W_sme & P_sme) | ...
           (D_sme & K_phy & P_sme) & other_idx(minerals);
 minerals(sme_idx) = deal({'Montmorillonite-like'});
@@ -370,7 +375,10 @@ minerals(mica_idx) = deal({'Mica-like'});
 %
 % Assign vermiculite to data
 %
-verm_idx = (W_verm & D_verm) & other_idx(minerals);
+W_biotite = ismember(W.Mineral, 'Biotite');
+D_biotite = ismember(D.Mineral, 'Biotite');
+verm_idx = (W_verm & D_verm) | (W_biotite & D_verm)...
+  | (W_verm & D_biotite) & other_idx(minerals);
 minerals(verm_idx) = deal({'Vermiculite-like'});
 
 %
@@ -379,11 +387,10 @@ minerals(verm_idx) = deal({'Vermiculite-like'});
 W_paly = ismember(W.Mineral,'Palygorskite'); % (Mg,Al)2Si4O10(OH)·4H2O
 D_hect = ismember(D.Mineral,'Hectorite'); % Na0.3(Mg,Li)3(Si4O10)(F,OH)2
 K_phy = ismember(K.Mineral, 'Phyllosilicate');
-P_clay = ismember(P.Mineral, {'Complex Clay'});
+P_clay = ismember(P.Mineral, {'Complex clay'});
 paly_idx = (W_paly & D_hect & K_phy) | (W_paly & D_hect & P_clay) | ...
            (W_paly & K_phy & P_clay) & other_idx(minerals);
 minerals(paly_idx) = deal({'Palygorskite-like'});
-
 
 %
 % Delete 'other' (i.e., "unknown") minerals
