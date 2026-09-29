@@ -100,7 +100,7 @@ all_minerals.WeberProbability = max(W.Scores{1,:});
 %   eds_multiclassification function, which has been copy-pasted here and
 %   modified where appropriate.
 %
-minerals = repmat({'Other'},[size(file,1) 1]);
+minerals = repmat({'Other'},[size(filename,1) 1]);
 
 %
 % Create an index that will be used in each assignment phase that is
