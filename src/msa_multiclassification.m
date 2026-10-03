@@ -168,7 +168,7 @@ D_qz = ismember(D.Mineral,'Hectorite'); % D algorithm confuses Qz for Hct
 A_qz = ismember(A.Group, 'Qz');
 K_qz = ismember(K.Mineral,'Quartz');
 P_qz = ismember(P.Mineral,{'Quartz','Complex Quartz'});
-qz_idx = (A_qz & K_qz) | (A_qz & P_qz) | (K_qz & P_qz) | ...
+qz_idx = (A_qz & K_qz) | (A_qz & P_qz) | (K_qz & P_qz) | (A_qz & W_qz & D_qz) |...
          (K_qz & W_qz & D_qz) | (P_qz & W_qz & D_qz) & other_idx(minerals);
 minerals(qz_idx) = deal({'Quartz-like'});
 
@@ -203,7 +203,7 @@ minerals(alo_idx) = deal({'Al oxide-like'});
 A_mix = ismember(A.Group, 'mixtures');
 K_mix = ismember(K.Mineral, 'Unknown');
 P_mix = ismember(P.Mineral, {'Ca-rich silicate/Ca-Si-mix','Complex Feldspar/Clay mix'});
-mix_idx = (A_mix & P_mix) | (K_mix & P_mix) & other_idx(minerals);
+mix_idx = (A_mix & P_mix) | (A_mix & K_mix) | (K_mix & P_mix) & other_idx(minerals);
 minerals(mix_idx) = deal({'Complex Mixture'});
 
 %
@@ -239,8 +239,9 @@ D_kln = ismember(D.Mineral, 'Kaolinite');
 A_kln = ismember(A.Class, 'SiAl');
 K_kln = ismember(K.Mineral, 'Kaolinite');
 P_kln = ismember(P.Mineral, {'Kaolinite','Complex Feldspar/Clay mix','Complex clay'});
-kln_idx = (W_kln & D_kln) | (W_kln & A_kln & P_kln) | (D_kln & A_kln & K_kln) ...
-  | (W_kln & K_kln & P_kln) | (A_kln & K_kln & P_kln) & other_idx(minerals);
+kln_idx = (W_kln & D_kln) | (W_kln & A_kln & P_kln) | (W_kln & A_kln & K_kln)...
+  | (D_kln & A_kln & K_kln) | (W_kln & K_kln & P_kln) ...
+  | (A_kln & K_kln & P_kln) & other_idx(minerals);
 minerals(kln_idx) = deal({'Kaolinite-like'});
 
 %
@@ -252,8 +253,9 @@ A_chl = ismember(A.Class, 'SiAlFeMg');
 K_chl = ismember(K.Mineral, 'Chlorite');
 P_chl = ismember(P.Mineral, 'Chlorite');
 chl_idx = (W_chl & D_chl) | (W_chl & A_chl) | (W_chl & K_chl) | (W_chl & P_chl) |...
-          (D_chl & A_chl & K_chl) | (D_chl & A_chl & P_chl) |...
-          (A_chl & K_chl & P_chl) & other_idx(minerals);
+          (D_chl & A_chl & K_chl) | (D_chl & K_chl & P_chl) ...
+          | (D_chl & A_chl & P_chl) ...
+          | (A_chl & K_chl & P_chl) & other_idx(minerals);
 minerals(chl_idx) = deal({'Chlorite-like'});
 
 %
