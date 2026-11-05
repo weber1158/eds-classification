@@ -29,7 +29,7 @@ classdef test_eds_classification < matlab.unittest.TestCase
       testCase.verifyClass(actual, expected);
     end
 
-    % Test whether msa_classification correctly identifies 20 reference
+    % Test whether eds_classification correctly identifies 20 reference
     % minerals using the default algorithm
     function test_default_algorithm(testCase)
       mineral = {'Albite','Apatite','Augite','Biotite','Chlorite',...
@@ -46,7 +46,7 @@ classdef test_eds_classification < matlab.unittest.TestCase
       end
     end
 
-    % Test whether msa_classification applies the non-default algorithms
+    % Test whether eds_classification applies the non-default algorithms
     % successfully
     function test_alternate_algorithms(testCase)
       algorithm = {'Donarummo','Kandler','Kutuzov','Panta'};
