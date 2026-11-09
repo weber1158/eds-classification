@@ -24,6 +24,17 @@ D_vs_K = array2table([D_minerals.Mineral, K_minerals.Mineral], ...
 head(D_vs_K, 4)
 
 %% ========================================================================
+% eds_multiclassification
+%==========================================================================
+% Example 1
+load('eds_data.mat','data')
+minerals = eds_multiclassification(data);
+
+% Example 2
+minerals = eds_multiclassification(data,...
+  DisplayMessages=true, Initialize='none', OmitOther=false);
+
+%% ========================================================================
 % eds_read
 %==========================================================================
 % Example 1
@@ -46,6 +57,15 @@ metadata = get_sem_metadata(backscatter_image)
 %==========================================================================
 % Example
 mineral = msa_classification(which('apreo_cemas.msa'));
+
+%% ========================================================================
+% msa_multiclassification
+%==========================================================================
+% Example 1
+mineral = msa_multiclassification(which('albite.msa'));
+
+%Example 2
+[mineral, all_minerals] = msa_multiclassification(which('albite.msa'));
 
 %% ========================================================================
 % Spectrum
