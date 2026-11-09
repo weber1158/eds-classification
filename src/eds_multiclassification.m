@@ -330,7 +330,7 @@ minerals(ilt_idx) = deal({'Illite-like'});
 W_sme = ismember(W.Mineral, 'Montmorillonite');
 D_sme = ismember(D.Mineral, {'Ca-Montmorillonite','Illite/Smectite 70/30 Mix'});
 K_phy = ismember(K.Mineral, 'Phyllosilicate');
-P_sme = ismember(P.Mineral, {'Smectite','Complex clay'});
+P_sme = ismember(P.Mineral, {'Smectite','Complex clay','Complex Feldspar/Clay mix'});
 sme_idx = (W_sme & D_sme) | (W_sme & K_phy) | (W_sme & P_sme) | ...
           (D_sme & K_phy & P_sme) & other_idx(minerals);
 minerals(sme_idx) = deal({'Montmorillonite-like'});
