@@ -4,7 +4,13 @@
 
 **Documentation**
 
-The examples in this documentation can be viewed by running `eds_demo.m`.
+The examples in this documentation can be viewed by executing the demo file. Simply type:
+
+```matlab
+edit eds_demo
+```
+
+ in the Command Window to open the demo file, and then run each section individually (or all at once).
 
 <!-- Begin Toc -->
 
@@ -24,6 +30,20 @@ The examples in this documentation can be viewed by running `eds_demo.m`.
 &#8195;&#8195;&#8195;[Example 1](#TMP_463d)
  
 &#8195;&#8195;&#8195;[Example 2](#TMP_4d13)
+ 
+[eds\_multiclassification](#TMP_7122)
+ 
+&#8195;&#8195;&#8195;[Syntax](#TMP_2a1c)
+ 
+&#8195;&#8195;&#8195;[Input Arguments](#TMP_3549)
+ 
+&#8195;&#8195;&#8195;[Output Arguments](#TMP_9381)
+ 
+&#8195;&#8195;&#8195;[Name\-Value Arguments](#TMP_4e31)
+ 
+&#8195;&#8195;&#8195;[Example 1](#TMP_054d)
+ 
+&#8195;&#8195;&#8195;[Example 2](#TMP_8a90)
  
 [eds\_read](#TMP_8af8)
  
@@ -60,6 +80,18 @@ The examples in this documentation can be viewed by running `eds_demo.m`.
 &#8195;&#8195;&#8195;[Name\-Value Arguments](#TMP_266e)
  
 &#8195;&#8195;&#8195;[Example](#TMP_85cb)
+ 
+[msa\_multiclassification](#TMP_1ad5)
+ 
+&#8195;&#8195;&#8195;[Syntax](#TMP_1142)
+ 
+&#8195;&#8195;&#8195;[Input Arguments](#TMP_0c58)
+ 
+&#8195;&#8195;&#8195;[Output Arguments](#TMP_1fd1)
+ 
+&#8195;&#8195;&#8195;[Example 1](#TMP_8d5c)
+ 
+&#8195;&#8195;&#8195;[Example 2](#TMP_35e9)
  
 [Spectrum](#TMP_44f4)
  
@@ -136,7 +168,7 @@ The `eds_classification` function can accept one **optional** name\-value pair.
 |||||
 | :-- | :-- | :-- | :-- |
 | **Name**  | **Value**  | **Description**  | **Reference**   |
-| `'Algorithm'`  | `'Weber'` (default)  | Machine learning classifier trained to recognize certain minerals commonly found in dust samples. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, P, K, Ca, Ti, and Fe. The output `struct` will contain (1) a `categorical` list of mineral names, (2) a `categorical` list of mineral group names, and (3) a probability `table` for each mineral ID.  | \[1a,1b\]   |
+| `'Algorithm'`  | `'Weber'` (default)  | Machine learning classifier trained to recognize certain minerals commonly found in dust samples. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, P, K, Ca, Ti, and Fe. The output `struct` will contain (1) a `categorical` list of mineral names, (2) a `categorical` list of mineral group names, and (3) a probability `table` for each mineral ID.  | \[1\]   |
 | `'Algorithm'`  | `'Donarummo'`  | Sorting algorithm designed for the identification of aluminosilicate minerals in ice core samples. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, K, Ca, and Fe. The output `struct` will contain a `categorical` list of mineral names.  | \[2\]   |
 | `'Algorithm'`  | `'Kandler'`  | Comparative criteria algorithm for classifying the general chemistry of particles in dust samples. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, P, S, Cl, K, Ca, Ti, Cr, Mn, and Fe. The output `struct` will contain (1) a `categorical` list of chemical classes, (2) a `categorical` list of generalized mineral groups, and (3) a list of refractive indexes.   | \[3\]   |
 | `'Algorithm'`  | `'Kutuzov'`  | Comparative criteria algorithm originally designed for mineral identification with single particle ICP\-TOFMS, but it also works reasonably well with EDS data. The input `table` must contain columns for the following elements: Na, Mg, Al, Si, Ca, Ti, and Fe. The output `struct` will contain a `categorical` list of mineral names.  | \[4\]   |
@@ -144,9 +176,7 @@ The `eds_classification` function can accept one **optional** name\-value pair.
 
 **References**
 
-1. Refer to *both* of the following:
-    - (a) Weber, A. M. (2025). *Journal of Open Source Software*, *10*. [https://doi.org/10.21105/joss.07533](https://doi.org/10.21105/joss.07533)
-    - (b) Weber, A. M. (2026). A machine learning model for determining the mineralogy of compositionally ambiguous dust particles in SEM-EDS data. In *Mineral Dust in the Huascarán Ice Cores* (Ph.D. Dissertation, pp. 34‒58). The Ohio State University.
+1. Weber, A. M. (2025). *Journal of Open Source Software*, *10*. [https://doi.org/10.21105/joss.07533](https://doi.org/10.21105/joss.07533)
 2. Donarummo et al. (2003). *Geophysical Research Letters*, *30*. [https://doi.org/10.1029/2002GL016641](https://doi.org/10.1029/2002GL016641)
 3. Kandler et al. (2011). *Tellus B*, *63*. [https://doi.org/10.1111/j.1600\-0889.2011.00550.x](https://doi.org/10.1111/j.1600-0889.2011.00550.x)
 4. Kutuzov et al. (2026). *Scientific Reports*, *16*. [https://doi.org/10.1038/s41598\-026\-45260\-3](https://doi.org/10.1038/s41598-026-45260-3)
@@ -180,6 +210,63 @@ D_vs_K = array2table([D_minerals.Mineral, K_minerals.Mineral], ...
 
 % Compare the first 4 rows
 head(D_vs_K, 4)
+```
+
+<a id="TMP_7122"></a>
+
+# eds\_multiclassification
+
+Mineral particle identification using a multi\-algorithm approach (**BETA**)
+
+**Description**
+
+Uses the full suite of mineral classification algorithms to identify minerals in an EDS data set. As an initial filtering step, the Kandler algorithm is used to identify possible silicates, oxides, carbonates, phosphates, sulfates, and chlorides. Each particle (i.e., each row) in the filtered data is then classified using a combination of different algorithms (Donarummo et al., 2003; Kandler et al., 2011; Panta et al., 2023; Weber, 2025; Kutuzov et al., 2026). Different algorithms can recognize different minerals but in many cases there is a lot of overlap. The `eds_multiclassification` function cross\-references the results of the various mineral identification algorithms and assigns a mineralogy to each particle based on consistencies between the algorithm outputs. In general, two or more algorithms must agree with the mineral assignment in order for the assignment to be finalized. Mineral assignments are made via a logical cascading indexing search that begins with broader mineral groups and narrows down to more specific mineral groups or species as the search progresses. Any mineral assignments made during the search process are finalized and will not be overwritten by subsequent operations in the classification scheme.
+
+<a id="TMP_2a1c"></a>
+### Syntax
+
+`minerals = eds_multiclassification(data, varargin)`
+
+<a id="TMP_3549"></a>
+### Input Arguments
+
+`data        table` | EDS data set with columns for each mineral\-forming element (F, Na, Mg, Al, Si, P, S, Cl, K, Ca, Ti, Cr, Mn, Fe)
+
+<a id="TMP_9381"></a>
+### Output Arguments
+
+`minerals     cell` | List of mineral assignments for each mineral\-like particle in the input table. Not necessarily the same length as `size(data,1)`!
+
+<a id="TMP_4e31"></a>
+### Name\-Value Arguments
+
+The `eds_multiclassification` function can accept a few **optional** name\-value pairs.
+
+||||
+| :-- | :-- | :-- |
+| **Name**  | **Default Value**  | **Description**   |
+| `'DisplayMessages'`  | `false`  | Specifies whether progress lines are printed in the Command Window. Recommend setting to `true` for very large data sets.   |
+| `'Initialize'`  | `'default'`  | The initialization method for filtering the data set. By default, the dataset is filtered using the Kandler algorithm to narrow the input data to only the particles whose compositions are mineral\-like. Alternatively, the user can specify `Initialize='none'` to bypass the inital filtering step, or the user can pass a vector of logical indexes designating which rows correspond to minerals.   |
+| `'OmitOther'`  | `true`  | When `true`, mineral IDs that are not confirmed by at least two algorithms are omitted from the final output. Set `OmitOther=false` to keep the unconfirmed minerals and label them as "Other".   |
+
+<a id="TMP_054d"></a>
+### Example 1
+
+Basic usage: Load an EDS data table and use `eds_multiclassification` to evaluate the results.
+
+```matlab
+load('eds_data.mat','data')
+minerals = eds_multiclassification(data);
+```
+
+<a id="TMP_8a90"></a>
+### Example 2
+
+Optional input arguments: Same as above, but display progress lines, skip the initial filtering, and keep the minerals classified as "other" (i.e., the minerals that could not be confirmed by multiple algorithms).
+
+```matlab
+minerals = eds_multiclassification(data,...
+  DisplayMessages=true, Initialize='none', OmitOther=false);
 ```
 
 <a id="TMP_8af8"></a>
@@ -222,7 +309,7 @@ Create object from EDS spectral data file (.msa / .emsa)
 Read an x\-ray energy file and access its metadata.
 
 ```matlab
-s = eds_read('phenom_osu.emsa');
+s = eds_read(which('phenom_osu.emsa'));
 md = s.Metadata
 ```
 
@@ -236,7 +323,7 @@ figure
 s.plot_spectrum; % Equivalent to eds_read(filename).plot_spectrum();
 ```
 
-**Note:** For a better method for visualizing EDS spectra, see the documentation entry for the [`Spectrum`](#TMP_44f4) class.
+**Note:** For a better method for visualizing EDS spectra, see the documentation entry for the [`Spectrum`](<about:blank<#TMP%2044f4%3E>) class.
 
 <a id="TMP_2982"></a>
 
@@ -317,7 +404,7 @@ I do not want this algorithm to feel like a black box to the user. If you would 
 
  `>>  help subtract_background` 
 
-in the Command Window. Try running this algorithm individually on a `.msa` file and assign a second output argument to a variable, for example:
+in the Command Window. Trying run this algorithm individually on a `.msa` file and assign a second output argument to a variable, for example:
 
 `>> [~,h] = subtract_background('myspectrum.msa');`
 
@@ -333,7 +420,54 @@ This is the process that I used to determine the optimal default values, but I r
 Identify the mineralogy of a sample directly from its `.msa` file.
 
 ```matlab
-mineral = msa_classification('apreo_cemas.msa');
+mineral = msa_classification(which('apreo_cemas.msa'));
+```
+
+<a id="TMP_1ad5"></a>
+
+# msa\_multiclassification
+
+Mineral particle identification from EDS spectral data files using a multi\-algorithm approach (**BETA**)
+
+**Description**
+
+Uses the full suite of mineral classification algorithms to identify minerals in an EDS spectral data file (`.msa` or `.emsa`). As an initial filtering step, the Kandler algorithm is used to identify possible silicates, oxides, carbonates, phosphates, sulfates, and chlorides. If the spectrum is inconsistent with any of the recognized mineral groups, then the spectrum is classified as "Non\-mineralogical". Otherwise, the spectrum is classified using a combination of different algorithms (Donarummo et al., 2003; Kandler et al., 2011; Panta et al., 2023; Weber, 2025; Kutuzov et al., 2026). Different algorithms can recognize different minerals but in many cases there is a lot of overlap. The `msa_multiclassification` function cross\-references the results of the various mineral identification algorithms and assigns a mineralogy to the spectrum based on consistencies between the algorithm outputs. In general, two or more algorithms must agree with the mineral assignment in order for the assignment to be finalized. Mineral assignments are made via a logical cascading indexing search that begins with broader mineral groups and narrows down to more specific mineral groups or species as the search progresses. Any mineral assignments made during the search process are finalized and will not be overwritten by subsequent operations in the classification scheme.
+
+<a id="TMP_1142"></a>
+### Syntax
+
+`mineral = msa_multiclassification(filename)`
+
+`[~,all_minerals] = msa_multiclassification(filename)`
+
+<a id="TMP_0c58"></a>
+### Input Arguments
+
+`filename     char` | Full file name (including file extension) of a valid EDS x\-ray energy file on the path (for example, `'albite.msa'`). You may use `which('<name>.msa')` if the file is not on the current path but is publically located somewhere on the user's computer.
+
+<a id="TMP_1fd1"></a>
+### Output Arguments
+
+`mineral             cell` | Mineral assignment the given x\-ray energy file.
+
+`all_minerals       table` | The primary result obtained from all mineral classification algorithms, including a column named "Final" that contains the final mineral assignment based on the results from all of the algorithms.
+
+<a id="TMP_8d5c"></a>
+### Example 1
+
+Basic usage
+
+```matlab
+mineral = msa_multiclassification(which('albite.msa'));
+```
+
+<a id="TMP_35e9"></a>
+### Example 2
+
+Get the final result **and** a table of the other algorithm results.
+
+```matlab
+[mineral, all_minerals] = msa_multiclassification(which('albite.msa'));
 ```
 
 <a id="TMP_97f3"></a>
@@ -406,7 +540,7 @@ The following name\-value arguments are **optional**. If you do not specify char
 Create a simple Spectrum object visualization.
 
 ```matlab
-s = eds_read('phenom_osu.emsa');
+s = eds_read(which('phenom_osu.emsa'));
 figure
 plt = Spectrum(s.Energy, s.Counts);
 ```
@@ -419,8 +553,8 @@ Note that Example 1 above is equivalent to the quick visualization method: `eds_
 Overlay a second spectrum onto the original Spectrum, and normalize the y\-axes for better comparison.
 
 ```matlab
-s1 = eds_read('phenom_osu.emsa');
-s2 = eds_read('quattro_cemas.msa');
+s1 = eds_read(which('phenom_osu.emsa'));
+s2 = eds_read(which('quattro_cemas.msa'));
 figure
 plt2 = Spectrum(s1.Energy, s1.Counts);
 plt2.addSpectrum(s2.Energy, s2.Counts);
@@ -433,7 +567,7 @@ plt2.normalizeSpectrum();
 Add characteristic x\-ray labels to a Spectrum.
 
 ```matlab
-s3 = eds_read('apreo_cemas.msa');
+s3 = eds_read(which('apreo_cemas.msa'));
 figure
 plt3 = Spectrum(s3.Energy, s3.Counts);
 plt3.addXrayLabels('prominence',94,'marker','sr');
@@ -451,12 +585,12 @@ This function quantifies the stoichiometric composition of a sample by means of 
 
  $$ C_{i,sample} =\frac{I_{i,sample} }{I_{i,standard} }\times C_{i,standard} $$ 
 
-where `C` is normalized weight percent, `I` is the net intensity of a characteristic x-ray peak in an EDS spectrum, and `i` represents the corresponding element of the sample or standard. This function should only be used when you acquire data for a reference material and a sample using the same instrument conditions (acceleration voltage, spot size, etc.).
+where `C` is normalized weight percent, `I` is the net intensity of a characteristic x\-ray peak in an EDS spectrum, and `i` represents the corresponding element of the sample or standard. This function should only be used when you acquire data for a reference material and a sample using the same instrument conditions (acceleration voltage, spot size, etc.).
 
 <a id="TMP_6b9f"></a>
 ### Syntax
 
-`quant = standard_stoich_quant(num_Oxygens, elements, norm_wt_pct_standard, net_counts_standard, net_counts_sample)` 
+`quant = standard_stoich_quant(num_Oxygens, elements, norm_wt_pct_standard, net_counts_standard, net_counts_sample)`
 
 <a id="TMP_3c5d"></a>
 ### Input Arguments
