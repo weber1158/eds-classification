@@ -155,18 +155,18 @@ classdef test_Spectrum < matlab.unittest.TestCase
       % Including input arguments for addXrayLabels(varargin)
       f = figure;
         plt = Spectrum(data.Energy, data.Counts);
-        plt.addXrayLabels('marker','sr','markersize',5,...
+        plt.addXrayLabels('marker','s','markersize',5,...
           'markerfacecolor','#0000FF');
         drawnow;
         ax = plt.getSpectrumAxes();
-        marker_objects = findobj(ax,'Type','Line');
-        num_marker_objects = length(marker_objects);
-        testCase.verifyGreaterThanOrEqual(num_marker_objects, 1);
-        first_marker = marker_objects(1);
-        testCase.verifyEqual(first_marker.MarkerSize, 5);
-        testCase.verifyEqual(first_marker.Marker, 'square');
-        testCase.verifyEqual(first_marker.Color, [1 0 0]);
-        testCase.verifyEqual(first_marker.MarkerFaceColor, [0 0 1]);
+        stem_objects = findobj(ax,'Type','Stem');
+        num_stem_objects = length(stem_objects);
+        testCase.verifyGreaterThanOrEqual(num_stem_objects, 1);
+        stem_objects1 = stem_objects(1);
+        testCase.verifyEqual(stem_objects1.MarkerSize, 5);
+        testCase.verifyEqual(stem_objects1.Marker, 'square');
+        testCase.verifyEqual(stem_objects1.Color, [0 0 0]);
+        testCase.verifyEqual(stem_objects1.MarkerFaceColor, [0 0 1]);
       close(f)
     end
 
@@ -180,7 +180,7 @@ classdef test_Spectrum < matlab.unittest.TestCase
         plt.removeXrayLabels();
         drawnow;
         ax = plt.getSpectrumAxes();
-        marker_objects = findobj(ax,'Type','Line');
+        marker_objects = findobj(ax,'Type','Stem');
         num_marker_objects = length(marker_objects);
         testCase.verifyEqual(num_marker_objects, 0);
         text_objects = findobj(ax,'Type','Text');
