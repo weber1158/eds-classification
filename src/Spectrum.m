@@ -72,6 +72,9 @@ classdef Spectrum < matlab.graphics.chartcontainer.ChartContainer
 %   MarkerFaceColor  'none'   Specifies a fill color for your marker.
 %                             All basic color options are accepted,
 %                             including RGB triplets and hexadecimals.
+%
+%   LineStyle        'none'   Choose a stem line style for the markers
+%                             (i.e., '-', '--', ':', or '-.')
 %   ______________________________________________________________________
 %
 %
@@ -283,7 +286,7 @@ methods
   function addXrayLabels(obj, varargin)
     ax = getAxes(obj);
 
-    mfc_valid_fcn = @(x) (strcmpi(x,'none') || strcmpi(x,'auto')) || ...
+    col_valid_fcn = @(x) (strcmpi(x,'none') || strcmpi(x,'auto')) || ...
                          (ischar(x)&&isscalar(x)&&contains('wkrgbcym',x))||...
                          (isnumeric(x) && isequal(length(x),3)) || ...
                          (contains(x,'#') && isequal(length(x),7));
@@ -292,19 +295,28 @@ methods
 
 
     p = inputParser;
+    % Peak labeling parameters
     addParameter(p, 'min_sep',   0.1,  @(x) isnumeric(x) && isscalar(x));
     addParameter(p, 'prominence', 90,  @(x) isnumeric(x) && isscalar(x));
-    addParameter(p, 'marker',     '',  @(x) ischar(x));
-    addParameter(p, 'MarkerSize',  4,  @(x) isnumeric(x) && isscalar(x));
-    addParameter(p, 'MarkerFaceColor',...
-                               'none', mfc_valid_fcn);
+    % Stem plot parameters
+    addParameter(p, 'LineStyle', 'none', @(x) ischar(x));
+    addParameter(p, 'LineWidth', 0.5,    @(x) isnumeric(x) && isscalar(x));
+    addParameter(p, 'Color', 'k',        @(x) col_valid_fcn);
+    addParameter(p, 'Marker', 'none',    @(x) ischar(x));
+    addParameter(p, 'MarkerSize', 4,     @(x) isnumeric(x) && isscalar(x));
+    addParameter(p, 'MarkerEdgeColor', 'k', col_valid_fcn);
+    addParameter(p, 'MarkerFaceColor', 'none', col_valid_fcn);
 
     parse(p, varargin{:});
     minSep = p.Results.min_sep;
     prom   = p.Results.prominence;
       prom = prctile(obj.Counts, prom);
-    marker = p.Results.marker;
+    line_s = p.Results.LineStyle;
+    line_w = p.Results.LineWidth;
+    mcolor = p.Results.Color;
+    marker = p.Results.Marker;
     mkr_sz = p.Results.MarkerSize;
+    mkr_ec = p.Results.MarkerEdgeColor;
     mkr_fc = p.Results.MarkerFaceColor;
 
     xrayEnergyTable = readtable('XrayEnergyTable.csv',...
@@ -369,11 +381,11 @@ methods
              'HorizontalAlignment','center',...
              'VerticalAlignment','middle',...
              'FontSize',8)
-        if ~isempty(marker)
-          plot(ax, e_k, y_value, marker, ...
-            'LineStyle', 'none', ...
-            'MarkerSize', mkr_sz,...
-            'MarkerFaceColor',mkr_fc);
+        if ~contains(marker,'none')
+          vargs = {'LineStyle',line_s,'LineWidth',line_w,'Color',mcolor,...
+            'MarkerSize',mkr_sz,'MarkerEdgeColor',mkr_ec,...
+            'MarkerFaceColor',mkr_fc};
+          stem(ax, e_k, y_value, marker, vargs{:})
         end
       end
     end
@@ -420,7 +432,7 @@ methods
   function removeXrayLabels(obj)
     ax = getAxes(obj);
     TextObjects = findobj(ax.Children,'Type','Text');
-    MarkerObjects = findobj(ax.Children,'Type','Line');
+    MarkerObjects = findobj(ax.Children,'Type','Stem');
     delete(TextObjects)
     delete(MarkerObjects)
   end
