@@ -570,7 +570,7 @@ Add characteristic x\-ray labels to a Spectrum.
 s3 = eds_read(which('apreo_cemas.msa'));
 figure
 plt3 = Spectrum(s3.Energy, s3.Counts);
-plt3.addXrayLabels('prominence',94,'marker','sr');
+plt3.addXrayLabels('prominence',94,'marker','s','linestyle','-');
 ```
 
 <a id="TMP_274e"></a>
