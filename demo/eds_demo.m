@@ -87,7 +87,7 @@ plt2.normalizeSpectrum();
 s3 = eds_read(which('apreo_cemas.msa'));
 figure
 plt3 = Spectrum(s3.Energy, s3.Counts);
-plt3.addXrayLabels('prominence',94,'marker','sr');
+plt3.addXrayLabels('prominence',94,'marker','s','linestyle','-');
 
 %% ========================================================================
 % standard_stoich_quant
