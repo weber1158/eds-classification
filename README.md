@@ -65,11 +65,13 @@ A repository of functions for working with SEM-EDS data, with an emphasis on ide
 See the online **[Documentation](https://github.com/weber1158/eds-classification/blob/main/docs/Documentation.md)** for details on each of the algorithms.
 
 ## ⬇️ Installation
-You can download the repository from the MATLAB Central File Exchange [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771), or open it directly in your browser [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx) (recommended). 
+You can download the repository from [GitHub](https://github.com/weber1158/eds-classification) or the MATLAB Central File Exchange [![View my project on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/170771), or open it directly in MATLAB Online [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=170771&file=Tests/matlab_test.mlx). 
 
 To add the EDS Classification functions to the default search path:
 
-1. Un-zip the downloaded folder. 
+### Option 1 - From GitHub
+
+1. Download the repository and un-zip the folder somewhere on your PC. 
 
 2. Execute the following command in the MATLAB Command Window:
 
@@ -79,7 +81,15 @@ pathtool
 
 3. A popup menu should open. Click `Add Folder with Subfolders` and select the un-zipped main repository folder. 
 
-4. Finalize your chce by clicking `Save` or `Apply`.
+4. Finalize your choice by clicking `Save` or `Apply`.
+
+### Option 2 - From the File Exchange
+
+1. From your MATLAB Desktop application, click the <kbd>Add-Ons</kbd>-><kbd>Explore Add-Ons</kbd> buttons under the `Environment` tab.
+
+2. In the popup window, search for "**eds-classification**" and navigate to the repository.
+
+3. On the repository page there will be a button to install the repository to the MATLAB path.
 
 ## 🎓 How to cite
 <a href="https://joss.theoj.org/papers/c2564d4c44b4ee77c24ac32f7431a6b2">
@@ -89,10 +99,10 @@ pathtool
 This repository has been peer-reviewed and published in _Journal of Open Source Software_. Please use the information below for citing the software:
 
 
-#### APA-like
+#### APA-like citation
 Weber, Austin M., (2025). Algorithms for SEM-EDS mineral dust classification. _Journal of Open Source Software_, *10*(107), 7533, https://doi.org/10.21105/joss.07533
 
-#### `BibTeX`:
+#### `BibTeX` citation:
 ```tex
 @article{weber2025,
     author = {Weber, Austin M.},
